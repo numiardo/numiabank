@@ -12,20 +12,18 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <!-- Google Font Roboto -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <!-- Tailwind CSS CDN -->
+  <!-- Flatpickr -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-.JB {
- position: fixed;
-bottom: 24px;
-right: 24px;
-z-index: 9999;
-
-      }
-
+    .JB {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+    }
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
@@ -111,74 +109,31 @@ z-index: 9999;
       font-weight: bold;
       cursor: pointer;
     }
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-        }
-        
-                 .btn-primary {
-             @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200;
-         }
-         
-         .btn-secondary {
-             @apply bg-white hover:bg-gray-50 text-primary-500 border border-primary-500 font-medium py-3 px-6 rounded-lg transition-colors duration-200;
-         }
-        
-        .card {
-            @apply bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-200;
-        }
-        
-                 .input-field {
-             @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200;
-         }
-         
-         /* Estilos específicos para el popup */
-         #formModal .input-field {
-             @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200;
-         }
-         
-         /* Botones con fondo naranja */
-         .btn-primary {
-             @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200;
-         }
-         
-         /* Asegurar que los campos del popup tengan bordes visibles */
-         #formModal input[type="text"],
-         #formModal input[type="email"],
-         #formModal input[type="tel"] {
-             border: 2px solid #d1d5db !important;
-             border-radius: 0.5rem !important;
-             padding: 0.75rem 1rem !important;
-             width: 100% !important;
-             transition: all 0.2s ease !important;
-         }
-         
-         #formModal input[type="text"]:focus,
-         #formModal input[type="email"]:focus,
-         #formModal input[type="tel"]:focus {
-             border-color: #863DFF !important;
-             box-shadow: 0 0 0 2px rgba(237, 122, 26, 0.2) !important;
-             outline: none !important;
-         }
-         
-         /* Asegurar que los botones del popup tengan el color naranja correcto */
-         #formModal .btn-primary {
-             background-color: #863DFF !important;
-             color: white !important;
-             font-weight: 500 !important;
-             padding: 0.75rem 1.5rem !important;
-             border-radius: 0.5rem !important;
-             transition: background-color 0.2s ease !important;
-         }
-         
-         #formModal .btn-primary:hover {
-             background-color: #863DFF !important;
-         }
-   
+
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .btn-primary { /* Tailwind @apply placeholders (no-op en CSS puro) */ }
+    .btn-secondary {}
+    .card {}
+    .input-field {}
+
+    #formModal .input-field {}
+
+    /* Botones popup */
+    #formModal .btn-primary {
+      background-color: #863DFF !important;
+      color: white !important;
+      font-weight: 500 !important;
+      padding: 0.75rem 1.5rem !important;
+      border-radius: 0.5rem !important;
+      transition: background-color 0.2s ease !important;
+    }
+    #formModal .btn-primary:hover { background-color: #863DFF !important; }
+
     /* --- Variables de color --- */
     :root {
       --numia-azul: #863DFF;
-      --numia-azul-claro: #e6ecf9; /* para fondos suaves */
-      --numia-azul-muy-claro: #eef2fc; /* para segunda franja */
+      --numia-azul-claro: #e6ecf9;
+      --numia-azul-muy-claro: #eef2fc;
     }
 
     body {
@@ -198,7 +153,6 @@ z-index: 9999;
     }
     .card.ad-card:hover {
       transform: translateY(-4px) scale(1.025);
-      /* sombra adaptada al azul */
       box-shadow: 0 8px 32px rgba(0,19,145,0.17);
     }
     .card-img-top-holder {
@@ -262,21 +216,15 @@ z-index: 9999;
         max-width: 50%;
         margin-bottom: 1rem;
       }
-      .carousel-item img {
-        height: 180px;
-      }
+      .carousel-item img { height: 180px; }
     }
     @media (max-width: 767px) {
       .main-cards .col-lg-3 {
         flex: 0 0 100%;
         max-width: 100%;
       }
-      .carousel-item img {
-        height: 140px;
-      }
-      .card-img-top-holder {
-        height: 140px;
-      }
+      .carousel-item img { height: 140px; }
+      .card-img-top-holder { height: 140px; }
       .ad-card .card-title { font-size: 1.08rem; }
     }
 
@@ -333,7 +281,6 @@ z-index: 9999;
       opacity: .93;
     }
     .rates-col-side .btn {
-      /* usamos el azul numia como fondo */
       background: var(--numia-azul);
       border: none;
       color: #fff;
@@ -345,12 +292,10 @@ z-index: 9999;
       transition: background 0.18s;
     }
     .rates-col-side .btn:hover {
-      /* ligero oscurecimiento */
       background: #000d73;
       color: #fff;
     }
 
-    /* --- Botones de pestañas Divisas/Tasas --- */
     .rates-tab-btn {
       padding: .7rem 0;
       border: none;
@@ -364,7 +309,7 @@ z-index: 9999;
       cursor: pointer;
       box-shadow: none;
       outline: none;
-      border: 2px solid #d1d9f9; /* borde muy claro */
+      border: 2px solid #d1d9f9;
       min-width: 70px;
     }
     .rates-tab-btn.active,
@@ -374,7 +319,6 @@ z-index: 9999;
       border: 2px solid var(--numia-azul);
     }
 
-    /* --- Tabla de tasas/divisas --- */
     .rates-table {
       width: 100%;
       border-collapse: separate;
@@ -399,15 +343,9 @@ z-index: 9999;
       text-align: center;
       letter-spacing: 0.02em;
     }
-    .rates-table tr:not(:last-child) {
-      border-bottom: 1px solid #cde0f8;
-    }
-    .rates-table tr:nth-child(2) {
-      background: var(--numia-azul-claro);
-    }
-    .rates-table tr:nth-child(3) {
-      background: var(--numia-azul-muy-claro);
-    }
+    .rates-table tr:not(:last-child) { border-bottom: 1px solid #cde0f8; }
+    .rates-table tr:nth-child(2) { background: var(--numia-azul-claro); }
+    .rates-table tr:nth-child(3) { background: var(--numia-azul-muy-claro); }
     .rates-table td {
       color: #222;
       font-weight: 500;
@@ -415,37 +353,18 @@ z-index: 9999;
       vertical-align: middle;
     }
     .rates-table td:first-child,
-    .rates-table th:first-child {
-      text-align: left;
-    }
+    .rates-table th:first-child { text-align: left; }
 
     @media (max-width: 1300px) {
-      .rates-col-table {
-        min-width: 0;
-        flex-basis: 400px;
-      }
-      .rates-col-side {
-        min-width: 0;
-      }
+      .rates-col-table { min-width: 0; flex-basis: 400px; }
+      .rates-col-side { min-width: 0; }
     }
     @media (max-width: 991px) {
-      .rates-section {
-        flex-direction: column;
-        gap: 1.4rem;
-      }
-      .rates-col-table,
-      .rates-col-side {
-        min-width: 0;
-        max-width: 100%;
-      }
-      .rates-col-side {
-        align-items: flex-start;
-        padding-top: 1.2rem;
-      }
+      .rates-section { flex-direction: column; gap: 1.4rem; }
+      .rates-col-table, .rates-col-side { min-width: 0; max-width: 100%; }
+      .rates-col-side { align-items: flex-start; padding-top: 1.2rem; }
     }
 
-    /* --- Estilos específicos para botones y elementos que antes eran 'rojos' --- */
-    /* Creamos una clase para forzar que btn-primary use nuestro azul */
     .btn-primary {
       background-color: var(--numia-azul) !important;
       border-color: var(--numia-azul) !important;
@@ -463,13 +382,8 @@ z-index: 9999;
       color: #fff !important;
     }
 
-    /* Cambiamos el icono de maximizar del chat para que destaque sobre azul */
-    #max-chat {
-      background: var(--numia-azul) !important;
-    }
-    #open-chat {
-      background: var(--numia-azul) !important;
-    }
+    #max-chat { background: var(--numia-azul) !important; }
+    #open-chat { background: var(--numia-azul) !important; }
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -481,7 +395,6 @@ z-index: 9999;
         <a href="index.html" class="d-block">
           <img src="images/numia.png" alt="Numia Bank Logo" class="img-fluid" style="max-height: 88px;" />
         </a>
-        <!-- Cambiamos logo_hsbc por logo_numia -->
       </div>
       <p class="lead mt-2 mb-0 text-dark text-start" style="font-size:1rem;">
         Innovación en tus finanzas, potenciada por IA manteniendo el toque humano
@@ -489,7 +402,7 @@ z-index: 9999;
     </div>
   </header>
 
-  <!-- NAVBAR de menús principal debajo del header -->
+  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom" style="z-index:1050;">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -553,7 +466,7 @@ z-index: 9999;
     </div>
   </nav>
 
-  <!-- Carrusel de imágenes -->
+  <!-- Carrusel -->
   <div class="container mb-4">
     <div id="carouselMain" class="carousel slide shadow-sm rounded-3" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -562,7 +475,6 @@ z-index: 9999;
           <div class="carousel-caption d-none d-md-block">
             <h5 class="fw-bold display-6" style="text-shadow: 0 2px 12px rgba(0,0,0,0.36)">¡Lo más hot!</h5>
             <p class="fs-4">Usa tu tarjeta de crédito digital y recibe hasta un <strong>20% de cashback</strong></p>
-            <!-- Cambiado btn-danger a btn-primary -->
             <a href="#" class="btn btn-primary btn-lg rounded-pill mt-2 px-4 fw-bold">Conoce más</a>
           </div>
         </div>
@@ -571,7 +483,6 @@ z-index: 9999;
           <div class="carousel-caption d-none d-md-block">
             <h5 class="fw-bold display-6">Banca digital</h5>
             <p class="fs-4">Accede a tu banca en línea y administra tus productos 24/7</p>
-            <!-- Este botón era outline-light, lo dejamos como está -->
             <a href="#" class="btn btn-outline-light btn-lg rounded-pill mt-2 px-4 fw-bold">Regístrate aquí</a>
           </div>
         </div>
@@ -580,7 +491,6 @@ z-index: 9999;
           <div class="carousel-caption d-none d-md-block">
             <h5 class="fw-bold display-6">Préstamos numia</h5>
             <p class="fs-4">Consolida tus deudas y obtén las mejores tasas del mercado</p>
-            <!-- Cambiado btn-danger a btn-primary -->
             <a href="#" class="btn btn-primary btn-lg rounded-pill mt-2 px-4 fw-bold">Simula tu crédito</a>
           </div>
         </div>
@@ -612,8 +522,7 @@ z-index: 9999;
           <div class="card-body">
             <h5 class="card-title">Solicitud de tarjeta de crédito</h5>
             <p class="card-text">Acceso inmediato, recompensas, meses sin intereses y seguridad total en cada compra.</p>
-            <!-- Cambiado btn-danger a btn-primary -->
-            <button class="btn btn-primary rounded-pill px-4 mt-2 fw-bold"  onclick="cargarCombosDesdeAPI()" >Solicitar ahora</button>
+            <button class="btn btn-primary rounded-pill px-4 mt-2 fw-bold" onclick="cargarCombosDesdeAPI()">Solicitar ahora</button>
           </div>
         </div>
       </div>
@@ -625,7 +534,6 @@ z-index: 9999;
           <div class="card-body">
             <h5 class="card-title">Apertura de cuenta nómina</h5>
             <p class="card-text">Recibe tu sueldo y accede a promociones, descuentos y retiros sin costo en miles de cajeros.</p>
-            <!-- Cambiado btn-outline-danger a btn-outline-primary -->
             <button class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold" onclick="showForm()">Comenzar</button>
           </div>
         </div>
@@ -638,7 +546,6 @@ z-index: 9999;
           <div class="card-body">
             <h5 class="card-title">Préstamos personales</h5>
             <p class="card-text">Soluciona, planea y disfruta: obtén tu préstamo con tasas preferenciales y pagos flexibles.</p>
-            <!-- Cambiado btn-danger a btn-primary -->
             <button class="btn btn-primary rounded-pill px-4 mt-2 fw-bold" disabled>Simular préstamo</button>
           </div>
         </div>
@@ -651,14 +558,13 @@ z-index: 9999;
           <div class="card-body">
             <h5 class="card-title">Seguros numia</h5>
             <p class="card-text">Tu tranquilidad asegurada: protege auto, hogar, salud y vida con la solidez de numia.</p>
-            <!-- Cambiado btn-outline-danger a btn-outline-primary -->
             <button class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold" disabled>Conoce más</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- NUEVA SECCION: DIVISAS/TASAS + INVERSIONES -->
+    <!-- DIVISAS/TASAS + INVERSIONES -->
     <div class="rates-section mt-5 mb-4">
       <div class="rates-col-table">
         <div class="d-flex gap-3 mb-2">
@@ -674,21 +580,9 @@ z-index: 9999;
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Dólar USD</td>
-              <td>17.12</td>
-              <td>17.45</td>
-            </tr>
-            <tr>
-              <td>Euro</td>
-              <td>18.65</td>
-              <td>19.15</td>
-            </tr>
-            <tr>
-              <td>Libra esterlina</td>
-              <td>21.15</td>
-              <td>21.75</td>
-            </tr>
+            <tr><td>Dólar USD</td><td>17.12</td><td>17.45</td></tr>
+            <tr><td>Euro</td><td>18.65</td><td>19.15</td></tr>
+            <tr><td>Libra esterlina</td><td>21.15</td><td>21.75</td></tr>
           </tbody>
         </table>
         <table class="rates-table" id="tablaTasas" style="display:none;">
@@ -700,16 +594,8 @@ z-index: 9999;
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>cete Diario</td>
-              <td>8.12 %</td>
-              <td>9.18 %</td>
-            </tr>
-            <tr>
-              <td>cete Anualizado</td>
-              <td>8.12 %</td>
-              <td>9.18 %</td>
-            </tr>
+            <tr><td>cete Diario</td><td>8.12 %</td><td>9.18 %</td></tr>
+            <tr><td>cete Anualizado</td><td>8.12 %</td><td>9.18 %</td></tr>
           </tbody>
         </table>
       </div>
@@ -720,156 +606,440 @@ z-index: 9999;
           <strong>Saldo CETES:</strong> $75,000.00 MXN<br>
           <span style="font-size:0.95rem; color:var(--numia-azul); font-weight:700;">¡Estás generando $570/mes solo en intereses!</span>
         </p>
-        <p>
-          ¿Quieres diversificar? Simula en 2 clicks tus ganancias potenciales en fondos de inversión o plazo fijo.
-        </p>
+        <p>¿Quieres diversificar? Simula en 2 clicks tus ganancias potenciales en fondos de inversión o plazo fijo.</p>
         <button class="btn" disabled>Invertir ahora</button>
       </div>
     </div>
   </main>
-   
 
-<div id="popupModal" class="modal">
- 
+  <!-- Modal selección agenda -->
+  <div id="popupModal" class="modal">
     <div class="modal-content">
-    <span class="close" onclick="document.getElementById('popupModal').style.display='none'">&times;</span>
-    <div>
-         <h3 class='titulo'>Seleccione una agenda</h3>
-    </div>
-    <div id="formularioInicial">
-
-
-
-      <div align="center">      <!--label for="sucuCombo">Selecciona una sucursal:</label-->
-        <select id="sucuCombo" required><option value="">Cargando opciones...</option></select>
+      <span class="close" onclick="document.getElementById('popupModal').style.display='none'">&times;</span>
+      <div><h3 class="titulo">Seleccione una agenda</h3></div>
+      <div id="formularioInicial">
+        <div align="center">
+          <select id="sucuCombo" required><option value="">Cargando opciones...</option></select>
+        </div>
+        <div>
+          <select id="salaCombo" required><option value="">Cargando opciones...</option></select>
+        </div>
       </div>
-      <div>
-    
-        <!--label for="salaCombo">Selecciona una sala:</label-->
-      <select id="salaCombo" required><option value="">Cargando opciones...</option></select>
-      </div>
-</div>
 
-        <!--div align="center">
-        <button type="button" class="boton-fecha" onclick="cargarCombosDesdeAPI()">Buscar</button>
-      </div-->
       <div id="bloqueFecha" style="display: none;">
         <label for="fecha">Seleccione una fecha: </label>
         <input type="text" id="fecha" placeholder="Elige una fecha" />
       </div>
-    
-    <div id="resultados" class="flex flex-wrap gap-3 justify-center my-4"></div>
-    <div id="formularioDatos" style="display: none;"></div>
-    <div id="final"></div>
+
+      <div id="resultados" class="flex flex-wrap gap-3 justify-center my-4"></div>
+      <div id="formularioDatos" style="display: none;"></div>
+      <div id="final"></div>
+    </div>
   </div>
-</div>
-</div>
-  
-    <!-- Modal Form -->
-   <!-- Modal Form (estilo popup unificado) -->
-<div id="formModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="hideForm()">&times;</span>
-    <h3 class="titulo">Reserva tu Turno</h3>
-    <div id="message" class="hidden p-4 rounded-lg mb-4"></div>
 
-    <form id="reservaForm" class="space-y-4">
-      <label>Nombre</label>
-      <input type="text" name="firstName" required class="input-field" />
+  <!-- Modal Form -->
+  <div id="formModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="hideForm()">&times;</span>
+      <h3 class="titulo">Reserva tu Turno</h3>
+      <div id="message" class="hidden p-4 rounded-lg mb-4"></div>
 
-      <label>Apellido</label>
-      <input type="text" name="lastName" required class="input-field" />
+      <form id="reservaForm" class="space-y-4">
+        <label>Nombre</label>
+        <input type="text" name="firstName" required class="input-field" />
 
-      <label>DNI</label>
-      <input type="text" name="dni" required class="input-field" />
+        <label>Apellido</label>
+        <input type="text" name="lastName" required class="input-field" />
 
-      <label>Email</label>
-      <input type="email" name="email" required class="input-field" />
+        <label>DNI</label>
+        <input type="text" name="dni" required class="input-field" />
 
-      <label>Teléfono</label>
-      <input type="tel" name="phone" required class="input-field" />
+        <label>Email</label>
+        <input type="email" name="email" required class="input-field" />
 
-      <div class="d-flex justify-content-between pt-3">
-        <button type="submit" class="boton-fecha" id="submitBtn">Reservar Turno</button>
-        <button type="button" class="boton-fecha" onclick="hideForm()">Cancelar</button>
-      </div>
-    </form>
+        <label>Teléfono</label>
+        <input type="tel" name="phone" required class="input-field" />
+
+        <div class="d-flex justify-content-between pt-3">
+          <button type="submit" class="boton-fecha" id="submitBtn">Reservar Turno</button>
+          <button type="button" class="boton-fecha" onclick="hideForm()">Cancelar</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  
 
-  <!-- Pie de página con mt-auto para pegarlo al fondo -->
+  <!-- Pie -->
   <footer class="bg-light text-center py-3 mt-auto border-top">
     <small>&copy; NumiaBank. Todos los derechos reservados.</small>
   </footer>
 
-  <!-- Bootstrap JS Bundle -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-  <!-- 
-    JavaScript para:
-    1) Conmutar pestañas de Divisas / Tasas
-    2) Controlar la apertura/maximización del chat
-  -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Función de pestañas (Divisas / Tasas)
-      function showRatesTab(tab) {
-        const tabDivisas = document.getElementById('tabDivisas');
-        const tabTasas = document.getElementById('tabTasas');
-        const tablaDivisas = document.getElementById('tablaDivisas');
-        const tablaTasas = document.getElementById('tablaTasas');
-        if (tab === 'divisas') {
-          tabDivisas.classList.add('active');
-          tabTasas.classList.remove('active');
-          tablaDivisas.style.display = '';
-          tablaTasas.style.display = 'none';
-        } else {
-          tabDivisas.classList.remove('active');
-          tabTasas.classList.add('active');
-          tablaDivisas.style.display = 'none';
-          tablaTasas.style.display = '';
-        }
+    // Cerrar modales al click en fondo
+    document.addEventListener('click', function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
       }
-      // Exponer la función globalmente para el onclick en HTML
-      window.showRatesTab = showRatesTab;
-
-      // Control de la burbuja de chat
-      const iframe = document.getElementById('numia-chat-bubble');
-      const btn = document.getElementById('max-chat');
-      const openBtn = document.getElementById('open-chat');
-      let maximized = false;
-
-      // Al hacer clic en la burbuja, mostrar el iframe y el botón de maximizar
-      openBtn.onclick = function() {
-        iframe.style.display = 'block';
-        btn.style.display = 'flex';
-        openBtn.style.display = 'none';
-      };
-      // Al hacer clic en el botón de maximizar/minimizar
-      btn.onclick = function() {
-        if (!maximized) {
-          iframe.style.width = '98vw';
-          iframe.style.height = '94vh';
-          iframe.style.bottom = '3vh';
-          iframe.style.right = '1vw';
-          iframe.style.boxShadow = 'none';
-          btn.style.bottom = 'calc(94vh + 3vh + 12px)';
-          btn.textContent = '🗗';
-          maximized = true;
-        } else {
-          iframe.style.width = '370px';
-          iframe.style.height = '550px';
-          iframe.style.bottom = '24px';
-          iframe.style.right = '24px';
-          iframe.style.boxShadow = 'none';
-          btn.style.bottom = '590px';
-          btn.textContent = '⛶';
-          maximized = false;
-        }
-      };
     });
+
+    // Inicializar iconos de Lucide (protegido por si no está cargado)
+    if (window.lucide && typeof lucide.createIcons === 'function') {
+      lucide.createIcons();
+    }
+
+    // Estado
+    let isLoading = false;
+
+    // Mostrar/ocultar form breve (apertura de cuenta)
+    function showForm() {
+      document.getElementById('formModal').style.display = 'block';
+      document.getElementById('message').classList.add('hidden');
+      document.getElementById('reservaForm').reset();
+    }
+    window.showForm = showForm;
+
+    function hideForm() {
+      document.getElementById('formModal').style.display = 'none';
+    }
+    window.hideForm = hideForm;
+
+    // Mensajes del formulario "apertura de cuenta"
+    function showMessage(text, isError = false) {
+      const messageDiv = document.getElementById('message');
+      messageDiv.textContent = text;
+      messageDiv.className = `p-4 rounded-lg mb-4 ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
+      messageDiv.classList.remove('hidden');
+    }
+
+    // Envío de "apertura de cuenta" (enqueue demo)
+    async function handleSubmit(event) {
+      event.preventDefault();
+      if (isLoading) return;
+
+      isLoading = true;
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.textContent = 'Reservando...';
+      submitBtn.disabled = true;
+
+      const formData = new FormData(event.target);
+      const data = {
+        firstName: formData.get('firstName'),
+        lastName:  formData.get('lastName'),
+        dni:       formData.get('dni'),
+        email:     formData.get('email'),
+        phone:     formData.get('phone')
+      };
+
+      try {
+        const response = await fetch('https://filavirtual2.debmedia.com/api/v1/queue/11392/branch/10588/enqueue', {
+          method: 'POST',
+          headers: {
+            'x-api-token': 'iyAUHKKJ2NTsxf4sAH1OWm3fljRsThvxF0kbCGWe',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          showMessage('¡Turno reservado exitosamente!');
+          event.target.reset();
+          setTimeout(() => { hideForm(); }, 2000);
+        } else {
+          throw new Error('Error en la respuesta del servidor');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        showMessage('Error al reservar el turno. Por favor, inténtalo de nuevo.', true);
+      } finally {
+        isLoading = false;
+        submitBtn.textContent = 'Reservar Turno';
+        submitBtn.disabled = false;
+      }
+    }
+    document.getElementById('reservaForm').addEventListener('submit', handleSubmit);
+
+    // Mensaje de error reutilizable (usa lucide si está)
+    function showErrorMessage(message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 transform transition-all duration-300';
+      messageDiv.innerHTML = `
+        <div class="d-flex align-items-center">
+          <span class="me-2">⚠️</span>
+          <span>${message}</span>
+        </div>
+      `;
+      document.body.appendChild(messageDiv);
+      if (window.lucide && typeof lucide.createIcons === 'function') {
+        lucide.createIcons();
+      }
+      setTimeout(() => { messageDiv.remove(); }, 5000);
+    }
+
+    // Popup externo de ejemplo (no relacionado con "estoy aquí/acá")
+    function openViajeroPopup() {
+      const url = 'https://filavirtual2.debmedia.com/app/buscar/farmacity?queueName=Asesoramiento en Medicina al Viajero&branchId=10588';
+      const popup = window.open(url, 'ViajeroPopup', 'width=800,height=600,scrollbars=yes,resizable=yes', 600, 400);
+      if (popup) popup.focus();
+      else showErrorMessage('El popup fue bloqueado. Por favor, permite popups para este sitio.');
+    }
+
+    // Pestañas de divisas/tasas
+    function showRatesTab(tab) {
+      const tabDivisas   = document.getElementById('tabDivisas');
+      const tabTasas     = document.getElementById('tabTasas');
+      const tablaDivisas = document.getElementById('tablaDivisas');
+      const tablaTasas   = document.getElementById('tablaTasas');
+      if (tab === 'divisas') {
+        tabDivisas.classList.add('active');
+        tabTasas.classList.remove('active');
+        tablaDivisas.style.display = '';
+        tablaTasas.style.display   = 'none';
+      } else {
+        tabDivisas.classList.remove('active');
+        tabTasas.classList.add('active');
+        tablaDivisas.style.display = 'none';
+        tablaTasas.style.display   = '';
+      }
+    }
+    window.showRatesTab = showRatesTab;
+
+    // Chat bubble open/minimize
+    const iframe = document.getElementById('numia-chat-bubble');
+    const btn    = document.getElementById('max-chat');
+    const openBtn= document.getElementById('open-chat');
+    let maximized = false;
+
+    openBtn.onclick = function() {
+      iframe.style.display = 'block';
+      btn.style.display = 'flex';
+      openBtn.style.display = 'none';
+    };
+    btn.onclick = function() {
+      if (!maximized) {
+        iframe.style.width  = '98vw';
+        iframe.style.height = '94vh';
+        iframe.style.bottom = '3vh';
+        iframe.style.right  = '1vw';
+        iframe.style.boxShadow = 'none';
+        btn.style.bottom = 'calc(94vh + 3vh + 12px)';
+        btn.textContent = '🗗';
+        maximized = true;
+      } else {
+        iframe.style.width  = '370px';
+        iframe.style.height = '550px';
+        iframe.style.bottom = '24px';
+        iframe.style.right  = '24px';
+        iframe.style.boxShadow = 'none';
+        btn.style.bottom = '590px';
+        btn.textContent = '⛶';
+        maximized = false;
+      }
+    };
+
+    // ---------------------- RESERVAS (Debmedia citas2) ----------------------
+
+    let fechaSeleccionadaGlobal = null;
+    let duracionSeleccionadaGlobal = null;
+
+    flatpickr("#fecha", {
+      dateFormat: "Y-m-d",
+      minDate: "today",
+      onChange: function(selectedDates, dateStr) {
+        if (selectedDates.length > 0) consultarDisponibilidad(dateStr);
+      }
+    });
+
+    async function consultarDisponibilidad(strDate) {
+      const resultados = document.getElementById("resultados");
+      resultados.innerHTML = "Consultando disponibilidad...";
+
+      const baseUrl   = "https://citas2.debmedia.com/api/v2/schedules";
+      const branchId  = document.getElementById("sucuCombo").value;
+      const scheduleId= document.getElementById("salaCombo").value;
+      const url = `${baseUrl}/${scheduleId}/branch/${branchId}/availability?strDate=${encodeURIComponent(strDate)}`;
+
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: { "x-api-token": "KiULvyuin6xWlicdccn3b9vgerWpM7kB1dAWhaqi" }
+        });
+
+        if (!response.ok) throw new Error("Error en la solicitud: " + response.status);
+        const data = await response.json();
+        const dias = Array.isArray(data) ? data : (Array.isArray(data.slots) ? data.slots : []);
+
+        if (dias.length === 0) {
+          resultados.innerHTML = "No hay horarios disponibles para esta fecha.";
+          return;
+        }
+
+        let html = "<div><h3 class='titulo'>Horarios disponibles:</h3></div><div>";
+        dias.forEach(dia => {
+          const horaMinuto = dia.zonedStartDate.substring(11, 16);
+          html += `&nbsp;<button class="boton-fecha" onclick="mostrarFormulario('${dia.zonedStartDate}', ${dia.defaultDuration})">${horaMinuto}</button>&nbsp;`;
+        });
+        html += "</div>";
+        resultados.innerHTML = html;
+
+      } catch (err) {
+        console.error("Error atrapado:", err);
+        resultados.innerHTML = `<strong>Error:</strong> ${err.message}`;
+      }
+    }
+
+    function mostrarFormulario(fecha, duracion) {
+      let fechaSeleccionadaGlobal = fecha;      // (nota: se sombrea la global tal como estaba en tu base)
+      let duracionSeleccionadaGlobal = duracion;
+
+      const cont = document.getElementById("formularioDatos");
+      document.getElementById("formularioDatos").style.display = "block";
+      document.getElementById("resultados").style.display = "none";
+
+      cont.innerHTML = `
+        <h3 class='titulo'>Completa tus datos</h3>
+        <form id="formularioTurno" onsubmit="return enviarFormulario(event)">
+          <label>Nombre:</label>
+          <input type="text" id="nombre" required>
+          <label>Apellido:</label>
+          <input type="text" id="apellido" required>
+          <label>RUT:</label>
+          <input type="text" id="dni" required>
+          <label>Email:</label>
+          <input type="email" id="email" required>
+          <label>Motivo:</label>
+          <select id="motivo" required>
+            <option value="">Seleccionar...</option>
+            <option value="Consulta general">Consulta general</option>
+            <option value="Revisión">Revisión</option>
+            <option value="Control de tratamiento">Control de tratamiento</option>
+          </select>
+          <br><br>
+          <button type="submit" class="boton-fecha">Confirmar Turno</button>
+        </form>
+      `;
+    }
+    window.mostrarFormulario = mostrarFormulario;
+
+    function enviarFormulario(event) {
+      event.preventDefault();
+      const datos = {
+        nombre:   document.getElementById("nombre").value,
+        apellido: document.getElementById("apellido").value,
+        dni:      parseInt(document.getElementById("dni").value),
+        email:    document.getElementById("email").value,
+        motivo:   document.getElementById("motivo").value
+      };
+      crearCita(fechaSeleccionadaGlobal, duracionSeleccionadaGlobal, datos);
+    }
+
+    async function crearCita(fechaInicio, duracionMinutos, datosCliente) {
+      const resultados = document.getElementById("final");
+
+      const startDate = new Date(fechaInicio);
+      const endDate   = new Date(startDate.getTime() + duracionMinutos * 60000);
+      const pad = n => n.toString().padStart(2, '0');
+
+      function formatISO(date) {
+        const yyyy = date.getFullYear();
+        const MM = pad(date.getMonth() + 1);
+        const dd = pad(date.getDate());
+        const hh = pad(date.getHours());
+        const mm = pad(date.getMinutes());
+        return `${yyyy}-${MM}-${dd}T${hh}:${mm}:00-0300`;
+      }
+
+      const startAt = formatISO(startDate);
+      const endAt   = formatISO(endDate);
+
+      const data = {
+        branch:   { id: document.getElementById("sucuCombo").value },
+        schedule: { id: document.getElementById("salaCombo").value },
+        startAt, endAt,
+        customer: {
+          firstName: datosCliente.nombre,
+          lastName:  datosCliente.apellido,
+          dni:       datosCliente.dni
+          // email:  datosCliente.email
+        },
+        reason: datosCliente.motivo
+      };
+
+      try {
+        const response = await fetch("https://citas2.debmedia.com/api/v2/appointments", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-token": "KiULvyuin6xWlicdccn3b9vgerWpM7kB1dAWhaqi"
+          },
+          body: JSON.stringify(data)
+        });
+
+        const resultado = await response.json();
+        if (!response.ok) throw new Error(`Error ${response.status}: ${resultado.message || JSON.stringify(resultado)}`);
+
+        document.getElementById("formularioDatos").style.display = "none";
+        resultados.innerHTML = `<strong>✅ La reserva fue creada correctamente. ID: ${resultado.id}</strong>`;
+
+      } catch (error) {
+        console.error("Error:", error);
+        resultados.innerHTML = `<strong>❌ Error al generar la cita:</strong> ${error.message}`;
+      }
+    }
+
+    async function cargarCombosDesdeAPI() {
+      const salaCombo = document.getElementById("salaCombo");
+      const sucuCombo = document.getElementById("sucuCombo");
+
+      flatpickr("#fecha", {
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        onChange: function(selectedDates, dateStr) {
+          if (selectedDates.length > 0) consultarDisponibilidad(dateStr);
+        }
+      });
+
+      const url = `https://citas2.debmedia.com/api/v2/reducedSchedules`;
+
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: { "x-api-token": "vnh1jkx3ay4eLREiVnT5MH9RENkT8tuWDjAIBe2E" }
+        });
+
+        if (!response.ok) throw new Error("No se pudo cargar la lista de salas");
+        const data = await response.json();
+
+        salaCombo.innerHTML = '<option value="">Seleccionar sala...</option>';
+        sucuCombo.innerHTML = '<option value="">Seleccionar sucursal...</option>';
+
+        const addedBranchIds = new Set();
+        document.getElementById("bloqueFecha").style.display = "block";
+
+        data.forEach(sala => {
+          salaCombo.innerHTML += `<option value="${sala.id}">${sala.name}</option>`;
+          if (Array.isArray(sala.branches)) {
+            sala.branches.forEach(branch => {
+              if (!addedBranchIds.has(branch.id)) {
+                sucuCombo.innerHTML += `<option value="${branch.id}">${branch.name}</option>`;
+                addedBranchIds.add(branch.id);
+              }
+            });
+          }
+        });
+
+        document.getElementById('popupModal').style.display = 'block';
+
+      } catch (err) {
+        console.error("Error al cargar combos:", err);
+        salaCombo.innerHTML = `<option value="">Error cargando salas</option>`;
+        sucuCombo.innerHTML = `<option value="">Error cargando sucursales</option>`;
+      }
+    }
+    window.cargarCombosDesdeAPI = cargarCombosDesdeAPI;
   </script>
 
   <!-- CHAT -->
@@ -937,474 +1107,4 @@ z-index: 9999;
     <span style="font-weight:bold;font-size:2rem;">N</span>
   </button>
 </body>
-
- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-
-
-
-
-        // Aquí va el JS de reservas, igual al que ya tienes, recortado para simplicidad
-document.addEventListener('click', function(event) {
-  if (event.target.classList.contains('modal')) {
-    event.target.style.display = 'none';
-  }
-});
-        // Inicializar iconos de Lucide
-        lucide.createIcons();
-
-        // Variables globales
-        let isLoading = false;
-
-        // Funciones para mostrar/ocultar el formulario
-    function showForm() {
-      document.getElementById('formModal').style.display = 'block';
-      document.getElementById('message').classList.add('hidden');
-      document.getElementById('reservaForm').reset();
-    }
-    window.showForm = showForm;
-
-function hideForm() {
-  document.getElementById('formModal').style.display = 'none';
-}
-window.hideForm = hideForm;
-
-        // Función para mostrar mensajes
-        function showMessage(text, isError = false) {
-            const messageDiv = document.getElementById('message');
-            messageDiv.textContent = text;
-            messageDiv.className = `p-4 rounded-lg mb-4 ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
-            messageDiv.classList.remove('hidden');
-        }
-
-        // Función para manejar el envío del formulario
-        async function handleSubmit(event) {
-            event.preventDefault();
-            
-            if (isLoading) return;
-            
-            isLoading = true;
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.textContent = 'Reservando...';
-            submitBtn.disabled = true;
-
-            const formData = new FormData(event.target);
-            const data = {
-                firstName: formData.get('firstName'),
-                lastName: formData.get('lastName'),
-                dni: formData.get('dni'),
-                email: formData.get('email'),
-                phone: formData.get('phone')
-            };
-
-            try {
-                const response = await fetch('https://filavirtual2.debmedia.com/api/v1/queue/11392/branch/10588/enqueue', {
-                    method: 'POST',
-                    headers: {
-                        'x-api-token': 'iyAUHKKJ2NTsxf4sAH1OWm3fljRsThvxF0kbCGWe',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    showMessage('¡Turno reservado exitosamente!');
-                    event.target.reset();
-                    setTimeout(() => {
-                        hideForm();
-                    }, 2000);
-                } else {
-                    throw new Error('Error en la respuesta del servidor');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showMessage('Error al reservar el turno. Por favor, inténtalo de nuevo.', true);
-            } finally {
-                isLoading = false;
-                submitBtn.textContent = 'Reservar Turno';
-                submitBtn.disabled = false;
-            }
-        }
-
-        // Función para el botón "Estoy aquí"
-        async function handleEstoyAqui() {
-            if (isLoading) return;
-            
-            isLoading = true;
-            const btn = document.getElementById('estoyAquiBtn');
-            btn.textContent = 'Enviando...';
-            btn.disabled = true;
-
-            try {
-                const response = await fetch('https://filavirtual2.debmedia.com/api/v1/queue/15055/branch/10588/enqueue', {
-                    method: 'POST',
-                    headers: {
-                        'x-api-token': 'iyAUHKKJ2NTsxf4sAH1OWm3fljRsThvxF0kbCGWe',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        firstName: "Jorge",
-                        lastName: "Macera",
-                        dni: "29328703",
-                        email: "jmacera@gmail.com",
-                        phone: "1558668241"
-                    })
-                });
-
-                if (response.ok) {
-                    alert('¡Notificación enviada exitosamente!');
-                } else {
-                    throw new Error('Error en la respuesta del servidor');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error al enviar la notificación. Por favor, inténtalo de nuevo.');
-            } finally {
-                isLoading = false;
-                btn.textContent = '¡Estoy aquí!';
-                btn.disabled = false;
-            }
-        }
-
-        // Función para el botón "Estoy acá" (nueva sección)
-        async function handleEstoyAca() {
-            if (isLoading) return;
-            
-            isLoading = true;
-            const btn = document.getElementById('estoyAcaBtn');
-            const originalContent = btn.innerHTML;
-            btn.innerHTML = '<i data-lucide="loader-2" class="w-6 h-6 mr-3 animate-spin"></i>Enviando...';
-            btn.disabled = true;
-
-            try {
-                const response = await fetch('https://filavirtual2.debmedia.com/api/v1/queue/15090/branch/10588/enqueue', {
-                    method: 'POST',
-                    headers: {
-                        'x-api-token': 'iyAUHKKJ2NTsxf4sAH1OWm3fljRsThvxF0kbCGWe',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                    firstName: "Jorge",
-                        lastName: "Macera",
-                        dni: "29328703",
-                        email: "jmacera@gmail.com",
-                        phone: "1558668241"
-                    })
-                });
-
-                if (response.ok) {
-                    // Mostrar mensaje de éxito con estilo
-                    showSuccessMessage('¡Perfecto! Ya estás registrado en la cola. Te atenderemos pronto.');
-                    btn.innerHTML = '<i data-lucide="check" class="w-6 h-6 mr-3"></i>¡Enviado!';
-                                         btn.classList.remove('bg-primary-500', 'hover:bg-primary-600');
-                     btn.classList.add('bg-green-600', 'hover:bg-green-700');
-                     
-                     // Resetear después de 3 segundos
-                     setTimeout(() => {
-                         btn.innerHTML = originalContent;
-                         btn.classList.remove('bg-green-600', 'hover:bg-green-700');
-                         btn.classList.add('bg-primary-500', 'hover:bg-primary-600');
-                     }, 3000);
-                } else {
-                    throw new Error('Error en la respuesta del servidor');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showErrorMessage('Error al enviar la notificación. Por favor, inténtalo de nuevo.');
-            } finally {
-                isLoading = false;
-                btn.innerHTML = originalContent;
-                btn.disabled = false;
-            }
-        }
-
-        // Función para mostrar mensaje de éxito
-        function showSuccessMessage(message) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 transform transition-all duration-300';
-            messageDiv.innerHTML = `
-                <div class="flex items-center">
-                    <i data-lucide="check-circle" class="w-6 h-6 mr-3"></i>
-                    <span>${message}</span>
-                </div>
-            `;
-            document.body.appendChild(messageDiv);
-            lucide.createIcons();
-
-            // Remover después de 5 segundos
-            setTimeout(() => {
-                messageDiv.remove();
-            }, 5000);
-        }
-
-                 // Función para mostrar mensaje de error
-         function showErrorMessage(message) {
-             const messageDiv = document.createElement('div');
-             messageDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 transform transition-all duration-300';
-             messageDiv.innerHTML = `
-                 <div class="flex items-center">
-                     <i data-lucide="alert-circle" class="w-6 h-6 mr-3"></i>
-                     <span>${message}</span>
-                 </div>
-             `;
-             document.body.appendChild(messageDiv);
-             lucide.createIcons();
-
-             // Remover después de 5 segundos
-             setTimeout(() => {
-                 messageDiv.remove();
-             }, 5000);
-         }
-
-         // Función para abrir popup de Medicina al Viajero
-         function openViajeroPopup() {
-             const url = 'https://filavirtual2.debmedia.com/app/buscar/farmacity?queueName=Asesoramiento en Medicina al Viajero&branchId=10588';
-             const popup = window.open(url, 'ViajeroPopup', 'width=800,height=600,scrollbars=yes,resizable=yes', 600, 400);
-             
-             // Enfocar el popup si se abrió correctamente
-             if (popup) {
-                 popup.focus();
-             } else {
-                 // Si el popup fue bloqueado, mostrar mensaje
-                 showErrorMessage('El popup fue bloqueado. Por favor, permite popups para este sitio.');
-             }
-         }
-
-        // Event listeners
-        document.getElementById('reservaForm').addEventListener('submit', handleSubmit);
-
-        // Cerrar modal al hacer clic fuera de él
-        document.getElementById('formModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hideForm();
-            }
-        });
-
- let fechaSeleccionadaGlobal = null;
-    let duracionSeleccionadaGlobal = null;
-
-    flatpickr("#fecha", {
-      dateFormat: "Y-m-d",
-      minDate: "today", // evitar fechas anteriores
-      onChange: function(selectedDates, dateStr) {
-        if (selectedDates.length > 0) {
-          consultarDisponibilidad(dateStr);
-        }
-      }
-    });
-
-    async function consultarDisponibilidad(strDate) {
-      const resultados = document.getElementById("resultados");
-      resultados.innerHTML = "Consultando disponibilidad...";
-
-      const baseUrl = "https://citas2.debmedia.com/api/v2/schedules";
-      const strDateEncoded = encodeURIComponent(strDate);
-      const branchId = document.getElementById("sucuCombo").value;
-      const scheduleId = document.getElementById("salaCombo").value;
-      const url = `${baseUrl}/${scheduleId}/branch/${branchId}/availability?strDate=${strDateEncoded}`;
-
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            "x-api-token": "KiULvyuin6xWlicdccn3b9vgerWpM7kB1dAWhaqi"
-          }
-        });
-
-        if (!response.ok) throw new Error("Error en la solicitud: " + response.status);
-        const data = await response.json();
-
-        const dias = Array.isArray(data) ? data : (Array.isArray(data.slots) ? data.slots : []);
-
-        if (dias.length === 0) {
-          resultados.innerHTML = "No hay horarios disponibles para esta fecha.";
-          return;
-        }
-
-        let html = "<div><h3 class='titulo'>Horarios disponibles:</h3></div>";
-        html+="<div>"
-        dias.forEach(dia => {
-          const horaMinuto = dia.zonedStartDate.substring(11, 16);
-          html += `&nbsp<button class="boton-fecha" onclick="mostrarFormulario('${dia.zonedStartDate}', ${dia.defaultDuration})">${horaMinuto}</button>&nbsp`;
-        });
-          html+="</div>"
-        resultados.innerHTML = html;
-
-      } catch (err) {
-        console.error("Error atrapado:", err);
-        resultados.innerHTML = `<strong>Error:</strong> ${err.message}`;
-      }
-    }
-
-    function mostrarFormulario(fecha, duracion) {
-      let fechaSeleccionadaGlobal = fecha;
-      let duracionSeleccionadaGlobal = duracion;
-
-      const resultados = document.getElementById("formularioDatos");
-	document.getElementById("formularioDatos").style.display = "block";
-
-	//document.getElementById("bloqueFecha").style.display = "none";
-	//document.getElementById("formularioInicial").style.display = "none";
-
-	document.getElementById("resultados").style.display = "none";
-
-
-      let html = `
-        <h3 class='titulo'>Completa tus datos</h3>
-        <form id="formularioTurno" onsubmit="return enviarFormulario(event)">
-          <label>Nombre:</label>
-          <input type="text" id="nombre" required>
-          <label>Apellido:</label>
-          <input type="text" id="apellido" required>
-          <label>RUT:</label>
-          <input type="text" id="dni" required>
-          <label>Email:</label>
-          <input type="email" id="email" required>
-          <label>Motivo:</label>
-          <select id="motivo" required>
-            <option value="">Seleccionar...</option>
-            <option value="Consulta general">Consulta general</option>
-            <option value="Revisión">Revisión</option>
-            <option value="Control de tratamiento">Control de tratamiento</option>
-          </select>
-          <br><br>
-          <button type="submit" class="boton-fecha">Confirmar Turno</button>
-        </form>
-      `;
-      resultados.innerHTML = html;
-    }
-window.mostrarFormulario = mostrarFormulario;
-    function enviarFormulario(event) {
-      event.preventDefault();
-      const datos = {
-        nombre: document.getElementById("nombre").value,
-        apellido: document.getElementById("apellido").value,
-        dni: parseInt(document.getElementById("dni").value),
-        email: document.getElementById("email").value,
-        motivo: document.getElementById("motivo").value
-      };
-
-      crearCita(fechaSeleccionadaGlobal, duracionSeleccionadaGlobal, datos);
-    }
-
-    async function crearCita(fechaInicio, duracionMinutos, datosCliente) {
-      const resultados = document.getElementById("final");
-
-      const startDate = new Date(fechaInicio);
-      const endDate = new Date(startDate.getTime() + duracionMinutos * 60000);
-
-      const pad = n => n.toString().padStart(2, '0');
-        resultados.innerHTML = `1`;
-      function formatISO(date) {
-        const yyyy = date.getFullYear();
-        const MM = pad(date.getMonth() + 1);
-        const dd = pad(date.getDate());
-        const hh = pad(date.getHours());
-        const mm = pad(date.getMinutes());
-        return `${yyyy}-${MM}-${dd}T${hh}:${mm}:00-0300`;
-      }
-
-      const startAt = formatISO(startDate);
-      const endAt = formatISO(endDate);
-
-      const data = {
-        branch: { id:  document.getElementById("sucuCombo").value },
-        schedule: { id:  document.getElementById("salaCombo").value },
-        startAt: startAt,
-        endAt: endAt,
-        customer: {
-          firstName: datosCliente.nombre,
-          lastName: datosCliente.apellido,
-          dni: datosCliente.dni
-         // email: datosCliente.email
-        },
-        reason: datosCliente.motivo
-      };
-      try {
-        const response = await fetch("https://citas2.debmedia.com/api/v2/appointments", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-token": "KiULvyuin6xWlicdccn3b9vgerWpM7kB1dAWhaqi"
-          },
-          body: JSON.stringify(data)
-        });
-
-
-        const resultado = await response.json();
-
-        if (!response.ok) {
-          throw new Error(`Error ${response.status}: ${resultado.message || JSON.stringify(resultado)}`);
-        }
-
-
-
-document.getElementById("formularioDatos").style.display = "none";
-        resultados.innerHTML = `<strong>✅ La reserva fue creada correctamente. ID: ${resultado.id}</strong>`;
-
-      } catch (error) {
-        console.error("Error:", error);
-        resultados.innerHTML = `<strong>❌ Error al generar la cita:</strong> ${error.message}`;
-      }
-    }
-
-
-async function cargarCombosDesdeAPI() {
-  const salaCombo = document.getElementById("salaCombo");
-  const sucuCombo = document.getElementById("sucuCombo");
-
- 
-
-flatpickr("#fecha", {
-  dateFormat: "Y-m-d",
-  minDate: "today",
-  onChange: function(selectedDates, dateStr) {
-    if (selectedDates.length > 0) {
-      consultarDisponibilidad(dateStr);
-    }
-  }
-});
-
- 
-  const url = `https://citas2.debmedia.com/api/v2/reducedSchedules`;
-
-  try {
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "x-api-token": "vnh1jkx3ay4eLREiVnT5MH9RENkT8tuWDjAIBe2E"
-      }
-    });
-
-    if (!response.ok) throw new Error("No se pudo cargar la lista de salas");
-    const data = await response.json();
-
-    salaCombo.innerHTML = '<option value="">Seleccionar sala...</option>';
-    sucuCombo.innerHTML = '<option value="">Seleccionar sucursal...</option>';
-
-    const addedBranchIds = new Set();
-document.getElementById("bloqueFecha").style.display = "block";
-    data.forEach(sala => {
-      salaCombo.innerHTML += `<option value="${sala.id}">${sala.name}</option>`;
-
-      if (Array.isArray(sala.branches)) {
-        sala.branches.forEach(branch => {
-          if (!addedBranchIds.has(branch.id)) {
-            sucuCombo.innerHTML += `<option value="${branch.id}">${branch.name}</option>`;
-            addedBranchIds.add(branch.id);
-          }
-        });
-      }
-    });
-    document.getElementById('popupModal').style.display='block';
-
-  } catch (err) {
-    console.error("Error al cargar combos:", err);
-    salaCombo.innerHTML = `<option value="">Error cargando salas</option>`;
-    sucuCombo.innerHTML = `<option value="">Error cargando sucursales</option>`;
-  }
-}
-
-</script>
-
 </html>
