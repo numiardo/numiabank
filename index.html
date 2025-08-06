@@ -12,7 +12,168 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <!-- Google Font Roboto -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- Tailwind CSS CDN -->
   <style>
+
+           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.JB {
+ position: fixed;
+bottom: 24px;
+right: 24px;
+z-index: 9999;
+
+      }
+
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 20px;
+    }
+    .boton-fecha {
+      background-color: #863DFF;
+      color: white;
+      font-weight: 500;
+      padding: 0.5rem 0.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s ease;
+      margin-top: 20px;
+    }
+    .boton-fecha:hover {
+      background-color: #863DFF;
+    }
+    .input-field {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #d1d5db;
+      border-radius: 0.5rem;
+      background-color: #ffffff;
+      color: #333;
+      transition: all 0.2s ease;
+    }
+    .input-field:focus {
+      border-color: #863DFF;
+      box-shadow: 0 0 0 2px rgba(237, 122, 26, 0.2);
+      outline: none;
+    }
+    h2, .titulo {
+      text-align: center;
+      color: #863DFF;
+      margin-top: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    #formularioInicial, #resultados, #formularioDatos, #bloqueFecha {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    #formularioInicial {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    #formularioTurno {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    /* Popup */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 800px;
+      position: relative;
+    }
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        
+                 .btn-primary {
+             @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200;
+         }
+         
+         .btn-secondary {
+             @apply bg-white hover:bg-gray-50 text-primary-500 border border-primary-500 font-medium py-3 px-6 rounded-lg transition-colors duration-200;
+         }
+        
+        .card {
+            @apply bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-200;
+        }
+        
+                 .input-field {
+             @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200;
+         }
+         
+         /* Estilos específicos para el popup */
+         #formModal .input-field {
+             @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200;
+         }
+         
+         /* Botones con fondo naranja */
+         .btn-primary {
+             @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200;
+         }
+         
+         /* Asegurar que los campos del popup tengan bordes visibles */
+         #formModal input[type="text"],
+         #formModal input[type="email"],
+         #formModal input[type="tel"] {
+             border: 2px solid #d1d5db !important;
+             border-radius: 0.5rem !important;
+             padding: 0.75rem 1rem !important;
+             width: 100% !important;
+             transition: all 0.2s ease !important;
+         }
+         
+         #formModal input[type="text"]:focus,
+         #formModal input[type="email"]:focus,
+         #formModal input[type="tel"]:focus {
+             border-color: #863DFF !important;
+             box-shadow: 0 0 0 2px rgba(237, 122, 26, 0.2) !important;
+             outline: none !important;
+         }
+         
+         /* Asegurar que los botones del popup tengan el color naranja correcto */
+         #formModal .btn-primary {
+             background-color: #863DFF !important;
+             color: white !important;
+             font-weight: 500 !important;
+             padding: 0.75rem 1.5rem !important;
+             border-radius: 0.5rem !important;
+             transition: background-color 0.2s ease !important;
+         }
+         
+         #formModal .btn-primary:hover {
+             background-color: #863DFF !important;
+         }
+   
     /* --- Variables de color --- */
     :root {
       --numia-azul: #863DFF;
@@ -452,7 +613,7 @@
             <h5 class="card-title">Solicitud de tarjeta de crédito</h5>
             <p class="card-text">Acceso inmediato, recompensas, meses sin intereses y seguridad total en cada compra.</p>
             <!-- Cambiado btn-danger a btn-primary -->
-            <button class="btn btn-primary rounded-pill px-4 mt-2 fw-bold" disabled>Solicitar ahora</button>
+            <button class="btn btn-primary rounded-pill px-4 mt-2 fw-bold"  onclick="cargarCombosDesdeAPI()" >Solicitar ahora</button>
           </div>
         </div>
       </div>
@@ -465,7 +626,7 @@
             <h5 class="card-title">Apertura de cuenta nómina</h5>
             <p class="card-text">Recibe tu sueldo y accede a promociones, descuentos y retiros sin costo en miles de cajeros.</p>
             <!-- Cambiado btn-outline-danger a btn-outline-primary -->
-            <button class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold" disabled>Comenzar</button>
+            <button class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold" onclick="showForm()">Comenzar</button>
           </div>
         </div>
       </div>
@@ -566,6 +727,77 @@
       </div>
     </div>
   </main>
+   
+
+<div id="popupModal" class="modal">
+ 
+    <div class="modal-content">
+    <span class="close" onclick="document.getElementById('popupModal').style.display='none'">&times;</span>
+    <div>
+         <h3 class='titulo'>Seleccione una agenda</h3>
+    </div>
+    <div id="formularioInicial">
+
+
+
+      <div align="center">      <!--label for="sucuCombo">Selecciona una sucursal:</label-->
+        <select id="sucuCombo" required><option value="">Cargando opciones...</option></select>
+      </div>
+      <div>
+    
+        <!--label for="salaCombo">Selecciona una sala:</label-->
+      <select id="salaCombo" required><option value="">Cargando opciones...</option></select>
+      </div>
+</div>
+
+        <!--div align="center">
+        <button type="button" class="boton-fecha" onclick="cargarCombosDesdeAPI()">Buscar</button>
+      </div-->
+      <div id="bloqueFecha" style="display: none;">
+        <label for="fecha">Seleccione una fecha: </label>
+        <input type="text" id="fecha" placeholder="Elige una fecha" />
+      </div>
+    
+    <div id="resultados" class="flex flex-wrap gap-3 justify-center my-4"></div>
+    <div id="formularioDatos" style="display: none;"></div>
+    <div id="final"></div>
+  </div>
+</div>
+</div>
+  
+    <!-- Modal Form -->
+   <!-- Modal Form (estilo popup unificado) -->
+<div id="formModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="hideForm()">&times;</span>
+    <h3 class="titulo">Reserva tu Turno</h3>
+    <div id="message" class="hidden p-4 rounded-lg mb-4"></div>
+
+    <form id="reservaForm" class="space-y-4">
+      <label>Nombre</label>
+      <input type="text" name="firstName" required class="input-field" />
+
+      <label>Apellido</label>
+      <input type="text" name="lastName" required class="input-field" />
+
+      <label>DNI</label>
+      <input type="text" name="dni" required class="input-field" />
+
+      <label>Email</label>
+      <input type="email" name="email" required class="input-field" />
+
+      <label>Teléfono</label>
+      <input type="tel" name="phone" required class="input-field" />
+
+      <div class="d-flex justify-content-between pt-3">
+        <button type="submit" class="boton-fecha" id="submitBtn">Reservar Turno</button>
+        <button type="button" class="boton-fecha" onclick="hideForm()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+ <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  
 
   <!-- Pie de página con mt-auto para pegarlo al fondo -->
   <footer class="bg-light text-center py-3 mt-auto border-top">
@@ -705,4 +937,474 @@
     <span style="font-weight:bold;font-size:2rem;">N</span>
   </button>
 </body>
+
+ <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+
+
+
+
+        // Aquí va el JS de reservas, igual al que ya tienes, recortado para simplicidad
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('modal')) {
+    event.target.style.display = 'none';
+  }
+});
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+
+        // Variables globales
+        let isLoading = false;
+
+        // Funciones para mostrar/ocultar el formulario
+    function showForm() {
+      document.getElementById('formModal').style.display = 'block';
+      document.getElementById('message').classList.add('hidden');
+      document.getElementById('reservaForm').reset();
+    }
+    window.showForm = showForm;
+
+function hideForm() {
+  document.getElementById('formModal').style.display = 'none';
+}
+window.hideForm = hideForm;
+
+        // Función para mostrar mensajes
+        function showMessage(text, isError = false) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = `p-4 rounded-lg mb-4 ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
+            messageDiv.classList.remove('hidden');
+        }
+
+        // Función para manejar el envío del formulario
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            if (isLoading) return;
+            
+            isLoading = true;
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.textContent = 'Reservando...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(event.target);
+            const data = {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                dni: formData.get('dni'),
+                email: formData.get('email'),
+                phone: formData.get('phone')
+            };
+
+            try {
+                const response = await fetch('https://filavirtual2.debmedia.com/api/v1/queue/11392/branch/10588/enqueue', {
+                    method: 'POST',
+                    headers: {
+                        'x-api-token': 'iyAUHKKJ2NTsxf4sAH1OWm3fljRsThvxF0kbCGWe',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    showMessage('¡Turno reservado exitosamente!');
+                    event.target.reset();
+                    setTimeout(() => {
+                        hideForm();
+                    }, 2000);
+                } else {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('Error al reservar el turno. Por favor, inténtalo de nuevo.', true);
+            } finally {
+                isLoading = false;
+                submitBtn.textContent = 'Reservar Turno';
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Función para el botón "Estoy aquí"
+        async function handleEstoyAqui() {
+            if (isLoading) return;
+            
+            isLoading = true;
+            const btn = document.getElementById('estoyAquiBtn');
+            btn.textContent = 'Enviando...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('https://filavirtual2.debmedia.com/api/v1/queue/15055/branch/10588/enqueue', {
+                    method: 'POST',
+                    headers: {
+                        'x-api-token': 'iyAUHKKJ2NTsxf4sAH1OWm3fljRsThvxF0kbCGWe',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        firstName: "Jorge",
+                        lastName: "Macera",
+                        dni: "29328703",
+                        email: "jmacera@gmail.com",
+                        phone: "1558668241"
+                    })
+                });
+
+                if (response.ok) {
+                    alert('¡Notificación enviada exitosamente!');
+                } else {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al enviar la notificación. Por favor, inténtalo de nuevo.');
+            } finally {
+                isLoading = false;
+                btn.textContent = '¡Estoy aquí!';
+                btn.disabled = false;
+            }
+        }
+
+        // Función para el botón "Estoy acá" (nueva sección)
+        async function handleEstoyAca() {
+            if (isLoading) return;
+            
+            isLoading = true;
+            const btn = document.getElementById('estoyAcaBtn');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-6 h-6 mr-3 animate-spin"></i>Enviando...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('https://filavirtual2.debmedia.com/api/v1/queue/15090/branch/10588/enqueue', {
+                    method: 'POST',
+                    headers: {
+                        'x-api-token': 'iyAUHKKJ2NTsxf4sAH1OWm3fljRsThvxF0kbCGWe',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                    firstName: "Jorge",
+                        lastName: "Macera",
+                        dni: "29328703",
+                        email: "jmacera@gmail.com",
+                        phone: "1558668241"
+                    })
+                });
+
+                if (response.ok) {
+                    // Mostrar mensaje de éxito con estilo
+                    showSuccessMessage('¡Perfecto! Ya estás registrado en la cola. Te atenderemos pronto.');
+                    btn.innerHTML = '<i data-lucide="check" class="w-6 h-6 mr-3"></i>¡Enviado!';
+                                         btn.classList.remove('bg-primary-500', 'hover:bg-primary-600');
+                     btn.classList.add('bg-green-600', 'hover:bg-green-700');
+                     
+                     // Resetear después de 3 segundos
+                     setTimeout(() => {
+                         btn.innerHTML = originalContent;
+                         btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                         btn.classList.add('bg-primary-500', 'hover:bg-primary-600');
+                     }, 3000);
+                } else {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showErrorMessage('Error al enviar la notificación. Por favor, inténtalo de nuevo.');
+            } finally {
+                isLoading = false;
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            }
+        }
+
+        // Función para mostrar mensaje de éxito
+        function showSuccessMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 transform transition-all duration-300';
+            messageDiv.innerHTML = `
+                <div class="flex items-center">
+                    <i data-lucide="check-circle" class="w-6 h-6 mr-3"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(messageDiv);
+            lucide.createIcons();
+
+            // Remover después de 5 segundos
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+
+                 // Función para mostrar mensaje de error
+         function showErrorMessage(message) {
+             const messageDiv = document.createElement('div');
+             messageDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 transform transition-all duration-300';
+             messageDiv.innerHTML = `
+                 <div class="flex items-center">
+                     <i data-lucide="alert-circle" class="w-6 h-6 mr-3"></i>
+                     <span>${message}</span>
+                 </div>
+             `;
+             document.body.appendChild(messageDiv);
+             lucide.createIcons();
+
+             // Remover después de 5 segundos
+             setTimeout(() => {
+                 messageDiv.remove();
+             }, 5000);
+         }
+
+         // Función para abrir popup de Medicina al Viajero
+         function openViajeroPopup() {
+             const url = 'https://filavirtual2.debmedia.com/app/buscar/farmacity?queueName=Asesoramiento en Medicina al Viajero&branchId=10588';
+             const popup = window.open(url, 'ViajeroPopup', 'width=800,height=600,scrollbars=yes,resizable=yes', 600, 400);
+             
+             // Enfocar el popup si se abrió correctamente
+             if (popup) {
+                 popup.focus();
+             } else {
+                 // Si el popup fue bloqueado, mostrar mensaje
+                 showErrorMessage('El popup fue bloqueado. Por favor, permite popups para este sitio.');
+             }
+         }
+
+        // Event listeners
+        document.getElementById('reservaForm').addEventListener('submit', handleSubmit);
+
+        // Cerrar modal al hacer clic fuera de él
+        document.getElementById('formModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideForm();
+            }
+        });
+
+ let fechaSeleccionadaGlobal = null;
+    let duracionSeleccionadaGlobal = null;
+
+    flatpickr("#fecha", {
+      dateFormat: "Y-m-d",
+      minDate: "today", // evitar fechas anteriores
+      onChange: function(selectedDates, dateStr) {
+        if (selectedDates.length > 0) {
+          consultarDisponibilidad(dateStr);
+        }
+      }
+    });
+
+    async function consultarDisponibilidad(strDate) {
+      const resultados = document.getElementById("resultados");
+      resultados.innerHTML = "Consultando disponibilidad...";
+
+      const baseUrl = "https://citas2.debmedia.com/api/v2/schedules";
+      const strDateEncoded = encodeURIComponent(strDate);
+      const branchId = document.getElementById("sucuCombo").value;
+      const scheduleId = document.getElementById("salaCombo").value;
+      const url = `${baseUrl}/${scheduleId}/branch/${branchId}/availability?strDate=${strDateEncoded}`;
+
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "x-api-token": "KiULvyuin6xWlicdccn3b9vgerWpM7kB1dAWhaqi"
+          }
+        });
+
+        if (!response.ok) throw new Error("Error en la solicitud: " + response.status);
+        const data = await response.json();
+
+        const dias = Array.isArray(data) ? data : (Array.isArray(data.slots) ? data.slots : []);
+
+        if (dias.length === 0) {
+          resultados.innerHTML = "No hay horarios disponibles para esta fecha.";
+          return;
+        }
+
+        let html = "<div><h3 class='titulo'>Horarios disponibles:</h3></div>";
+        html+="<div>"
+        dias.forEach(dia => {
+          const horaMinuto = dia.zonedStartDate.substring(11, 16);
+          html += `&nbsp<button class="boton-fecha" onclick="mostrarFormulario('${dia.zonedStartDate}', ${dia.defaultDuration})">${horaMinuto}</button>&nbsp`;
+        });
+          html+="</div>"
+        resultados.innerHTML = html;
+
+      } catch (err) {
+        console.error("Error atrapado:", err);
+        resultados.innerHTML = `<strong>Error:</strong> ${err.message}`;
+      }
+    }
+
+    function mostrarFormulario(fecha, duracion) {
+      let fechaSeleccionadaGlobal = fecha;
+      let duracionSeleccionadaGlobal = duracion;
+
+      const resultados = document.getElementById("formularioDatos");
+	document.getElementById("formularioDatos").style.display = "block";
+
+	//document.getElementById("bloqueFecha").style.display = "none";
+	//document.getElementById("formularioInicial").style.display = "none";
+
+	document.getElementById("resultados").style.display = "none";
+
+
+      let html = `
+        <h3 class='titulo'>Completa tus datos</h3>
+        <form id="formularioTurno" onsubmit="return enviarFormulario(event)">
+          <label>Nombre:</label>
+          <input type="text" id="nombre" required>
+          <label>Apellido:</label>
+          <input type="text" id="apellido" required>
+          <label>RUT:</label>
+          <input type="text" id="dni" required>
+          <label>Email:</label>
+          <input type="email" id="email" required>
+          <label>Motivo:</label>
+          <select id="motivo" required>
+            <option value="">Seleccionar...</option>
+            <option value="Consulta general">Consulta general</option>
+            <option value="Revisión">Revisión</option>
+            <option value="Control de tratamiento">Control de tratamiento</option>
+          </select>
+          <br><br>
+          <button type="submit" class="boton-fecha">Confirmar Turno</button>
+        </form>
+      `;
+      resultados.innerHTML = html;
+    }
+window.mostrarFormulario = mostrarFormulario;
+    function enviarFormulario(event) {
+      event.preventDefault();
+      const datos = {
+        nombre: document.getElementById("nombre").value,
+        apellido: document.getElementById("apellido").value,
+        dni: parseInt(document.getElementById("dni").value),
+        email: document.getElementById("email").value,
+        motivo: document.getElementById("motivo").value
+      };
+
+      crearCita(fechaSeleccionadaGlobal, duracionSeleccionadaGlobal, datos);
+    }
+
+    async function crearCita(fechaInicio, duracionMinutos, datosCliente) {
+      const resultados = document.getElementById("final");
+
+      const startDate = new Date(fechaInicio);
+      const endDate = new Date(startDate.getTime() + duracionMinutos * 60000);
+
+      const pad = n => n.toString().padStart(2, '0');
+        resultados.innerHTML = `1`;
+      function formatISO(date) {
+        const yyyy = date.getFullYear();
+        const MM = pad(date.getMonth() + 1);
+        const dd = pad(date.getDate());
+        const hh = pad(date.getHours());
+        const mm = pad(date.getMinutes());
+        return `${yyyy}-${MM}-${dd}T${hh}:${mm}:00-0300`;
+      }
+
+      const startAt = formatISO(startDate);
+      const endAt = formatISO(endDate);
+
+      const data = {
+        branch: { id:  document.getElementById("sucuCombo").value },
+        schedule: { id:  document.getElementById("salaCombo").value },
+        startAt: startAt,
+        endAt: endAt,
+        customer: {
+          firstName: datosCliente.nombre,
+          lastName: datosCliente.apellido,
+          dni: datosCliente.dni
+         // email: datosCliente.email
+        },
+        reason: datosCliente.motivo
+      };
+      try {
+        const response = await fetch("https://citas2.debmedia.com/api/v2/appointments", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-token": "KiULvyuin6xWlicdccn3b9vgerWpM7kB1dAWhaqi"
+          },
+          body: JSON.stringify(data)
+        });
+
+
+        const resultado = await response.json();
+
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}: ${resultado.message || JSON.stringify(resultado)}`);
+        }
+
+
+
+document.getElementById("formularioDatos").style.display = "none";
+        resultados.innerHTML = `<strong>✅ La reserva fue creada correctamente. ID: ${resultado.id}</strong>`;
+
+      } catch (error) {
+        console.error("Error:", error);
+        resultados.innerHTML = `<strong>❌ Error al generar la cita:</strong> ${error.message}`;
+      }
+    }
+
+
+async function cargarCombosDesdeAPI() {
+  const salaCombo = document.getElementById("salaCombo");
+  const sucuCombo = document.getElementById("sucuCombo");
+
+ 
+
+flatpickr("#fecha", {
+  dateFormat: "Y-m-d",
+  minDate: "today",
+  onChange: function(selectedDates, dateStr) {
+    if (selectedDates.length > 0) {
+      consultarDisponibilidad(dateStr);
+    }
+  }
+});
+
+ 
+  const url = `https://citas2.debmedia.com/api/v2/reducedSchedules`;
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "x-api-token": "vnh1jkx3ay4eLREiVnT5MH9RENkT8tuWDjAIBe2E"
+      }
+    });
+
+    if (!response.ok) throw new Error("No se pudo cargar la lista de salas");
+    const data = await response.json();
+
+    salaCombo.innerHTML = '<option value="">Seleccionar sala...</option>';
+    sucuCombo.innerHTML = '<option value="">Seleccionar sucursal...</option>';
+
+    const addedBranchIds = new Set();
+document.getElementById("bloqueFecha").style.display = "block";
+    data.forEach(sala => {
+      salaCombo.innerHTML += `<option value="${sala.id}">${sala.name}</option>`;
+
+      if (Array.isArray(sala.branches)) {
+        sala.branches.forEach(branch => {
+          if (!addedBranchIds.has(branch.id)) {
+            sucuCombo.innerHTML += `<option value="${branch.id}">${branch.name}</option>`;
+            addedBranchIds.add(branch.id);
+          }
+        });
+      }
+    });
+    document.getElementById('popupModal').style.display='block';
+
+  } catch (err) {
+    console.error("Error al cargar combos:", err);
+    salaCombo.innerHTML = `<option value="">Error cargando salas</option>`;
+    sucuCombo.innerHTML = `<option value="">Error cargando sucursales</option>`;
+  }
+}
+
+</script>
+
 </html>
