@@ -735,10 +735,10 @@
       };
 
       try {
-        const response = await fetch('https://filavirtual2.debmedia.com/api/v1/queue/11392/branch/10588/enqueue', {
+        const response = await fetch('https://filavirtual2.debmedia.com/api/v1/queue/5007/branch/11/enqueue', {
           method: 'POST',
           headers: {
-            'x-api-token': 'iyAUHKKJ2NTsxf4sAH1OWm3fljRsThvxF0kbCGWe',
+            'x-api-token': 'm7NCbNDBShZOV83fu6RGJV1DbkhSkWI6JSTxmT2e',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(data)
@@ -779,14 +779,6 @@
       setTimeout(() => { messageDiv.remove(); }, 5000);
     }
 
-    // Popup externo de ejemplo (no relacionado con "estoy aquí/acá")
-    function openViajeroPopup() {
-      const url = 'https://filavirtual2.debmedia.com/app/buscar/farmacity?queueName=Asesoramiento en Medicina al Viajero&branchId=10588';
-      const popup = window.open(url, 'ViajeroPopup', 'width=800,height=600,scrollbars=yes,resizable=yes', 600, 400);
-      if (popup) popup.focus();
-      else showErrorMessage('El popup fue bloqueado. Por favor, permite popups para este sitio.');
-    }
-
     // Pestañas de divisas/tasas
     function showRatesTab(tab) {
       const tabDivisas   = document.getElementById('tabDivisas');
@@ -806,39 +798,6 @@
       }
     }
     window.showRatesTab = showRatesTab;
-
-    // Chat bubble open/minimize
-    const iframe = document.getElementById('numia-chat-bubble');
-    const btn    = document.getElementById('max-chat');
-    const openBtn= document.getElementById('open-chat');
-    let maximized = false;
-
-    openBtn.onclick = function() {
-      iframe.style.display = 'block';
-      btn.style.display = 'flex';
-      openBtn.style.display = 'none';
-    };
-    btn.onclick = function() {
-      if (!maximized) {
-        iframe.style.width  = '98vw';
-        iframe.style.height = '94vh';
-        iframe.style.bottom = '3vh';
-        iframe.style.right  = '1vw';
-        iframe.style.boxShadow = 'none';
-        btn.style.bottom = 'calc(94vh + 3vh + 12px)';
-        btn.textContent = '🗗';
-        maximized = true;
-      } else {
-        iframe.style.width  = '370px';
-        iframe.style.height = '550px';
-        iframe.style.bottom = '24px';
-        iframe.style.right  = '24px';
-        iframe.style.boxShadow = 'none';
-        btn.style.bottom = '590px';
-        btn.textContent = '⛶';
-        maximized = false;
-      }
-    };
 
     // ---------------------- RESERVAS (Debmedia citas2) ----------------------
 
@@ -865,7 +824,7 @@
       try {
         const response = await fetch(url, {
           method: "GET",
-          headers: { "x-api-token": "KiULvyuin6xWlicdccn3b9vgerWpM7kB1dAWhaqi" }
+          headers: { "x-api-token": "s9ZmCOGzuRz0OlxtZyJYIvnG7WQVBtnLlNFrHD2U" }
         });
 
         if (!response.ok) throw new Error("Error en la solicitud: " + response.status);
@@ -973,7 +932,7 @@
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-api-token": "KiULvyuin6xWlicdccn3b9vgerWpM7kB1dAWhaqi"
+            "x-api-token": "s9ZmCOGzuRz0OlxtZyJYIvnG7WQVBtnLlNFrHD2U"
           },
           body: JSON.stringify(data)
         });
@@ -1007,7 +966,7 @@
       try {
         const response = await fetch(url, {
           method: "GET",
-          headers: { "x-api-token": "vnh1jkx3ay4eLREiVnT5MH9RENkT8tuWDjAIBe2E" }
+          headers: { "x-api-token": "s9ZmCOGzuRz0OlxtZyJYIvnG7WQVBtnLlNFrHD2U" }
         });
 
         if (!response.ok) throw new Error("No se pudo cargar la lista de salas");
@@ -1106,5 +1065,42 @@
   >
     <span style="font-weight:bold;font-size:2rem;">N</span>
   </button>
+
+  <!-- Handlers del chat: abrir y maximizar/minimizar -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const iframe  = document.getElementById('numia-chat-bubble');
+      const openBtn = document.getElementById('open-chat');
+      const maxBtn  = document.getElementById('max-chat');
+      if (!iframe || !openBtn || !maxBtn) return;
+
+      let maximized = false;
+
+      openBtn.addEventListener('click', () => {
+        iframe.style.display = 'block';
+        maxBtn.style.display = 'flex';
+        openBtn.style.display = 'none';
+      });
+
+      maxBtn.addEventListener('click', () => {
+        if (!maximized) {
+          iframe.style.width  = '98vw';
+          iframe.style.height = '94vh';
+          iframe.style.bottom = '3vh';
+          iframe.style.right  = '1vw';
+          maxBtn.style.bottom = 'calc(94vh + 3vh + 12px)';
+          maxBtn.textContent  = '🗗';
+        } else {
+          iframe.style.width  = '370px';
+          iframe.style.height = '550px';
+          iframe.style.bottom = '24px';
+          iframe.style.right  = '24px';
+          maxBtn.style.bottom = '590px';
+          maxBtn.textContent  = '⛶';
+        }
+        maximized = !maximized;
+      });
+    });
+  </script>
 </body>
 </html>
