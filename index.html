@@ -12,128 +12,12 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <!-- Google Font Roboto -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
-  <!-- Flatpickr -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-    .JB {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 9999;
-    }
-
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-      padding: 20px;
-    }
-    .boton-fecha {
-      background-color: #863DFF;
-      color: white;
-      font-weight: 500;
-      padding: 0.5rem 0.5rem;
-      border-radius: 0.5rem;
-      transition: background-color 0.2s ease;
-      margin-top: 20px;
-    }
-    .boton-fecha:hover {
-      background-color: #863DFF;
-    }
-    .input-field {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 2px solid #d1d5db;
-      border-radius: 0.5rem;
-      background-color: #ffffff;
-      color: #333;
-      transition: all 0.2s ease;
-    }
-    .input-field:focus {
-      border-color: #863DFF;
-      box-shadow: 0 0 0 2px rgba(237, 122, 26, 0.2);
-      outline: none;
-    }
-    h2, .titulo {
-      text-align: center;
-      color: #863DFF;
-      margin-top: 20px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    #formularioInicial, #resultados, #formularioDatos, #bloqueFecha {
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 0.75rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      margin-top: 20px;
-    }
-    #formularioInicial {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    #formularioTurno {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    /* Popup */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.5);
-    }
-    .modal-content {
-      background-color: #fff;
-      margin: 5% auto;
-      padding: 30px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 800px;
-      position: relative;
-    }
-    .close {
-      position: absolute;
-      right: 15px;
-      top: 10px;
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    body { font-family: 'Inter', system-ui, sans-serif; }
-    .btn-primary { /* Tailwind @apply placeholders (no-op en CSS puro) */ }
-    .btn-secondary {}
-    .card {}
-    .input-field {}
-
-    #formModal .input-field {}
-
-    /* Botones popup */
-    #formModal .btn-primary {
-      background-color: #863DFF !important;
-      color: white !important;
-      font-weight: 500 !important;
-      padding: 0.75rem 1.5rem !important;
-      border-radius: 0.5rem !important;
-      transition: background-color 0.2s ease !important;
-    }
-    #formModal .btn-primary:hover { background-color: #863DFF !important; }
-
     /* --- Variables de color --- */
     :root {
       --numia-azul: #863DFF;
-      --numia-azul-claro: #e6ecf9;
-      --numia-azul-muy-claro: #eef2fc;
+      --numia-azul-claro: #e6ecf9; /* para fondos suaves */
+      --numia-azul-muy-claro: #eef2fc; /* para segunda franja */
     }
 
     body {
@@ -153,6 +37,7 @@
     }
     .card.ad-card:hover {
       transform: translateY(-4px) scale(1.025);
+      /* sombra adaptada al azul */
       box-shadow: 0 8px 32px rgba(0,19,145,0.17);
     }
     .card-img-top-holder {
@@ -216,15 +101,21 @@
         max-width: 50%;
         margin-bottom: 1rem;
       }
-      .carousel-item img { height: 180px; }
+      .carousel-item img {
+        height: 180px;
+      }
     }
     @media (max-width: 767px) {
       .main-cards .col-lg-3 {
         flex: 0 0 100%;
         max-width: 100%;
       }
-      .carousel-item img { height: 140px; }
-      .card-img-top-holder { height: 140px; }
+      .carousel-item img {
+        height: 140px;
+      }
+      .card-img-top-holder {
+        height: 140px;
+      }
       .ad-card .card-title { font-size: 1.08rem; }
     }
 
@@ -281,6 +172,7 @@
       opacity: .93;
     }
     .rates-col-side .btn {
+      /* usamos el azul numia como fondo */
       background: var(--numia-azul);
       border: none;
       color: #fff;
@@ -292,10 +184,12 @@
       transition: background 0.18s;
     }
     .rates-col-side .btn:hover {
+      /* ligero oscurecimiento */
       background: #000d73;
       color: #fff;
     }
 
+    /* --- Botones de pestañas Divisas/Tasas --- */
     .rates-tab-btn {
       padding: .7rem 0;
       border: none;
@@ -309,7 +203,7 @@
       cursor: pointer;
       box-shadow: none;
       outline: none;
-      border: 2px solid #d1d9f9;
+      border: 2px solid #d1d9f9; /* borde muy claro */
       min-width: 70px;
     }
     .rates-tab-btn.active,
@@ -319,6 +213,7 @@
       border: 2px solid var(--numia-azul);
     }
 
+    /* --- Tabla de tasas/divisas --- */
     .rates-table {
       width: 100%;
       border-collapse: separate;
@@ -343,9 +238,15 @@
       text-align: center;
       letter-spacing: 0.02em;
     }
-    .rates-table tr:not(:last-child) { border-bottom: 1px solid #cde0f8; }
-    .rates-table tr:nth-child(2) { background: var(--numia-azul-claro); }
-    .rates-table tr:nth-child(3) { background: var(--numia-azul-muy-claro); }
+    .rates-table tr:not(:last-child) {
+      border-bottom: 1px solid #cde0f8;
+    }
+    .rates-table tr:nth-child(2) {
+      background: var(--numia-azul-claro);
+    }
+    .rates-table tr:nth-child(3) {
+      background: var(--numia-azul-muy-claro);
+    }
     .rates-table td {
       color: #222;
       font-weight: 500;
@@ -353,18 +254,37 @@
       vertical-align: middle;
     }
     .rates-table td:first-child,
-    .rates-table th:first-child { text-align: left; }
+    .rates-table th:first-child {
+      text-align: left;
+    }
 
     @media (max-width: 1300px) {
-      .rates-col-table { min-width: 0; flex-basis: 400px; }
-      .rates-col-side { min-width: 0; }
+      .rates-col-table {
+        min-width: 0;
+        flex-basis: 400px;
+      }
+      .rates-col-side {
+        min-width: 0;
+      }
     }
     @media (max-width: 991px) {
-      .rates-section { flex-direction: column; gap: 1.4rem; }
-      .rates-col-table, .rates-col-side { min-width: 0; max-width: 100%; }
-      .rates-col-side { align-items: flex-start; padding-top: 1.2rem; }
+      .rates-section {
+        flex-direction: column;
+        gap: 1.4rem;
+      }
+      .rates-col-table,
+      .rates-col-side {
+        min-width: 0;
+        max-width: 100%;
+      }
+      .rates-col-side {
+        align-items: flex-start;
+        padding-top: 1.2rem;
+      }
     }
 
+    /* --- Estilos específicos para botones y elementos que antes eran 'rojos' --- */
+    /* Creamos una clase para forzar que btn-primary use nuestro azul */
     .btn-primary {
       background-color: var(--numia-azul) !important;
       border-color: var(--numia-azul) !important;
@@ -382,8 +302,51 @@
       color: #fff !important;
     }
 
-    #max-chat { background: var(--numia-azul) !important; }
-    #open-chat { background: var(--numia-azul) !important; }
+    /* Cambiamos el icono de maximizar del chat para que destaque sobre azul */
+    #max-chat {
+      background: var(--numia-azul) !important;
+    }
+    #open-chat {
+      background: var(--numia-azul) !important;
+    }
+
+    /* ======== UX citas mejorado ======== */
+    #modalCita .modal-dialog { max-width: 920px; }
+    #modalCita .modal-content { border-radius: 16px; border: 0; box-shadow: 0 14px 40px rgba(0,0,0,.12); }
+    #modalCita .modal-header { border-bottom: 1px solid #eef2fc; }
+    #modalCita .modal-body { padding-top: .75rem; }
+
+    .cita-toolbar {
+      position: sticky; top: 0; z-index: 2; background: #fff;
+      padding-bottom: .5rem; margin-bottom: .75rem; border-bottom: 1px solid #eef2fc;
+    }
+    #citaSchedule, #citaBranch, #citaFecha { border-radius: 10px; }
+    #citaSlots {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+      gap: .5rem;
+      max-height: 320px;
+      overflow: auto;
+      padding-right: .25rem;
+    }
+    #citaSlots .btn {
+      border-radius: 10px;
+      border: 1px solid #c9b6ff;
+      font-weight: 600;
+      padding: .45rem .3rem;
+    }
+    #citaSlots .btn:hover { background: #f6f3ff; }
+    #citaSlots .btn.active,
+    #citaSlots .btn:focus {
+      background: var(--numia-azul);
+      color: #fff;
+      border-color: var(--numia-azul);
+    }
+    .cita-legend { font-size: .8rem; color: #6c6c7a; }
+
+    @media (max-width: 576px) {
+      #citaSlots { max-height: 260px; }
+    }
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -395,6 +358,7 @@
         <a href="index.html" class="d-block">
           <img src="images/numia.png" alt="Numia Bank Logo" class="img-fluid" style="max-height: 88px;" />
         </a>
+        <!-- Cambiamos logo_hsbc por logo_numia -->
       </div>
       <p class="lead mt-2 mb-0 text-dark text-start" style="font-size:1rem;">
         Innovación en tus finanzas, potenciada por IA manteniendo el toque humano
@@ -402,7 +366,7 @@
     </div>
   </header>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR de menús principal debajo del header -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom" style="z-index:1050;">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -466,7 +430,7 @@
     </div>
   </nav>
 
-  <!-- Carrusel -->
+  <!-- Carrusel de imágenes -->
   <div class="container mb-4">
     <div id="carouselMain" class="carousel slide shadow-sm rounded-3" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -475,6 +439,7 @@
           <div class="carousel-caption d-none d-md-block">
             <h5 class="fw-bold display-6" style="text-shadow: 0 2px 12px rgba(0,0,0,0.36)">¡Lo más hot!</h5>
             <p class="fs-4">Usa tu tarjeta de crédito digital y recibe hasta un <strong>20% de cashback</strong></p>
+            <!-- Cambiado btn-danger a btn-primary -->
             <a href="#" class="btn btn-primary btn-lg rounded-pill mt-2 px-4 fw-bold">Conoce más</a>
           </div>
         </div>
@@ -483,6 +448,7 @@
           <div class="carousel-caption d-none d-md-block">
             <h5 class="fw-bold display-6">Banca digital</h5>
             <p class="fs-4">Accede a tu banca en línea y administra tus productos 24/7</p>
+            <!-- Este botón era outline-light, lo dejamos como está -->
             <a href="#" class="btn btn-outline-light btn-lg rounded-pill mt-2 px-4 fw-bold">Regístrate aquí</a>
           </div>
         </div>
@@ -491,6 +457,7 @@
           <div class="carousel-caption d-none d-md-block">
             <h5 class="fw-bold display-6">Préstamos numia</h5>
             <p class="fs-4">Consolida tus deudas y obtén las mejores tasas del mercado</p>
+            <!-- Cambiado btn-danger a btn-primary -->
             <a href="#" class="btn btn-primary btn-lg rounded-pill mt-2 px-4 fw-bold">Simula tu crédito</a>
           </div>
         </div>
@@ -520,9 +487,10 @@
             <img src="images/Tarjeta de credito.jpg" alt="Tarjeta de Crédito">
           </div>
           <div class="card-body">
-            <h5 class="card-title">Solicitud de tarjeta de crédito</h5>
-            <p class="card-text">Acceso inmediato, recompensas, meses sin intereses y seguridad total en cada compra.</p>
-            <button class="btn btn-primary rounded-pill px-4 mt-2 fw-bold" onclick="cargarCombosDesdeAPI()">Solicitar ahora</button>
+            <h5 class="card-title">Agenda una cita</h5>
+            <p class="card-text">Agenda una cita con un agente especialista y recibe atención remota o presencial.</p>
+            <!-- Cambiado btn-danger a btn-primary -->
+            <button class="btn btn-primary rounded-pill px-4 mt-2 fw-bold" disabled>Agendar</button>
           </div>
         </div>
       </div>
@@ -534,7 +502,8 @@
           <div class="card-body">
             <h5 class="card-title">Apertura de cuenta nómina</h5>
             <p class="card-text">Recibe tu sueldo y accede a promociones, descuentos y retiros sin costo en miles de cajeros.</p>
-            <button class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold" onclick="showForm()">Comenzar</button>
+            <!-- Cambiado btn-outline-danger a btn-outline-primary -->
+            <button class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold" disabled>Comenzar</button>
           </div>
         </div>
       </div>
@@ -546,6 +515,7 @@
           <div class="card-body">
             <h5 class="card-title">Préstamos personales</h5>
             <p class="card-text">Soluciona, planea y disfruta: obtén tu préstamo con tasas preferenciales y pagos flexibles.</p>
+            <!-- Cambiado btn-danger a btn-primary -->
             <button class="btn btn-primary rounded-pill px-4 mt-2 fw-bold" disabled>Simular préstamo</button>
           </div>
         </div>
@@ -558,13 +528,14 @@
           <div class="card-body">
             <h5 class="card-title">Seguros numia</h5>
             <p class="card-text">Tu tranquilidad asegurada: protege auto, hogar, salud y vida con la solidez de numia.</p>
+            <!-- Cambiado btn-outline-danger a btn-outline-primary -->
             <button class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold" disabled>Conoce más</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- DIVISAS/TASAS + INVERSIONES -->
+    <!-- NUEVA SECCION: DIVISAS/TASAS + INVERSIONES -->
     <div class="rates-section mt-5 mb-4">
       <div class="rates-col-table">
         <div class="d-flex gap-3 mb-2">
@@ -580,9 +551,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>Dólar USD</td><td>17.12</td><td>17.45</td></tr>
-            <tr><td>Euro</td><td>18.65</td><td>19.15</td></tr>
-            <tr><td>Libra esterlina</td><td>21.15</td><td>21.75</td></tr>
+            <tr>
+              <td>Dólar USD</td>
+              <td>17.12</td>
+              <td>17.45</td>
+            </tr>
+            <tr>
+              <td>Euro</td>
+              <td>18.65</td>
+              <td>19.15</td>
+            </tr>
+            <tr>
+              <td>Libra esterlina</td>
+              <td>21.15</td>
+              <td>21.75</td>
+            </tr>
           </tbody>
         </table>
         <table class="rates-table" id="tablaTasas" style="display:none;">
@@ -594,8 +577,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>cete Diario</td><td>8.12 %</td><td>9.18 %</td></tr>
-            <tr><td>cete Anualizado</td><td>8.12 %</td><td>9.18 %</td></tr>
+            <tr>
+              <td>cete Diario</td>
+              <td>8.12 %</td>
+              <td>9.18 %</td>
+            </tr>
+            <tr>
+              <td>cete Anualizado</td>
+              <td>8.12 %</td>
+              <td>9.18 %</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -606,400 +597,415 @@
           <strong>Saldo CETES:</strong> $75,000.00 MXN<br>
           <span style="font-size:0.95rem; color:var(--numia-azul); font-weight:700;">¡Estás generando $570/mes solo en intereses!</span>
         </p>
-        <p>¿Quieres diversificar? Simula en 2 clicks tus ganancias potenciales en fondos de inversión o plazo fijo.</p>
+        <p>
+          ¿Quieres diversificar? Simula en 2 clicks tus ganancias potenciales en fondos de inversión o plazo fijo.
+        </p>
         <button class="btn" disabled>Invertir ahora</button>
       </div>
     </div>
   </main>
 
-  <!-- Modal selección agenda -->
-  <div id="popupModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="document.getElementById('popupModal').style.display='none'">&times;</span>
-      <div><h3 class="titulo">Seleccione una agenda</h3></div>
-      <div id="formularioInicial">
-        <div align="center">
-          <select id="sucuCombo" required><option value="">Cargando opciones...</option></select>
-        </div>
-        <div>
-          <select id="salaCombo" required><option value="">Cargando opciones...</option></select>
-        </div>
-      </div>
-
-      <div id="bloqueFecha" style="display: none;">
-        <label for="fecha">Seleccione una fecha: </label>
-        <input type="text" id="fecha" placeholder="Elige una fecha" />
-      </div>
-
-      <div id="resultados" class="flex flex-wrap gap-3 justify-center my-4"></div>
-      <div id="formularioDatos" style="display: none;"></div>
-      <div id="final"></div>
-    </div>
-  </div>
-
-  <!-- Modal Form -->
-  <div id="formModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="hideForm()">&times;</span>
-      <h3 class="titulo">Reserva tu Turno</h3>
-      <div id="message" class="hidden p-4 rounded-lg mb-4"></div>
-
-      <form id="reservaForm" class="space-y-4">
-        <label>Nombre</label>
-        <input type="text" name="firstName" required class="input-field" />
-
-        <label>Apellido</label>
-        <input type="text" name="lastName" required class="input-field" />
-
-        <label>DNI</label>
-        <input type="text" name="dni" required class="input-field" />
-
-        <label>Email</label>
-        <input type="email" name="email" required class="input-field" />
-
-        <label>Teléfono</label>
-        <input type="tel" name="phone" required class="input-field" />
-
-        <div class="d-flex justify-content-between pt-3">
-          <button type="submit" class="boton-fecha" id="submitBtn">Reservar Turno</button>
-          <button type="button" class="boton-fecha" onclick="hideForm()">Cancelar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Pie -->
+  <!-- Pie de página con mt-auto para pegarlo al fondo -->
   <footer class="bg-light text-center py-3 mt-auto border-top">
     <small>&copy; NumiaBank. Todos los derechos reservados.</small>
   </footer>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Flatpickr JS -->
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-  <script>
-    // Cerrar modales al click en fondo
-    document.addEventListener('click', function(event) {
-      if (event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
-      }
-    });
-
-    // Inicializar iconos de Lucide (protegido por si no está cargado)
-    if (window.lucide && typeof lucide.createIcons === 'function') {
-      lucide.createIcons();
-    }
-
-    // Estado
-    let isLoading = false;
-
-    // Mostrar/ocultar form breve (apertura de cuenta)
-    function showForm() {
-      document.getElementById('formModal').style.display = 'block';
-      document.getElementById('message').classList.add('hidden');
-      document.getElementById('reservaForm').reset();
-    }
-    window.showForm = showForm;
-
-    function hideForm() {
-      document.getElementById('formModal').style.display = 'none';
-    }
-    window.hideForm = hideForm;
-
-    // Mensajes del formulario "apertura de cuenta"
-    function showMessage(text, isError = false) {
-      const messageDiv = document.getElementById('message');
-      messageDiv.textContent = text;
-      messageDiv.className = `p-4 rounded-lg mb-4 ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
-      messageDiv.classList.remove('hidden');
-    }
-
-    // Envío de "apertura de cuenta" (enqueue demo)
-    async function handleSubmit(event) {
-      event.preventDefault();
-      if (isLoading) return;
-
-      isLoading = true;
-      const submitBtn = document.getElementById('submitBtn');
-      submitBtn.textContent = 'Reservando...';
-      submitBtn.disabled = true;
-
-      const formData = new FormData(event.target);
-      const data = {
-        firstName: formData.get('firstName'),
-        lastName:  formData.get('lastName'),
-        dni:       formData.get('dni'),
-        email:     formData.get('email'),
-        phone:     formData.get('phone')
-      };
-
-      try {
-        const response = await fetch('https://filavirtual2.debmedia.com/api/v1/queue/5007/branch/11/enqueue', {
-          method: 'POST',
-          headers: {
-            'x-api-token': 'm7NCbNDBShZOV83fu6RGJV1DbkhSkWI6JSTxmT2e',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-          showMessage('¡Turno reservado exitosamente!');
-          event.target.reset();
-          setTimeout(() => { hideForm(); }, 2000);
-        } else {
-          throw new Error('Error en la respuesta del servidor');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        showMessage('Error al reservar el turno. Por favor, inténtalo de nuevo.', true);
-      } finally {
-        isLoading = false;
-        submitBtn.textContent = 'Reservar Turno';
-        submitBtn.disabled = false;
-      }
-    }
-    document.getElementById('reservaForm').addEventListener('submit', handleSubmit);
-
-    // Mensaje de error reutilizable (usa lucide si está)
-    function showErrorMessage(message) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 transform transition-all duration-300';
-      messageDiv.innerHTML = `
-        <div class="d-flex align-items-center">
-          <span class="me-2">⚠️</span>
-          <span>${message}</span>
+  <!-- ===================== MODAL DE CITAS (AGREGADO) ===================== -->
+  <div class="modal fade" id="modalCita" tabindex="-1" aria-labelledby="modalCitaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalCitaLabel">
+            <i class="bi bi-calendar2-week me-2"></i>Agenda tu cita
+          </h5>
+          <button class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
-      `;
-      document.body.appendChild(messageDiv);
-      if (window.lucide && typeof lucide.createIcons === 'function') {
-        lucide.createIcons();
+
+        <div class="modal-body">
+          <div id="citaAlert" class="alert d-none"></div>
+
+          <!-- Barra superior pegajosa con selects + fecha + chips -->
+          <div class="cita-toolbar">
+            <div class="row g-3 align-items-end">
+              <div class="col-lg-4">
+                <label class="form-label fw-semibold">Servicio / Agenda</label>
+                <select id="citaSchedule" class="form-select">
+                  <option value="">Cargando...</option>
+                </select>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label fw-semibold">Sucursal</label>
+                <select id="citaBranch" class="form-select" disabled>
+                  <option value="">Selecciona un servicio</option>
+                </select>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label fw-semibold">Fecha</label>
+                <div class="d-flex gap-2">
+                  <input id="citaFecha" type="date" class="form-control" disabled/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid de horarios con scroll interno -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Horarios disponibles</label>
+            <div id="citaSlots"></div>
+          </div>
+
+          <hr class="my-3">
+
+          <!-- Datos del cliente -->
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Nombre</label>
+              <input id="citaFirst" class="form-control" placeholder="Nombre">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Apellido</label>
+              <input id="citaLast" class="form-control" placeholder="Apellido">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">DNI</label>
+              <input id="citaDni" class="form-control" placeholder="Documento">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Email</label>
+              <input id="citaMail" type="email" class="form-control" placeholder="correo@dominio.com">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <div class="me-auto cita-legend">Selecciona un horario para habilitar la confirmación.</div>
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button id="citaConfirmar" class="btn btn-primary" disabled>Confirmar cita</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- =================== FIN MODAL DE CITAS (AGREGADO) =================== -->
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- 
+    JavaScript para:
+    1) Conmutar pestañas de Divisas / Tasas
+    2) Controlar la apertura/maximización del chat
+  -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Función de pestañas (Divisas / Tasas)
+      function showRatesTab(tab) {
+        const tabDivisas = document.getElementById('tabDivisas');
+        const tabTasas = document.getElementById('tabTasas');
+        const tablaDivisas = document.getElementById('tablaDivisas');
+        const tablaTasas = document.getElementById('tablaTasas');
+        if (tab === 'divisas') {
+          tabDivisas.classList.add('active');
+          tabTasas.classList.remove('active');
+          tablaDivisas.style.display = '';
+          tablaTasas.style.display = 'none';
+        } else {
+          tabDivisas.classList.remove('active');
+          tabTasas.classList.add('active');
+          tablaDivisas.style.display = 'none';
+          tablaTasas.style.display = '';
+        }
       }
-      setTimeout(() => { messageDiv.remove(); }, 5000);
-    }
+      // Exponer la función globalmente para el onclick en HTML
+      window.showRatesTab = showRatesTab;
 
-    // Pestañas de divisas/tasas
-    function showRatesTab(tab) {
-      const tabDivisas   = document.getElementById('tabDivisas');
-      const tabTasas     = document.getElementById('tabTasas');
-      const tablaDivisas = document.getElementById('tablaDivisas');
-      const tablaTasas   = document.getElementById('tablaTasas');
-      if (tab === 'divisas') {
-        tabDivisas.classList.add('active');
-        tabTasas.classList.remove('active');
-        tablaDivisas.style.display = '';
-        tablaTasas.style.display   = 'none';
-      } else {
-        tabDivisas.classList.remove('active');
-        tabTasas.classList.add('active');
-        tablaDivisas.style.display = 'none';
-        tablaTasas.style.display   = '';
-      }
-    }
-    window.showRatesTab = showRatesTab;
+      // Control de la burbuja de chat
+      const iframe = document.getElementById('numia-chat-bubble');
+      const btn = document.getElementById('max-chat');
+      const openBtn = document.getElementById('open-chat');
+      let maximized = false;
 
-    // ---------------------- RESERVAS (Debmedia citas2) ----------------------
-
-    let fechaSeleccionadaGlobal = null;
-    let duracionSeleccionadaGlobal = null;
-
-    flatpickr("#fecha", {
-      dateFormat: "Y-m-d",
-      minDate: "today",
-      onChange: function(selectedDates, dateStr) {
-        if (selectedDates.length > 0) consultarDisponibilidad(dateStr);
-      }
+      // Al hacer clic en la burbuja, mostrar el iframe y el botón de maximizar
+      openBtn.onclick = function() {
+        iframe.style.display = 'block';
+        btn.style.display = 'flex';
+        openBtn.style.display = 'none';
+      };
+      // Al hacer clic en el botón de maximizar/minimizar
+      btn.onclick = function() {
+        if (!maximized) {
+          iframe.style.width = '98vw';
+          iframe.style.height = '94vh';
+          iframe.style.bottom = '3vh';
+          iframe.style.right = '1vw';
+          iframe.style.boxShadow = 'none';
+          btn.style.bottom = 'calc(94vh + 3vh + 12px)';
+          btn.textContent = '🗗';
+          maximized = true;
+        } else {
+          iframe.style.width = '370px';
+          iframe.style.height = '550px';
+          iframe.style.bottom = '24px';
+          iframe.style.right = '24px';
+          iframe.style.boxShadow = 'none';
+          btn.style.bottom = '590px';
+          btn.textContent = '⛶';
+          maximized = false;
+        }
+      };
     });
+  </script>
 
-    async function consultarDisponibilidad(strDate) {
-      const resultados = document.getElementById("resultados");
-      resultados.innerHTML = "Consultando disponibilidad...";
+  <!-- ================== JS de la integración de citas (AGREGADO) ================== -->
+  <script>
+    (function(){
+      const API_TOKEN = 's9ZmCOGzuRz0OlxtZyJYIvnG7WQVBtnLlNFrHD2U';
+      const SVC_LIST   = 'https://citas2.debmedia.com/api/v2/reducedSchedules';
+      const AVAIL_BASE = 'https://citas2.debmedia.com/api/v2/schedules';
+      const APPT_URL   = 'https://citas2.debmedia.com/api/v2/appointments';
 
-      const baseUrl   = "https://citas2.debmedia.com/api/v2/schedules";
-      const branchId  = document.getElementById("sucuCombo").value;
-      const scheduleId= document.getElementById("salaCombo").value;
-      const url = `${baseUrl}/${scheduleId}/branch/${branchId}/availability?strDate=${encodeURIComponent(strDate)}`;
+      // Elementos UI
+      const modalEl = document.getElementById('modalCita');
+      const modal = new bootstrap.Modal(modalEl);
+      const btnPrimaryCards = document.querySelectorAll('.ad-card .btn.btn-primary'); // "Solicitar ahora" (y otros primarios)
+      const alertBox = document.getElementById('citaAlert');
+      const selSchedule = document.getElementById('citaSchedule');
+      const selBranch   = document.getElementById('citaBranch');
+      const inputFecha  = document.getElementById('citaFecha');
+      const slotsWrap   = document.getElementById('citaSlots');
+      const btnConfirm  = document.getElementById('citaConfirmar');
 
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: { "x-api-token": "s9ZmCOGzuRz0OlxtZyJYIvnG7WQVBtnLlNFrHD2U" }
+      const inFirst = document.getElementById('citaFirst');
+      const inLast  = document.getElementById('citaLast');
+      const inDni   = document.getElementById('citaDni');
+      const inMail  = document.getElementById('citaMail');
+
+      // Estado actual
+      let schedules = [];          // [{id,name,branches:[{id,name},...]}, ...]
+      let selectedSlot = null;     // { startAt, endAt, defaultDuration }
+
+      // Habilitar botón "Solicitar ahora" y abrir modal
+      // (sin tocar tu HTML original)
+      if (btnPrimaryCards && btnPrimaryCards.length) {
+        const btnSolicitar = btnPrimaryCards[0]; // el primero es "Solicitar ahora" de la tarjeta de crédito
+        btnSolicitar.removeAttribute('disabled');
+        btnSolicitar.addEventListener('click', async () => {
+          resetForm();
+          modal.show();
+          await loadSchedules();
         });
+      }
 
-        if (!response.ok) throw new Error("Error en la solicitud: " + response.status);
-        const data = await response.json();
-        const dias = Array.isArray(data) ? data : (Array.isArray(data.slots) ? data.slots : []);
+      // Utilidades
+      const pad = n => String(n).padStart(2,'0');
+      const ymd = (d) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+      function isoFromZonedStart(zonedStartDate) {
+        // zonedStartDate viene como "YYYY-MM-DDTHH:mm:ss-0300" o con Z/offset.
+        // Para el POST necesitamos startAt y endAt (reusamos el valor recibido + duración).
+        // Aquí devolvemos Date para calcular endAt.
+        const d = new Date(zonedStartDate);
+        return d;
+      }
+      function setAlert(type, msg){
+        // type: 'danger' | 'success' | 'info'
+        alertBox.className = `alert alert-${type}`;
+        alertBox.textContent = msg;
+        alertBox.classList.remove('d-none');
+      }
+      function clearAlert(){ alertBox.className = 'alert d-none'; alertBox.textContent=''; }
 
-        if (dias.length === 0) {
-          resultados.innerHTML = "No hay horarios disponibles para esta fecha.";
+      function resetForm(){
+        clearAlert();
+        selSchedule.innerHTML = `<option value="">Cargando...</option>`;
+        selBranch.innerHTML   = `<option value="">Selecciona un servicio</option>`;
+        selBranch.disabled = true;
+        inputFecha.value = '';
+        inputFecha.disabled = true;
+        slotsWrap.innerHTML = '';
+        selectedSlot = null;
+        btnConfirm.disabled = true;
+        inFirst.value = ''; inLast.value = ''; inDni.value = ''; inMail.value = '';
+      }
+
+      async function loadSchedules(){
+        try{
+          const res = await fetch(SVC_LIST, { headers: { 'x-api-token': API_TOKEN } });
+          if(!res.ok) throw new Error(`No se pudieron obtener las agendas (${res.status})`);
+          schedules = await res.json();
+
+          // Poblar select de agenda
+          selSchedule.innerHTML = `<option value="">Selecciona un servicio...</option>`;
+          schedules.forEach(s => {
+            selSchedule.insertAdjacentHTML('beforeend', `<option value="${s.id}">${s.name}</option>`);
+          });
+
+          // Fecha habilitada desde hoy
+          const today = new Date();
+          inputFecha.min = ymd(today);
+          inputFecha.disabled = false;
+
+          // Eventos
+          selSchedule.onchange = handleScheduleChange;
+          selBranch.onchange = handleBranchOrDateChange;
+          inputFecha.onchange = handleBranchOrDateChange;
+
+        }catch(err){
+          setAlert('danger', err.message);
+        }
+      }
+
+      function handleScheduleChange(){
+        const schedId = selSchedule.value;
+        selBranch.innerHTML = `<option value="">Selecciona sucursal...</option>`;
+        selBranch.disabled = true;
+        slotsWrap.innerHTML = '';
+        btnConfirm.disabled = true;
+
+        if(!schedId){ return; }
+
+        const sched = schedules.find(s => String(s.id) === String(schedId));
+        if(!sched || !Array.isArray(sched.branches)) {
+          setAlert('danger', 'Esta agenda no tiene sucursales asociadas.');
+          return;
+        }
+        // Poblar sucursales (sin duplicados)
+        const seen = new Set();
+        sched.branches.forEach(b=>{
+          if(!seen.has(b.id)){
+            selBranch.insertAdjacentHTML('beforeend', `<option value="${b.id}">${b.name}</option>`);
+            seen.add(b.id);
+          }
+        });
+        selBranch.disabled = false;
+        clearAlert();
+      }
+
+      async function handleBranchOrDateChange(){
+        clearAlert();
+        slotsWrap.innerHTML = '';
+        selectedSlot = null;
+        btnConfirm.disabled = true;
+
+        const schedId = selSchedule.value;
+        const branchId = selBranch.value;
+        const dateStr  = inputFecha.value;
+
+        if(!schedId || !branchId || !dateStr){ return; }
+
+        try{
+          const url = `${AVAIL_BASE}/${encodeURIComponent(schedId)}/branch/${encodeURIComponent(branchId)}/availability?strDate=${encodeURIComponent(dateStr)}`;
+          const res = await fetch(url, { headers: { 'x-api-token': API_TOKEN }});
+          if(!res.ok) throw new Error(`No se pudo obtener disponibilidad (${res.status})`);
+          const data = await res.json();
+
+          const slots = Array.isArray(data) ? data : (Array.isArray(data.slots) ? data.slots : []);
+          if(slots.length === 0){
+            setAlert('info','No hay horarios disponibles para la fecha seleccionada.');
+            return;
+          }
+
+          // Render de botones
+          const frag = document.createDocumentFragment();
+          slots.forEach(slot=>{
+            const hora = slot.zonedStartDate.substring(11,16);
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'btn btn-light';
+            btn.textContent = hora;
+            btn.addEventListener('click', ()=>{
+              // marcar activo
+              [...slotsWrap.querySelectorAll('.btn')].forEach(b=>b.classList.remove('active'));
+              btn.classList.add('active');
+              // guardar slot seleccionado
+              const startDate = isoFromZonedStart(slot.zonedStartDate);
+              const end = new Date(startDate.getTime() + (slot.defaultDuration||0) * 60000);
+              selectedSlot = {
+                startAt: slot.zonedStartDate, // lo mandaremos tal cual
+                endAt: end
+              };
+              btnConfirm.disabled = false;
+            });
+            frag.appendChild(btn);
+          });
+          slotsWrap.appendChild(frag);
+
+        }catch(err){
+          setAlert('danger', err.message);
+        }
+      }
+
+      btnConfirm.addEventListener('click', async ()=>{
+        clearAlert();
+        if(!selectedSlot){
+          setAlert('danger','Selecciona un horario primero.');
+          return;
+        }
+        const schedId = selSchedule.value;
+        const branchId = selBranch.value;
+        if(!schedId || !branchId){
+          setAlert('danger','Faltan servicio o sucursal.');
+          return;
+        }
+        // Validaciones mínimas
+        if(!inFirst.value || !inLast.value || !inDni.value){
+          setAlert('danger','Completa Nombre, Apellido y DNI.');
           return;
         }
 
-        let html = "<div><h3 class='titulo'>Horarios disponibles:</h3></div><div>";
-        dias.forEach(dia => {
-          const horaMinuto = dia.zonedStartDate.substring(11, 16);
-          html += `&nbsp;<button class="boton-fecha" onclick="mostrarFormulario('${dia.zonedStartDate}', ${dia.defaultDuration})">${horaMinuto}</button>&nbsp;`;
-        });
-        html += "</div>";
-        resultados.innerHTML = html;
+        // Construir payload
+        const startDate = new Date(selectedSlot.startAt);
+        const endDate   = new Date(selectedSlot.endAt);
+        const fmt = (d)=>{
+          const off = -d.getTimezoneOffset(); // minutos
+          const sign = off >= 0 ? '+' : '-';
+          const hh = pad(Math.floor(Math.abs(off)/60));
+          const mm = pad(Math.abs(off)%60);
+          return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:00${sign}${hh}${mm}`;
+        };
 
-      } catch (err) {
-        console.error("Error atrapado:", err);
-        resultados.innerHTML = `<strong>Error:</strong> ${err.message}`;
-      }
-    }
-
-    function mostrarFormulario(fecha, duracion) {
-      let fechaSeleccionadaGlobal = fecha;      // (nota: se sombrea la global tal como estaba en tu base)
-      let duracionSeleccionadaGlobal = duracion;
-
-      const cont = document.getElementById("formularioDatos");
-      document.getElementById("formularioDatos").style.display = "block";
-      document.getElementById("resultados").style.display = "none";
-
-      cont.innerHTML = `
-        <h3 class='titulo'>Completa tus datos</h3>
-        <form id="formularioTurno" onsubmit="return enviarFormulario(event)">
-          <label>Nombre:</label>
-          <input type="text" id="nombre" required>
-          <label>Apellido:</label>
-          <input type="text" id="apellido" required>
-          <label>RUT:</label>
-          <input type="text" id="dni" required>
-          <label>Email:</label>
-          <input type="email" id="email" required>
-          <label>Motivo:</label>
-          <select id="motivo" required>
-            <option value="">Seleccionar...</option>
-            <option value="Consulta general">Consulta general</option>
-            <option value="Revisión">Revisión</option>
-            <option value="Control de tratamiento">Control de tratamiento</option>
-          </select>
-          <br><br>
-          <button type="submit" class="boton-fecha">Confirmar Turno</button>
-        </form>
-      `;
-    }
-    window.mostrarFormulario = mostrarFormulario;
-
-    function enviarFormulario(event) {
-      event.preventDefault();
-      const datos = {
-        nombre:   document.getElementById("nombre").value,
-        apellido: document.getElementById("apellido").value,
-        dni:      parseInt(document.getElementById("dni").value),
-        email:    document.getElementById("email").value,
-        motivo:   document.getElementById("motivo").value
-      };
-      crearCita(fechaSeleccionadaGlobal, duracionSeleccionadaGlobal, datos);
-    }
-
-    async function crearCita(fechaInicio, duracionMinutos, datosCliente) {
-      const resultados = document.getElementById("final");
-
-      const startDate = new Date(fechaInicio);
-      const endDate   = new Date(startDate.getTime() + duracionMinutos * 60000);
-      const pad = n => n.toString().padStart(2, '0');
-
-      function formatISO(date) {
-        const yyyy = date.getFullYear();
-        const MM = pad(date.getMonth() + 1);
-        const dd = pad(date.getDate());
-        const hh = pad(date.getHours());
-        const mm = pad(date.getMinutes());
-        return `${yyyy}-${MM}-${dd}T${hh}:${mm}:00-0300`;
-      }
-
-      const startAt = formatISO(startDate);
-      const endAt   = formatISO(endDate);
-
-      const data = {
-        branch:   { id: document.getElementById("sucuCombo").value },
-        schedule: { id: document.getElementById("salaCombo").value },
-        startAt, endAt,
-        customer: {
-          firstName: datosCliente.nombre,
-          lastName:  datosCliente.apellido,
-          dni:       datosCliente.dni
-          // email:  datosCliente.email
-        },
-        reason: datosCliente.motivo
-      };
-
-      try {
-        const response = await fetch("https://citas2.debmedia.com/api/v2/appointments", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-token": "s9ZmCOGzuRz0OlxtZyJYIvnG7WQVBtnLlNFrHD2U"
+        const body = {
+          branch:   { id: Number(branchId) },
+          schedule: { id: Number(schedId) },
+          startAt:  fmt(startDate),
+          endAt:    fmt(endDate),
+          customer: {
+            firstName: inFirst.value,
+            lastName:  inLast.value,
+            dni:       Number(inDni.value||0),
+            email:     inMail.value || undefined
           },
-          body: JSON.stringify(data)
-        });
+          reason: "Solicitud de Tarjeta de Crédito"
+        };
 
-        const resultado = await response.json();
-        if (!response.ok) throw new Error(`Error ${response.status}: ${resultado.message || JSON.stringify(resultado)}`);
+        btnConfirm.disabled = true;
+        btnConfirm.textContent = 'Confirmando...';
 
-        document.getElementById("formularioDatos").style.display = "none";
-        resultados.innerHTML = `<strong>✅ La reserva fue creada correctamente. ID: ${resultado.id}</strong>`;
-
-      } catch (error) {
-        console.error("Error:", error);
-        resultados.innerHTML = `<strong>❌ Error al generar la cita:</strong> ${error.message}`;
-      }
-    }
-
-    async function cargarCombosDesdeAPI() {
-      const salaCombo = document.getElementById("salaCombo");
-      const sucuCombo = document.getElementById("sucuCombo");
-
-      flatpickr("#fecha", {
-        dateFormat: "Y-m-d",
-        minDate: "today",
-        onChange: function(selectedDates, dateStr) {
-          if (selectedDates.length > 0) consultarDisponibilidad(dateStr);
+        try{
+          const res = await fetch(APPT_URL, {
+            method: 'POST',
+            headers: {
+              'x-api-token': API_TOKEN,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+          });
+          const out = await res.json().catch(()=> ({}));
+          if(!res.ok){
+            throw new Error(out?.message || `Error al crear la cita (${res.status})`);
+          }
+          setAlert('success', `¡Cita creada! ID: ${out.id || '(recibido)'}`);
+          // Cerrar tras unos segundos
+          setTimeout(()=> modal.hide(), 1500);
+        }catch(err){
+          setAlert('danger', err.message);
+        }finally{
+          btnConfirm.disabled = false;
+          btnConfirm.textContent = 'Confirmar cita';
         }
       });
-
-      const url = `https://citas2.debmedia.com/api/v2/reducedSchedules`;
-
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: { "x-api-token": "s9ZmCOGzuRz0OlxtZyJYIvnG7WQVBtnLlNFrHD2U" }
-        });
-
-        if (!response.ok) throw new Error("No se pudo cargar la lista de salas");
-        const data = await response.json();
-
-        salaCombo.innerHTML = '<option value="">Seleccionar sala...</option>';
-        sucuCombo.innerHTML = '<option value="">Seleccionar sucursal...</option>';
-
-        const addedBranchIds = new Set();
-        document.getElementById("bloqueFecha").style.display = "block";
-
-        data.forEach(sala => {
-          salaCombo.innerHTML += `<option value="${sala.id}">${sala.name}</option>`;
-          if (Array.isArray(sala.branches)) {
-            sala.branches.forEach(branch => {
-              if (!addedBranchIds.has(branch.id)) {
-                sucuCombo.innerHTML += `<option value="${branch.id}">${branch.name}</option>`;
-                addedBranchIds.add(branch.id);
-              }
-            });
-          }
-        });
-
-        document.getElementById('popupModal').style.display = 'block';
-
-      } catch (err) {
-        console.error("Error al cargar combos:", err);
-        salaCombo.innerHTML = `<option value="">Error cargando salas</option>`;
-        sucuCombo.innerHTML = `<option value="">Error cargando sucursales</option>`;
-      }
-    }
-    window.cargarCombosDesdeAPI = cargarCombosDesdeAPI;
+    })();
   </script>
+  <!-- ================== FIN JS de la integración de citas (AGREGADO) ================== -->
 
   <!-- CHAT -->
   <iframe
@@ -1065,42 +1071,5 @@
   >
     <span style="font-weight:bold;font-size:2rem;">N</span>
   </button>
-
-  <!-- Handlers del chat: abrir y maximizar/minimizar -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const iframe  = document.getElementById('numia-chat-bubble');
-      const openBtn = document.getElementById('open-chat');
-      const maxBtn  = document.getElementById('max-chat');
-      if (!iframe || !openBtn || !maxBtn) return;
-
-      let maximized = false;
-
-      openBtn.addEventListener('click', () => {
-        iframe.style.display = 'block';
-        maxBtn.style.display = 'flex';
-        openBtn.style.display = 'none';
-      });
-
-      maxBtn.addEventListener('click', () => {
-        if (!maximized) {
-          iframe.style.width  = '98vw';
-          iframe.style.height = '94vh';
-          iframe.style.bottom = '3vh';
-          iframe.style.right  = '1vw';
-          maxBtn.style.bottom = 'calc(94vh + 3vh + 12px)';
-          maxBtn.textContent  = '🗗';
-        } else {
-          iframe.style.width  = '370px';
-          iframe.style.height = '550px';
-          iframe.style.bottom = '24px';
-          iframe.style.right  = '24px';
-          maxBtn.style.bottom = '590px';
-          maxBtn.textContent  = '⛶';
-        }
-        maximized = !maximized;
-      });
-    });
-  </script>
 </body>
 </html>
