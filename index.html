@@ -4,361 +4,92 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>NumiaBank - Innova tu banca</title>
-  <!-- FAVICON para la pestaña -->
   <link rel="icon" type="image/png" href="images/N.png" />
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <!-- Google Font Roboto -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    /* --- Variables de color --- */
     :root {
       --numia-azul: #863DFF;
-      --numia-azul-claro: #e6ecf9; /* para fondos suaves */
-      --numia-azul-muy-claro: #eef2fc; /* para segunda franja */
+      --numia-azul-claro: #e6ecf9;
+      --numia-azul-muy-claro: #eef2fc;
     }
+    body { font-family: 'Roboto', Arial, sans-serif; background: #f7f7f7; }
+    .card.ad-card { border-radius: 1.2rem; box-shadow: 0 4px 18px rgba(0,0,0,0.08); transition: transform .18s, box-shadow .18s; min-width:210px; min-height:380px; display:flex; flex-direction:column; justify-content:stretch; height:100%; }
+    .card.ad-card:hover { transform: translateY(-4px) scale(1.025); box-shadow: 0 8px 32px rgba(0,19,145,0.17); }
+    .card-img-top-holder { width:100%; height:180px; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#fff8f8; border-top-left-radius:1.2rem; border-top-right-radius:1.2rem; }
+    .card-img-top-holder img { width:100%; height:100%; object-fit:cover; object-position:center; transition: transform .3s; }
+    .ad-card .card-body { display:flex; flex-direction:column; justify-content:flex-start; height:100%; padding-bottom:1.5rem; }
+    .ad-card .card-title { font-weight:700; color:var(--numia-azul); font-size:1.25rem; margin-bottom:.25rem; margin-top:1rem; min-height:3rem; display:flex; align-items:center; justify-content:center; text-align:center; }
+    .ad-card .card-text { font-size:1.01rem; color:#2d2d2d; font-weight:500; opacity:.88; margin-bottom:1.1rem; min-height:56px; text-align:center; display:flex; align-items:center; justify-content:center; }
+    .carousel-item img { object-fit:cover; width:100%; height:340px; border-radius:.7rem; }
+    @media (max-width:991px){ .main-cards .col-lg-3 {flex:0 0 50%; max-width:50%; margin-bottom:1rem;} .carousel-item img{height:180px;} }
+    @media (max-width:767px){ .main-cards .col-lg-3 {flex:0 0 100%; max-width:100%;} .carousel-item img{height:140px;} .card-img-top-holder{height:140px;} .ad-card .card-title{font-size:1.08rem;} }
 
-    body {
-      font-family: 'Roboto', Arial, sans-serif;
-      background: #f7f7f7;
-    }
-    .card.ad-card {
-      border-radius: 1.2rem;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-      transition: transform 0.18s, box-shadow 0.18s;
-      min-width: 210px;
-      min-height: 380px;
-      display: flex;
-      flex-direction: column;
-      justify-content: stretch;
-      height: 100%;
-    }
-    .card.ad-card:hover {
-      transform: translateY(-4px) scale(1.025);
-      /* sombra adaptada al azul */
-      box-shadow: 0 8px 32px rgba(0,19,145,0.17);
-    }
-    .card-img-top-holder {
-      width: 100%;
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: #fff8f8;
-      border-top-left-radius: 1.2rem;
-      border-top-right-radius: 1.2rem;
-    }
-    .card-img-top-holder img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      transition: transform 0.3s;
-    }
-    .ad-card .card-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      height: 100%;
-      padding-bottom: 1.5rem;
-    }
-    .ad-card .card-title {
-      font-weight: 700;
-      color: var(--numia-azul);
-      font-size: 1.25rem;
-      margin-bottom: .25rem;
-      margin-top: 1rem;
-      min-height: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .ad-card .card-text {
-      font-size: 1.01rem;
-      color: #2d2d2d;
-      font-weight: 500;
-      opacity: 0.88;
-      margin-bottom: 1.1rem;
-      min-height: 56px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .carousel-item img {
-      object-fit: cover;
-      width: 100%;
-      height: 340px;
-      border-radius: 0.7rem;
-    }
-    @media (max-width: 991px) {
-      .main-cards .col-lg-3 {
-        flex: 0 0 50%;
-        max-width: 50%;
-        margin-bottom: 1rem;
-      }
-      .carousel-item img {
-        height: 180px;
-      }
-    }
-    @media (max-width: 767px) {
-      .main-cards .col-lg-3 {
-        flex: 0 0 100%;
-        max-width: 100%;
-      }
-      .carousel-item img {
-        height: 140px;
-      }
-      .card-img-top-holder {
-        height: 140px;
-      }
-      .ad-card .card-title { font-size: 1.08rem; }
-    }
+    .rates-section{ display:flex; gap:2.2rem; align-items:stretch; margin:36px 0 0; width:100%; flex-wrap:wrap;}
+    .rates-col-table, .rates-col-side { background:#fff; border-radius:1.1rem; box-shadow:0 2px 12px rgba(0,0,0,0.07); padding:2.1rem 1.6rem 1.6rem 1.7rem; }
+    .rates-col-table{ min-width:340px; flex:2 1 540px; max-width:1000px; display:flex; flex-direction:column; justify-content:flex-start;}
+    .rates-col-side{ min-width:220px; flex:1 1 320px; max-width:420px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;}
+    .rates-col-side .bi{ font-size:2.6rem; color:var(--numia-azul); margin-bottom:.7rem;}
+    .rates-col-side h5{ color:var(--numia-azul); font-weight:700; margin-bottom:.5rem; font-size:1.2rem;}
+    .rates-col-side p{ color:#444; font-size:1.07rem; font-weight:500; margin-bottom:1.2rem; opacity:.93;}
+    .rates-col-side .btn{ background:var(--numia-azul); border:none; color:#fff; font-weight:700; border-radius:24px; padding:.7rem 2.1rem; font-size:1.07rem; box-shadow:0 2px 7px rgba(0,19,145,0.06);}
+    .rates-col-side .btn:hover{ background:#000d73; color:#fff;}
+    .rates-tab-btn{ padding:.7rem 0; border:none; border-radius:9px; font-weight:bold; font-size:1.1rem; background:#fff; color:var(--numia-azul); margin-bottom:0; cursor:pointer; border:2px solid #d1d9f9; min-width:70px;}
+    .rates-tab-btn.active,.rates-tab-btn:focus{ background:var(--numia-azul); color:#fff; border:2px solid var(--numia-azul);}
+    .rates-table{ width:100%; border-collapse:separate; border-spacing:0; background:#fff; border-radius:.8rem; overflow:hidden; margin-top:.7rem;}
+    .rates-table th,.rates-table td{ padding:12px 18px; font-size:1.04rem; text-align:left;}
+    .rates-table th{ color:var(--numia-azul); background:var(--numia-azul-claro); border:none; font-size:1.08rem; font-weight:700; text-align:center; letter-spacing:.02em;}
+    .rates-table tr:not(:last-child){ border-bottom:1px solid #cde0f8;}
+    .rates-table tr:nth-child(2){ background:var(--numia-azul-claro);} .rates-table tr:nth-child(3){ background:var(--numia-azul-muy-claro);}
+    .rates-table td{ color:#222; font-weight:500; text-align:center; vertical-align:middle;}
+    .rates-table td:first-child,.rates-table th:first-child{ text-align:left;}
+    @media (max-width:1300px){ .rates-col-table{min-width:0; flex-basis:400px;} .rates-col-side{min-width:0;} }
+    @media (max-width:991px){ .rates-section{flex-direction:column; gap:1.4rem;} .rates-col-table,.rates-col-side{min-width:0; max-width:100%;} .rates-col-side{align-items:flex-start; padding-top:1.2rem;} }
 
-    /* --- Sección de Divisas/Tasas --- */
-    .rates-section {
-      display: flex;
-      gap: 2.2rem;
-      align-items: stretch;
-      margin: 36px 0 0 0;
-      width: 100%;
-      flex-wrap: wrap;
-    }
-    .rates-col-table {
-      background: #fff;
-      border-radius: 1.1rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-      padding: 2.1rem 1.6rem 1.6rem 1.7rem;
-      min-width: 340px;
-      flex: 2 1 540px;
-      max-width: 1000px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-    .rates-col-side {
-      background: #fff;
-      border-radius: 1.1rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-      padding: 2.1rem 1.6rem 1.6rem 1.7rem;
-      min-width: 220px;
-      flex: 1 1 320px;
-      max-width: 420px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-    }
-    .rates-col-side .bi {
-      font-size: 2.6rem;
-      color: var(--numia-azul);
-      margin-bottom: .7rem;
-    }
-    .rates-col-side h5 {
-      color: var(--numia-azul);
-      font-weight: 700;
-      margin-bottom: .5rem;
-      font-size: 1.2rem;
-    }
-    .rates-col-side p {
-      color: #444;
-      font-size: 1.07rem;
-      font-weight: 500;
-      margin-bottom: 1.2rem;
-      opacity: .93;
-    }
-    .rates-col-side .btn {
-      /* usamos el azul numia como fondo */
-      background: var(--numia-azul);
-      border: none;
-      color: #fff;
-      font-weight: 700;
-      border-radius: 24px;
-      padding: 0.7rem 2.1rem;
-      font-size: 1.07rem;
-      box-shadow: 0 2px 7px rgba(0,19,145,0.06);
-      transition: background 0.18s;
-    }
-    .rates-col-side .btn:hover {
-      /* ligero oscurecimiento */
-      background: #000d73;
-      color: #fff;
-    }
+    .btn-primary{ background-color:var(--numia-azul)!important; border-color:var(--numia-azul)!important;}
+    .btn-primary:hover{ background-color:#000d73!important; border-color:#000d73!important;}
+    .btn-outline-primary{ color:var(--numia-azul)!important; border-color:var(--numia-azul)!important;}
+    .btn-outline-primary:hover{ background-color:var(--numia-azul)!important; color:#fff!important;}
+    #max-chat{ background:var(--numia-azul)!important;} #open-chat{ background:var(--numia-azul)!important;}
 
-    /* --- Botones de pestañas Divisas/Tasas --- */
-    .rates-tab-btn {
-      padding: .7rem 0;
-      border: none;
-      border-radius: 9px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      background: #fff;
-      color: var(--numia-azul);
-      margin-bottom: 0;
-      transition: background .16s, color .16s;
-      cursor: pointer;
-      box-shadow: none;
-      outline: none;
-      border: 2px solid #d1d9f9; /* borde muy claro */
-      min-width: 70px;
-    }
-    .rates-tab-btn.active,
-    .rates-tab-btn:focus {
-      background: var(--numia-azul);
-      color: #fff;
-      border: 2px solid var(--numia-azul);
-    }
+    /* --------- Sala de espera / Videollamada --------- */
+    .modal-wait .info-item{ display:flex; justify-content:space-between; align-items:center; padding:.8rem 1rem; border:1px solid #e7e9ff; border-radius:.6rem; background:linear-gradient(135deg,#f8f9ff,#eef2ff);}
+    .modal-wait .info-label{ font-weight:600; color:#4b5563; }
+    .modal-wait .info-value{ font-weight:700; color:#6d28d9; }
+    .badge-live{ background:#22c55e; }
+    .status-warn{ color:#f59e0b; font-weight:700; }
+    .status-ok{ color:#22c55e; font-weight:700; }
+    .status-done{ color:#06b6d4; font-weight:700; }
+    .status-err{ color:#ef4444; font-weight:700; }
+    .modal-video .modal-dialog{ width:var(--video-width, 90vw); max-width:100%; }
+    .modal-video .modal-content{ height:var(--video-height, 80vh); }
+    .modal-video iframe{ width:100%; height:100%; border:0; border-radius:.5rem; }
 
-    /* --- Tabla de tasas/divisas --- */
-    .rates-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      background: #fff;
-      border-radius: 0.8rem;
-      overflow: hidden;
-      margin-top: 0.7rem;
-    }
-    .rates-table th,
-    .rates-table td {
-      padding: 12px 18px;
-      font-size: 1.04rem;
-      text-align: left;
-    }
-    .rates-table th {
-      color: var(--numia-azul);
-      background: var(--numia-azul-claro);
-      border: none;
-      font-size: 1.08rem;
-      font-weight: 700;
-      text-align: center;
-      letter-spacing: 0.02em;
-    }
-    .rates-table tr:not(:last-child) {
-      border-bottom: 1px solid #cde0f8;
-    }
-    .rates-table tr:nth-child(2) {
-      background: var(--numia-azul-claro);
-    }
-    .rates-table tr:nth-child(3) {
-      background: var(--numia-azul-muy-claro);
-    }
-    .rates-table td {
-      color: #222;
-      font-weight: 500;
-      text-align: center;
-      vertical-align: middle;
-    }
-    .rates-table td:first-child,
-    .rates-table th:first-child {
-      text-align: left;
-    }
-
-    @media (max-width: 1300px) {
-      .rates-col-table {
-        min-width: 0;
-        flex-basis: 400px;
-      }
-      .rates-col-side {
-        min-width: 0;
-      }
-    }
-    @media (max-width: 991px) {
-      .rates-section {
-        flex-direction: column;
-        gap: 1.4rem;
-      }
-      .rates-col-table,
-      .rates-col-side {
-        min-width: 0;
-        max-width: 100%;
-      }
-      .rates-col-side {
-        align-items: flex-start;
-        padding-top: 1.2rem;
-      }
-    }
-
-    /* --- Estilos específicos para botones y elementos que antes eran 'rojos' --- */
-    /* Creamos una clase para forzar que btn-primary use nuestro azul */
-    .btn-primary {
-      background-color: var(--numia-azul) !important;
-      border-color: var(--numia-azul) !important;
-    }
-    .btn-primary:hover {
-      background-color: #000d73 !important;
-      border-color: #000d73 !important;
-    }
-    .btn-outline-primary {
-      color: var(--numia-azul) !important;
-      border-color: var(--numia-azul) !important;
-    }
-    .btn-outline-primary:hover {
-      background-color: var(--numia-azul) !important;
-      color: #fff !important;
-    }
-
-    /* Cambiamos el icono de maximizar del chat para que destaque sobre azul */
-    #max-chat {
-      background: var(--numia-azul) !important;
-    }
-    #open-chat {
-      background: var(--numia-azul) !important;
-    }
-
-    /* ======== UX citas mejorado ======== */
+    /* --------- Citas (estilos chips/horas) --------- */
     #modalCita .modal-dialog { max-width: 920px; }
     #modalCita .modal-content { border-radius: 16px; border: 0; box-shadow: 0 14px 40px rgba(0,0,0,.12); }
     #modalCita .modal-header { border-bottom: 1px solid #eef2fc; }
     #modalCita .modal-body { padding-top: .75rem; }
-
-    .cita-toolbar {
-      position: sticky; top: 0; z-index: 2; background: #fff;
-      padding-bottom: .5rem; margin-bottom: .75rem; border-bottom: 1px solid #eef2fc;
-    }
+    .cita-toolbar { position: sticky; top: 0; z-index: 2; background: #fff; padding-bottom: .5rem; margin-bottom: .75rem; border-bottom: 1px solid #eef2fc; }
     #citaSchedule, #citaBranch, #citaFecha { border-radius: 10px; }
-    #citaSlots {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
-      gap: .5rem;
-      max-height: 320px;
-      overflow: auto;
-      padding-right: .25rem;
-    }
-    #citaSlots .btn {
-      border-radius: 10px;
-      border: 1px solid #c9b6ff;
-      font-weight: 600;
-      padding: .45rem .3rem;
-    }
-    #citaSlots .btn:hover { background: #f6f3ff; }
-    #citaSlots .btn.active,
-    #citaSlots .btn:focus {
-      background: var(--numia-azul);
-      color: #fff;
-      border-color: var(--numia-azul);
-    }
-    .cita-legend { font-size: .8rem; color: #6c6c7a; }
-
-    @media (max-width: 576px) {
-      #citaSlots { max-height: 260px; }
-    }
+    #citaSlots { display:grid; grid-template-columns:repeat(auto-fill,minmax(88px,1fr)); gap:.5rem; max-height:320px; overflow:auto; padding-right:.25rem; }
+    #citaSlots .btn { border-radius:10px; border:1px solid #c9b6ff; font-weight:600; padding:.45rem .3rem; }
+    #citaSlots .btn:hover { background:#f6f3ff; }
+    #citaSlots .btn.active, #citaSlots .btn:focus { background:var(--numia-azul); color:#fff; border-color:var(--numia-azul); }
+    .cita-legend { font-size:.8rem; color:#6c6c7a; }
+    @media (max-width:576px){ #citaSlots { max-height:260px; } }
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-  <!-- Encabezado con logos -->
+  <!-- Header -->
   <header class="bg-white shadow-sm py-2 mb-0">
     <div class="container">
       <div class="d-flex justify-content-between align-items-right">
         <a href="index.html" class="d-block">
           <img src="images/numia.png" alt="Numia Bank Logo" class="img-fluid" style="max-height: 88px;" />
         </a>
-        <!-- Cambiamos logo_hsbc por logo_numia -->
       </div>
       <p class="lead mt-2 mb-0 text-dark text-start" style="font-size:1rem;">
         Innovación en tus finanzas, potenciada por IA manteniendo el toque humano
@@ -366,16 +97,16 @@
     </div>
   </header>
 
-  <!-- NAVBAR de menús principal debajo del header -->
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom" style="z-index:1050;">
     <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="navbarMain">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item dropdown px-2">
-            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="cuentasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="cuentasDropdown" role="button" data-bs-toggle="dropdown">
               <i class="bi bi-wallet2 me-1"></i>Cuentas
             </a>
             <ul class="dropdown-menu" aria-labelledby="cuentasDropdown">
@@ -385,7 +116,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown px-2">
-            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="tarjetasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="tarjetasDropdown" role="button" data-bs-toggle="dropdown">
               <i class="bi bi-credit-card-2-front me-1"></i>Tarjetas
             </a>
             <ul class="dropdown-menu" aria-labelledby="tarjetasDropdown">
@@ -395,7 +126,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown px-2">
-            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="creditosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="creditosDropdown" role="button" data-bs-toggle="dropdown">
               <i class="bi bi-cash-stack me-1"></i>Créditos
             </a>
             <ul class="dropdown-menu" aria-labelledby="creditosDropdown">
@@ -405,7 +136,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown px-2">
-            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="inversionesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="inversionesDropdown" role="button" data-bs-toggle="dropdown">
               <i class="bi bi-bar-chart-line me-1"></i>Inversiones
             </a>
             <ul class="dropdown-menu" aria-labelledby="inversionesDropdown">
@@ -415,7 +146,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown px-2">
-            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="segurosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="segurosDropdown" role="button" data-bs-toggle="dropdown">
               <i class="bi bi-shield-check me-1"></i>Seguros
             </a>
             <ul class="dropdown-menu" aria-labelledby="segurosDropdown">
@@ -430,16 +161,15 @@
     </div>
   </nav>
 
-  <!-- Carrusel de imágenes -->
+  <!-- Carrusel -->
   <div class="container mb-4">
     <div id="carouselMain" class="carousel slide shadow-sm rounded-3" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="images/Carrusel 1.png" class="d-block w-100" alt="Promo 1">
           <div class="carousel-caption d-none d-md-block">
-            <h5 class="fw-bold display-6" style="text-shadow: 0 2px 12px rgba(0,0,0,0.36)">¡Lo más hot!</h5>
+            <h5 class="fw-bold display-6" style="text-shadow:0 2px 12px rgba(0,0,0,0.36)">¡Lo más hot!</h5>
             <p class="fs-4">Usa tu tarjeta de crédito digital y recibe hasta un <strong>20% de cashback</strong></p>
-            <!-- Cambiado btn-danger a btn-primary -->
             <a href="#" class="btn btn-primary btn-lg rounded-pill mt-2 px-4 fw-bold">Conoce más</a>
           </div>
         </div>
@@ -448,7 +178,6 @@
           <div class="carousel-caption d-none d-md-block">
             <h5 class="fw-bold display-6">Banca digital</h5>
             <p class="fs-4">Accede a tu banca en línea y administra tus productos 24/7</p>
-            <!-- Este botón era outline-light, lo dejamos como está -->
             <a href="#" class="btn btn-outline-light btn-lg rounded-pill mt-2 px-4 fw-bold">Regístrate aquí</a>
           </div>
         </div>
@@ -457,7 +186,6 @@
           <div class="carousel-caption d-none d-md-block">
             <h5 class="fw-bold display-6">Préstamos numia</h5>
             <p class="fs-4">Consolida tus deudas y obtén las mejores tasas del mercado</p>
-            <!-- Cambiado btn-danger a btn-primary -->
             <a href="#" class="btn btn-primary btn-lg rounded-pill mt-2 px-4 fw-bold">Simula tu crédito</a>
           </div>
         </div>
@@ -468,7 +196,7 @@
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#carouselMain" data-bs-slide="next">
         <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
-        <span class="visually-hidden">Siguiente</span>
+        <span class="visualmente-hidden">Siguiente</span>
       </button>
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -478,9 +206,10 @@
     </div>
   </div>
 
-  <!-- TARJETAS -->
+  <!-- Tarjetas -->
   <main class="container mb-5">
     <div class="row g-4 justify-content-center main-cards">
+      <!-- Agenda cita -->
       <div class="col-lg-3 col-md-6">
         <div class="card ad-card h-100 text-center">
           <div class="card-img-top-holder">
@@ -489,11 +218,12 @@
           <div class="card-body">
             <h5 class="card-title">Agenda una cita</h5>
             <p class="card-text">Agenda una cita con un agente especialista y recibe atención remota o presencial.</p>
-            <!-- Cambiado btn-danger a btn-primary -->
             <button class="btn btn-primary rounded-pill px-4 mt-2 fw-bold" disabled>Agendar</button>
           </div>
         </div>
       </div>
+
+      <!-- Apertura nómina -->
       <div class="col-lg-3 col-md-6">
         <div class="card ad-card h-100 text-center">
           <div class="card-img-top-holder">
@@ -502,11 +232,11 @@
           <div class="card-body">
             <h5 class="card-title">Apertura de cuenta nómina</h5>
             <p class="card-text">Recibe tu sueldo y accede a promociones, descuentos y retiros sin costo en miles de cajeros.</p>
-            <!-- Cambiado btn-outline-danger a btn-outline-primary -->
-            <button class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold" disabled>Comenzar</button>
+            <button id="btnNominaComenzar" class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold">Comenzar</button>
           </div>
         </div>
       </div>
+
       <div class="col-lg-3 col-md-6">
         <div class="card ad-card h-100 text-center">
           <div class="card-img-top-holder">
@@ -515,7 +245,6 @@
           <div class="card-body">
             <h5 class="card-title">Préstamos personales</h5>
             <p class="card-text">Soluciona, planea y disfruta: obtén tu préstamo con tasas preferenciales y pagos flexibles.</p>
-            <!-- Cambiado btn-danger a btn-primary -->
             <button class="btn btn-primary rounded-pill px-4 mt-2 fw-bold" disabled>Simular préstamo</button>
           </div>
         </div>
@@ -528,14 +257,13 @@
           <div class="card-body">
             <h5 class="card-title">Seguros numia</h5>
             <p class="card-text">Tu tranquilidad asegurada: protege auto, hogar, salud y vida con la solidez de numia.</p>
-            <!-- Cambiado btn-outline-danger a btn-outline-primary -->
             <button class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold" disabled>Conoce más</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- NUEVA SECCION: DIVISAS/TASAS + INVERSIONES -->
+    <!-- Rates -->
     <div class="rates-section mt-5 mb-4">
       <div class="rates-col-table">
         <div class="d-flex gap-3 mb-2">
@@ -543,88 +271,119 @@
           <button class="rates-tab-btn" id="tabTasas" onclick="showRatesTab('tasas')">Tasas</button>
         </div>
         <table class="rates-table" id="tablaDivisas">
-          <thead>
-            <tr>
-              <th>Divisa</th>
-              <th>Compra</th>
-              <th>Venta</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Divisa</th><th>Compra</th><th>Venta</th></tr></thead>
           <tbody>
-            <tr>
-              <td>Dólar USD</td>
-              <td>17.12</td>
-              <td>17.45</td>
-            </tr>
-            <tr>
-              <td>Euro</td>
-              <td>18.65</td>
-              <td>19.15</td>
-            </tr>
-            <tr>
-              <td>Libra esterlina</td>
-              <td>21.15</td>
-              <td>21.75</td>
-            </tr>
+            <tr><td>Dólar USD</td><td>17.12</td><td>17.45</td></tr>
+            <tr><td>Euro</td><td>18.65</td><td>19.15</td></tr>
+            <tr><td>Libra esterlina</td><td>21.15</td><td>21.75</td></tr>
           </tbody>
         </table>
         <table class="rates-table" id="tablaTasas" style="display:none;">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Tasa Bruta al<br><span style="font-size:1rem;font-weight:700;">02/06/2025</span></th>
-              <th>Tasa Bruta<br>Anual</th>
-            </tr>
-          </thead>
+          <thead><tr><th></th><th>Tasa Bruta al<br><span style="font-size:1rem;font-weight:700;">02/06/2025</span></th><th>Tasa Bruta<br>Anual</th></tr></thead>
           <tbody>
-            <tr>
-              <td>cete Diario</td>
-              <td>8.12 %</td>
-              <td>9.18 %</td>
-            </tr>
-            <tr>
-              <td>cete Anualizado</td>
-              <td>8.12 %</td>
-              <td>9.18 %</td>
-            </tr>
+            <tr><td>cete Diario</td><td>8.12 %</td><td>9.18 %</td></tr>
+            <tr><td>cete Anualizado</td><td>8.12 %</td><td>9.18 %</td></tr>
           </tbody>
         </table>
       </div>
       <div class="rates-col-side">
         <i class="bi bi-piggy-bank"></i>
         <h5 class="mb-1" style="font-weight:700;">Tus inversiones Numia</h5>
-        <p>
-          <strong>Saldo CETES:</strong> $75,000.00 MXN<br>
-          <span style="font-size:0.95rem; color:var(--numia-azul); font-weight:700;">¡Estás generando $570/mes solo en intereses!</span>
-        </p>
-        <p>
-          ¿Quieres diversificar? Simula en 2 clicks tus ganancias potenciales en fondos de inversión o plazo fijo.
-        </p>
+        <p><strong>Saldo CETES:</strong> $75,000.00 MXN<br><span style="font-size:0.95rem; color:var(--numia-azul); font-weight:700;">¡Estás generando $570/mes solo en intereses!</span></p>
+        <p>¿Quieres diversificar? Simula en 2 clicks tus ganancias potenciales en fondos de inversión o plazo fijo.</p>
         <button class="btn" disabled>Invertir ahora</button>
       </div>
     </div>
   </main>
 
-  <!-- Pie de página con mt-auto para pegarlo al fondo -->
   <footer class="bg-light text-center py-3 mt-auto border-top">
     <small>&copy; NumiaBank. Todos los derechos reservados.</small>
   </footer>
 
-  <!-- ===================== MODAL DE CITAS (AGREGADO) ===================== -->
+  <!-- ===== MODALES: Turno/Sala/Video ===== -->
+  <div class="modal fade" id="modalGuardiaForm" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-person-vcard me-2"></i>Apertura de cuenta nómina</h5>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="formAlert" class="alert d-none"></div>
+          <form id="guardiaForm" class="row g-3">
+            <div class="col-md-6"><label class="form-label fw-semibold">Nombre</label><input type="text" class="form-control" name="firstName" required></div>
+            <div class="col-md-6"><label class="form-label fw-semibold">Apellido</label><input type="text" class="form-control" name="lastName" required></div>
+            <div class="col-md-6"><label class="form-label fw-semibold">DNI</label><input type="text" class="form-control" name="dni" required></div>
+            <div class="col-md-6"><label class="form-label fw-semibold">Teléfono</label><input type="tel" class="form-control" name="phone" required></div>
+            <div class="col-12"><label class="form-label fw-semibold">Email</label><input type="email" class="form-control" name="email" required></div>
+          </form>
+          <div class="small text-muted mt-3">Al continuar, te asignaremos un turno y verás una sala de espera. Cuando el agente esté listo, podrás iniciar una videollamada.</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button id="btnEnviarTurno" class="btn btn-primary"><i class="bi bi-check2-circle me-1"></i>Generar turno</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-wait" id="modalSalaEspera" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-clock-history me-2"></i>RESERVA TU TURNO</h5>
+          <button class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" id="btnCloseWait"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center mb-3">
+            <div class="mb-2"><span class="badge badge-live rounded-pill px-3 py-2"><i class="bi bi-check2-circle me-1"></i>Turno Reservado Exitosamente</span></div>
+            <div class="text-success fw-semibold">¡Tu turno ha sido generado en el sistema!</div>
+          </div>
+          <div class="row g-3">
+            <div class="col-12"><div class="info-item"><div class="info-label">Código del Turno:</div><div class="info-value"><a href="#" id="turnCodeDisplay" class="link-primary fw-bold" onclick="return false;">—</a></div></div></div>
+            <div class="col-md-6"><div class="info-item"><div class="info-label">Número de Turno:</div><div class="info-value" id="turnNumber">—</div></div></div>
+            <div class="col-md-6"><div class="info-item"><div class="info-label">Estado del Turno:</div><div class="info-value" id="turnStatus" class="status-warn">Consultando...</div></div></div>
+            <div class="col-md-6"><div class="info-item"><div class="info-label">Tiempo de Espera Actual:</div><div class="info-value" id="currentWaitingTime">N/A</div></div></div>
+            <div class="col-md-6"><div class="info-item"><div class="info-label">Tiempo Promedio de Espera:</div><div class="info-value" id="avgWaitingTime">N/A</div></div></div>
+            <div class="col-md-6"><div class="info-item"><div class="info-label">Cola/Servicio:</div><div class="info-value" id="queueName">—</div></div></div>
+            <div class="col-md-6"><div class="info-item"><div class="info-label">Sala de Espera:</div><div class="info-value" id="waitingRoomName">—</div></div></div>
+          </div>
+          <div class="text-center mt-4">
+            <button id="btnAbrirVideo" class="btn btn-primary" disabled><i class="bi bi-camera-video me-1"></i>Conectarme a videollamada</button>
+            <div class="form-text mt-2">El botón se habilitará cuando el agente te llame.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-video" id="modalVideo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-2">
+        <div class="d-flex justify-content-between align-items-center px-2">
+          <h6 class="m-0"><i class="bi bi-camera-video me-2"></i>Videollamada</h6>
+          <button class="btn btn-sm btn-outline-secondary" id="btnResizeVideo">Cambiar tamaño</button>
+        </div>
+        <div class="mt-2 h-100">
+          <iframe id="videoFrame" src="about:blank"
+            allow="camera; microphone; autoplay; fullscreen; clipboard-write; display-capture"
+            referrerpolicy="no-referrer" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL CITAS ===== -->
   <div class="modal fade" id="modalCita" tabindex="-1" aria-labelledby="modalCitaLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalCitaLabel">
-            <i class="bi bi-calendar2-week me-2"></i>Agenda tu cita
-          </h5>
+          <h5 class="modal-title" id="modalCitaLabel"><i class="bi bi-calendar2-week me-2"></i>Agenda tu cita</h5>
           <button class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
-
         <div class="modal-body">
           <div id="citaAlert" class="alert d-none"></div>
 
-          <!-- Barra superior pegajosa con selects + fecha + chips -->
           <div class="cita-toolbar">
             <div class="row g-3 align-items-end">
               <div class="col-lg-4">
@@ -648,7 +407,6 @@
             </div>
           </div>
 
-          <!-- Grid de horarios con scroll interno -->
           <div class="mb-3">
             <label class="form-label fw-semibold">Horarios disponibles</label>
             <div id="citaSlots"></div>
@@ -656,28 +414,13 @@
 
           <hr class="my-3">
 
-          <!-- Datos del cliente -->
           <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Nombre</label>
-              <input id="citaFirst" class="form-control" placeholder="Nombre">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Apellido</label>
-              <input id="citaLast" class="form-control" placeholder="Apellido">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">DNI</label>
-              <input id="citaDni" class="form-control" placeholder="Documento">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Email</label>
-              <input id="citaMail" type="email" class="form-control" placeholder="correo@dominio.com">
-            </div>
+            <div class="col-md-6"><label class="form-label fw-semibold">Nombre</label><input id="citaFirst" class="form-control" placeholder="Nombre"></div>
+            <div class="col-md-6"><label class="form-label fw-semibold">Apellido</label><input id="citaLast" class="form-control" placeholder="Apellido"></div>
+            <div class="col-md-6"><label class="form-label fw-semibold">DNI</label><input id="citaDni" class="form-control" placeholder="Documento"></div>
+            <div class="col-md-6"><label class="form-label fw-semibold">Email</label><input id="citaMail" type="email" class="form-control" placeholder="correo@dominio.com"></div>
           </div>
-
         </div>
-
         <div class="modal-footer">
           <div class="me-auto cita-legend">Selecciona un horario para habilitar la confirmación.</div>
           <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -686,77 +429,117 @@
       </div>
     </div>
   </div>
-  <!-- =================== FIN MODAL DE CITAS (AGREGADO) =================== -->
 
-  <!-- Bootstrap JS Bundle -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- 
-    JavaScript para:
-    1) Conmutar pestañas de Divisas / Tasas
-    2) Controlar la apertura/maximización del chat
-  -->
+  <!-- ===== Pestañas + Chat bubble ===== -->
   <script>
+    function showRatesTab(tab){
+      const tabDivisas=document.getElementById('tabDivisas');
+      const tabTasas=document.getElementById('tabTasas');
+      const tablaDivisas=document.getElementById('tablaDivisas');
+      const tablaTasas=document.getElementById('tablaTasas');
+      if(tab==='divisas'){ tabDivisas.classList.add('active'); tabTasas.classList.remove('active'); tablaDivisas.style.display=''; tablaTasas.style.display='none'; }
+      else { tabDivisas.classList.remove('active'); tabTasas.classList.add('active'); tablaDivisas.style.display='none'; tablaTasas.style.display=''; }
+    }
     document.addEventListener('DOMContentLoaded', function() {
-      // Función de pestañas (Divisas / Tasas)
-      function showRatesTab(tab) {
-        const tabDivisas = document.getElementById('tabDivisas');
-        const tabTasas = document.getElementById('tabTasas');
-        const tablaDivisas = document.getElementById('tablaDivisas');
-        const tablaTasas = document.getElementById('tablaTasas');
-        if (tab === 'divisas') {
-          tabDivisas.classList.add('active');
-          tabTasas.classList.remove('active');
-          tablaDivisas.style.display = '';
-          tablaTasas.style.display = 'none';
-        } else {
-          tabDivisas.classList.remove('active');
-          tabTasas.classList.add('active');
-          tablaDivisas.style.display = 'none';
-          tablaTasas.style.display = '';
-        }
-      }
-      // Exponer la función globalmente para el onclick en HTML
-      window.showRatesTab = showRatesTab;
-
-      // Control de la burbuja de chat
       const iframe = document.getElementById('numia-chat-bubble');
       const btn = document.getElementById('max-chat');
       const openBtn = document.getElementById('open-chat');
       let maximized = false;
-
-      // Al hacer clic en la burbuja, mostrar el iframe y el botón de maximizar
-      openBtn.onclick = function() {
-        iframe.style.display = 'block';
-        btn.style.display = 'flex';
-        openBtn.style.display = 'none';
-      };
-      // Al hacer clic en el botón de maximizar/minimizar
+      openBtn.onclick = function() { iframe.style.display='block'; btn.style.display='flex'; openBtn.style.display='none'; };
       btn.onclick = function() {
-        if (!maximized) {
-          iframe.style.width = '98vw';
-          iframe.style.height = '94vh';
-          iframe.style.bottom = '3vh';
-          iframe.style.right = '1vw';
-          iframe.style.boxShadow = 'none';
-          btn.style.bottom = 'calc(94vh + 3vh + 12px)';
-          btn.textContent = '🗗';
-          maximized = true;
-        } else {
-          iframe.style.width = '370px';
-          iframe.style.height = '550px';
-          iframe.style.bottom = '24px';
-          iframe.style.right = '24px';
-          iframe.style.boxShadow = 'none';
-          btn.style.bottom = '590px';
-          btn.textContent = '⛶';
-          maximized = false;
-        }
+        if (!maximized) { iframe.style.width='98vw'; iframe.style.height='94vh'; iframe.style.bottom='3vh'; iframe.style.right='1vw'; iframe.style.boxShadow='none'; btn.style.bottom='calc(94vh + 3vh + 12px)'; btn.textContent='🗗'; maximized = true; }
+        else { iframe.style.width='370px'; iframe.style.height='550px'; iframe.style.bottom='24px'; iframe.style.right='24px'; iframe.style.boxShadow='none'; btn.style.bottom='590px'; btn.textContent='⛶'; maximized = false; }
       };
     });
   </script>
 
-  <!-- ================== JS de la integración de citas (AGREGADO) ================== -->
+  <!-- ===== Flujo Turno / Videollamada ===== -->
+  <script>
+    const FV_TOKEN   = 'm7NCbNDBShZOV83fu6RGJV1DbkhSkWI6JSTxmT2e';
+    const FV_QUEUE   = 5007;
+    const FV_BRANCH  = 11;
+    const FV_BASE    = 'https://filavirtual2.debmedia.com/api/v1';
+    const VIDEO_CALL_URL = 'about:blank';
+
+    let pollingInterval = null;
+    let lastTurnCode = null;
+
+    const btnNominaComenzar = document.getElementById('btnNominaComenzar');
+    const modalForm = new bootstrap.Modal(document.getElementById('modalGuardiaForm'));
+    const modalWait = new bootstrap.Modal(document.getElementById('modalSalaEspera'), { backdrop: 'static', keyboard: false });
+    const modalVideo = new bootstrap.Modal(document.getElementById('modalVideo'), { backdrop:'static' });
+    const formEl = document.getElementById('guardiaForm');
+    const formAlert = document.getElementById('formAlert');
+    const btnEnviarTurno = document.getElementById('btnEnviarTurno');
+    const $ = (id)=> document.getElementById(id);
+
+    function setFormAlert(type, msg){ formAlert.className = `alert alert-${type}`; formAlert.textContent = msg; formAlert.classList.remove('d-none'); }
+    function clearFormAlert(){ formAlert.className = 'alert d-none'; formAlert.textContent = ''; }
+
+    btnNominaComenzar.addEventListener('click', ()=>{ clearFormAlert(); formEl.reset(); modalForm.show(); });
+
+    btnEnviarTurno.addEventListener('click', async ()=>{
+      clearFormAlert();
+      const data = Object.fromEntries(new FormData(formEl).entries());
+      if(!data.firstName || !data.lastName || !data.dni || !data.email || !data.phone){ setFormAlert('danger','Completa todos los campos.'); return; }
+      btnEnviarTurno.disabled = true; btnEnviarTurno.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Generando...';
+      try{
+        const url = `${FV_BASE}/queue/${FV_QUEUE}/branch/${FV_BRANCH}/enqueue`;
+        const res = await fetch(url, { method:'POST', headers:{ 'x-api-token': FV_TOKEN, 'Content-Type':'application/json' }, body: JSON.stringify({ firstName:data.firstName, lastName:data.lastName, dni:data.dni, email:data.email, phone:data.phone })});
+        const out = await res.json().catch(()=> ({}));
+        if(!res.ok) throw new Error(out?.message || `Error en servidor (${res.status})`);
+        const turnCode = out.code || '—'; lastTurnCode = turnCode; localStorage.setItem('turnCode', turnCode);
+        const turnNumber = out.jsonDetails?.turn || out.jsonDetails?.actualTurn || '—';
+        const avgWait    = out.jsonDetails?.averageWaitingTime ?? out.jsonDetails?.serviceTime ?? 'N/A';
+        const queueName  = out.jsonDetails?.queue?.name || '—';
+        const wrName     = out.jsonDetails?.waitingRoom?.name || '—';
+        fillWaitModal({ code:turnCode, number:turnNumber, avgWait:isFinite(avgWait)?`${Math.floor(parseFloat(avgWait))} min`:'N/A', queueName, waitingRoom:wrName });
+        modalForm.hide(); modalWait.show(); startPolling(turnCode);
+      }catch(err){ setFormAlert('danger', err.message);
+      }finally{ btnEnviarTurno.disabled = false; btnEnviarTurno.innerHTML = '<i class="bi bi-check2-circle me-1"></i>Generar turno'; }
+    });
+
+    function fillWaitModal({code, number, avgWait, queueName, waitingRoom}){
+      $('turnCodeDisplay').textContent = code; $('turnNumber').textContent = number; $('avgWaitingTime').textContent = avgWait;
+      $('queueName').textContent = queueName; $('waitingRoomName').textContent = waitingRoom;
+      $('turnStatus').textContent = 'Consultando...'; $('turnStatus').className = 'info-value status-warn';
+      $('currentWaitingTime').textContent = 'N/A'; $('btnAbrirVideo').disabled = true;
+    }
+
+    function startPolling(turnCode){
+      stopPolling();
+      const url = `${FV_BASE}/turn/code/${encodeURIComponent(turnCode)}`;
+      const mapStatus = (s)=> s==='ANNOUNCED'?{text:'Lo estamos llamando',cls:'status-ok'}: s==='WAITING_TO_BE_CALLED'?{text:'En breve lo llamaremos',cls:'status-warn'}: s==='FINALIZED'?{text:'Atención finalizada',cls:'status-done'}:{text:s||'Desconocido',cls:'status-warn'};
+      const tick = async ()=>{
+        try{
+          const res = await fetch(url, { headers: { 'x-api-token': FV_TOKEN, 'Content-Type':'text/plain' }});
+          if(!res.ok) throw new Error(`Estado no disponible (${res.status})`);
+          const data = await res.json();
+          const m = mapStatus(data.status); $('turnStatus').textContent = m.text; $('turnStatus').className = `info-value ${m.cls}`;
+          const avg = (data.averageWaitingTime ?? data.serviceTime); if(avg!==undefined && avg!==null && !isNaN(avg)){ $('currentWaitingTime').textContent = `${Math.floor(parseFloat(avg))} min`; }
+          if(data.status === 'ANNOUNCED'){ $('btnAbrirVideo').disabled = false; }
+        }catch(e){ $('turnStatus').textContent = 'Error al consultar'; $('turnStatus').className = 'info-value status-err'; }
+      };
+      tick(); pollingInterval = setInterval(tick, 5000);
+    }
+    function stopPolling(){ if(pollingInterval){ clearInterval(pollingInterval); pollingInterval = null; } }
+    document.getElementById('btnCloseWait').addEventListener('click', stopPolling);
+    document.getElementById('btnAbrirVideo').addEventListener('click', ()=>{ openVideoModal({ width:'90vw', height:'80vh', url: VIDEO_CALL_URL }); });
+    document.getElementById('btnResizeVideo').addEventListener('click', ()=>{
+      const dlg = document.querySelector('#modalVideo .modal-dialog');
+      const curW = dlg.style.getPropertyValue('--video-width') || '90vw';
+      const nextW = (curW.trim()==='90vw') ? '70vw' : '90vw';
+      const nextH = (nextW==='70vw') ? '60vh' : '80vh';
+      dlg.style.setProperty('--video-width', nextW);
+      document.querySelector('#modalVideo .modal-content').style.setProperty('--video-height', nextH);
+    });
+    function openVideoModal({width='90vw', height='80vh', url='about:blank'}={}){ const dlg=document.querySelector('#modalVideo .modal-dialog'); const content=document.querySelector('#modalVideo .modal-content'); dlg.style.setProperty('--video-width',width); content.style.setProperty('--video-height',height); document.getElementById('videoFrame').src=url; modalVideo.show(); }
+  </script>
+
+  <!-- ===== MÓDULO DE CITAS ===== -->
   <script>
     (function(){
       const API_TOKEN = 's9ZmCOGzuRz0OlxtZyJYIvnG7WQVBtnLlNFrHD2U';
@@ -764,10 +547,9 @@
       const AVAIL_BASE = 'https://citas2.debmedia.com/api/v2/schedules';
       const APPT_URL   = 'https://citas2.debmedia.com/api/v2/appointments';
 
-      // Elementos UI
       const modalEl = document.getElementById('modalCita');
       const modal = new bootstrap.Modal(modalEl);
-      const btnPrimaryCards = document.querySelectorAll('.ad-card .btn.btn-primary'); // "Solicitar ahora" (y otros primarios)
+      const btnPrimaryCards = document.querySelectorAll('.ad-card .btn.btn-primary');
       const alertBox = document.getElementById('citaAlert');
       const selSchedule = document.getElementById('citaSchedule');
       const selBranch   = document.getElementById('citaBranch');
@@ -780,14 +562,12 @@
       const inDni   = document.getElementById('citaDni');
       const inMail  = document.getElementById('citaMail');
 
-      // Estado actual
-      let schedules = [];          // [{id,name,branches:[{id,name},...]}, ...]
-      let selectedSlot = null;     // { startAt, endAt, defaultDuration }
+      let schedules = [];
+      let selectedSlot = null; // { startAt: 'YYYY-MM-DDTHH:mm:ss-0300', defaultDuration: n }
 
-      // Habilitar botón "Solicitar ahora" y abrir modal
-      // (sin tocar tu HTML original)
+      // habilita el primer botón primario (“Agendar”)
       if (btnPrimaryCards && btnPrimaryCards.length) {
-        const btnSolicitar = btnPrimaryCards[0]; // el primero es "Solicitar ahora" de la tarjeta de crédito
+        const btnSolicitar = btnPrimaryCards[0];
         btnSolicitar.removeAttribute('disabled');
         btnSolicitar.addEventListener('click', async () => {
           resetForm();
@@ -796,22 +576,9 @@
         });
       }
 
-      // Utilidades
       const pad = n => String(n).padStart(2,'0');
-      const ymd = (d) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-      function isoFromZonedStart(zonedStartDate) {
-        // zonedStartDate viene como "YYYY-MM-DDTHH:mm:ss-0300" o con Z/offset.
-        // Para el POST necesitamos startAt y endAt (reusamos el valor recibido + duración).
-        // Aquí devolvemos Date para calcular endAt.
-        const d = new Date(zonedStartDate);
-        return d;
-      }
-      function setAlert(type, msg){
-        // type: 'danger' | 'success' | 'info'
-        alertBox.className = `alert alert-${type}`;
-        alertBox.textContent = msg;
-        alertBox.classList.remove('d-none');
-      }
+
+      function setAlert(type, msg){ alertBox.className = `alert alert-${type}`; alertBox.textContent = msg; alertBox.classList.remove('d-none'); }
       function clearAlert(){ alertBox.className = 'alert d-none'; alertBox.textContent=''; }
 
       function resetForm(){
@@ -833,25 +600,19 @@
           if(!res.ok) throw new Error(`No se pudieron obtener las agendas (${res.status})`);
           schedules = await res.json();
 
-          // Poblar select de agenda
           selSchedule.innerHTML = `<option value="">Selecciona un servicio...</option>`;
-          schedules.forEach(s => {
-            selSchedule.insertAdjacentHTML('beforeend', `<option value="${s.id}">${s.name}</option>`);
-          });
+          schedules.forEach(s => selSchedule.insertAdjacentHTML('beforeend', `<option value="${s.id}">${s.name}</option>`));
 
-          // Fecha habilitada desde hoy
           const today = new Date();
+          const ymd = (d) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
           inputFecha.min = ymd(today);
           inputFecha.disabled = false;
 
-          // Eventos
           selSchedule.onchange = handleScheduleChange;
           selBranch.onchange = handleBranchOrDateChange;
           inputFecha.onchange = handleBranchOrDateChange;
 
-        }catch(err){
-          setAlert('danger', err.message);
-        }
+        }catch(err){ setAlert('danger', err.message); }
       }
 
       function handleScheduleChange(){
@@ -862,22 +623,11 @@
         btnConfirm.disabled = true;
 
         if(!schedId){ return; }
-
         const sched = schedules.find(s => String(s.id) === String(schedId));
-        if(!sched || !Array.isArray(sched.branches)) {
-          setAlert('danger', 'Esta agenda no tiene sucursales asociadas.');
-          return;
-        }
-        // Poblar sucursales (sin duplicados)
+        if(!sched || !Array.isArray(sched.branches)) { setAlert('danger','Esta agenda no tiene sucursales asociadas.'); return; }
         const seen = new Set();
-        sched.branches.forEach(b=>{
-          if(!seen.has(b.id)){
-            selBranch.insertAdjacentHTML('beforeend', `<option value="${b.id}">${b.name}</option>`);
-            seen.add(b.id);
-          }
-        });
-        selBranch.disabled = false;
-        clearAlert();
+        sched.branches.forEach(b=>{ if(!seen.has(b.id)){ selBranch.insertAdjacentHTML('beforeend', `<option value="${b.id}">${b.name}</option>`); seen.add(b.id); }});
+        selBranch.disabled = false; clearAlert();
       }
 
       async function handleBranchOrDateChange(){
@@ -899,12 +649,8 @@
           const data = await res.json();
 
           const slots = Array.isArray(data) ? data : (Array.isArray(data.slots) ? data.slots : []);
-          if(slots.length === 0){
-            setAlert('info','No hay horarios disponibles para la fecha seleccionada.');
-            return;
-          }
+          if(slots.length === 0){ setAlert('info','No hay horarios disponibles para la fecha seleccionada.'); return; }
 
-          // Render de botones
           const frag = document.createDocumentFragment();
           slots.forEach(slot=>{
             const hora = slot.zonedStartDate.substring(11,16);
@@ -913,162 +659,101 @@
             btn.className = 'btn btn-light';
             btn.textContent = hora;
             btn.addEventListener('click', ()=>{
-              // marcar activo
               [...slotsWrap.querySelectorAll('.btn')].forEach(b=>b.classList.remove('active'));
               btn.classList.add('active');
-              // guardar slot seleccionado
-              const startDate = isoFromZonedStart(slot.zonedStartDate);
-              const end = new Date(startDate.getTime() + (slot.defaultDuration||0) * 60000);
-              selectedSlot = {
-                startAt: slot.zonedStartDate, // lo mandaremos tal cual
-                endAt: end
-              };
+              selectedSlot = { startAt: slot.zonedStartDate, defaultDuration: (slot.defaultDuration||0) };
               btnConfirm.disabled = false;
             });
             frag.appendChild(btn);
           });
           slotsWrap.appendChild(frag);
 
-        }catch(err){
-          setAlert('danger', err.message);
+        }catch(err){ setAlert('danger', err.message); }
+      }
+
+      // Helpers para generar endAt con el MISMO offset que startAt (formato ...HH:mm:ss-0300)
+      function minutesOffsetFromSuffix(suffix){ // "-0300" -> -180
+        const m = suffix.match(/^([+-])(\d{2})(\d{2})$/);
+        if(!m) return 0;
+        const sign = m[1] === '-' ? -1 : 1;
+        return sign * (parseInt(m[2],10)*60 + parseInt(m[3],10));
         }
+      function buildEndAtLikeStart(startAtStr, addMinutes){
+        // startAtStr: "YYYY-MM-DDTHH:mm:ss-0300"
+        const offsetMatch = startAtStr.match(/([+-]\d{4}|Z)$/);
+        const offsetSuffix = offsetMatch ? offsetMatch[1] : 'Z';
+        const offsetMin = offsetSuffix==='Z' ? 0 : minutesOffsetFromSuffix(offsetSuffix);
+
+        const msStart = new Date(startAtStr).getTime();
+        const msEnd = msStart + (addMinutes*60000);
+
+        // Convertimos a "hora local" de ese offset: sumamos offset al UTC para leer UTC* como local de zona
+        const d = new Date(msEnd + offsetMin*60000);
+        const Y = d.getUTCFullYear(), M = d.getUTCMonth()+1, D = d.getUTCDate();
+        const H = d.getUTCHours(), m = d.getUTCMinutes(), S = d.getUTCSeconds();
+        return `${Y}-${pad(M)}-${pad(D)}T${pad(H)}:${pad(m)}:${pad(S)}${offsetSuffix}`;
       }
 
       btnConfirm.addEventListener('click', async ()=>{
         clearAlert();
-        if(!selectedSlot){
-          setAlert('danger','Selecciona un horario primero.');
-          return;
-        }
+        if(!selectedSlot){ setAlert('danger','Selecciona un horario primero.'); return; }
         const schedId = selSchedule.value;
         const branchId = selBranch.value;
-        if(!schedId || !branchId){
-          setAlert('danger','Faltan servicio o sucursal.');
-          return;
-        }
-        // Validaciones mínimas
-        if(!inFirst.value || !inLast.value || !inDni.value){
-          setAlert('danger','Completa Nombre, Apellido y DNI.');
-          return;
-        }
+        if(!schedId || !branchId){ setAlert('danger','Faltan servicio o sucursal.'); return; }
+        if(!inFirst.value || !inLast.value || !inDni.value){ setAlert('danger','Completa Nombre, Apellido y DNI.'); return; }
 
-        // Construir payload
-        const startDate = new Date(selectedSlot.startAt);
-        const endDate   = new Date(selectedSlot.endAt);
-        const fmt = (d)=>{
-          const off = -d.getTimezoneOffset(); // minutos
-          const sign = off >= 0 ? '+' : '-';
-          const hh = pad(Math.floor(Math.abs(off)/60));
-          const mm = pad(Math.abs(off)%60);
-          return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:00${sign}${hh}${mm}`;
-        };
+        // start/end con el MISMO offset y formato que la API entrega
+        const startAt = selectedSlot.startAt; // usar tal cual "....-0300"
+        const endAt   = buildEndAtLikeStart(startAt, selectedSlot.defaultDuration || 0);
 
         const body = {
           branch:   { id: Number(branchId) },
           schedule: { id: Number(schedId) },
-          startAt:  fmt(startDate),
-          endAt:    fmt(endDate),
+          startAt,  // "YYYY-MM-DDTHH:mm:ss-0300"
+          endAt,    // "YYYY-MM-DDTHH:mm:ss-0300"
           customer: {
             firstName: inFirst.value,
             lastName:  inLast.value,
-            dni:       Number(inDni.value||0),
-            email:     inMail.value || undefined
+            dni:       String(inDni.value || '').trim(),
+            email:     (inMail.value || '').trim() || undefined
           },
           reason: "Solicitud de Tarjeta de Crédito"
         };
 
-        btnConfirm.disabled = true;
-        btnConfirm.textContent = 'Confirmando...';
+        btnConfirm.disabled = true; btnConfirm.textContent = 'Confirmando...';
 
         try{
           const res = await fetch(APPT_URL, {
             method: 'POST',
-            headers: {
-              'x-api-token': API_TOKEN,
-              'Content-Type': 'application/json'
-            },
+            headers: { 'x-api-token': API_TOKEN, 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
           });
           const out = await res.json().catch(()=> ({}));
-          if(!res.ok){
-            throw new Error(out?.message || `Error al crear la cita (${res.status})`);
-          }
+          if(!res.ok){ throw new Error(out?.message || `Error al crear la cita (${res.status})`); }
           setAlert('success', `¡Cita creada! ID: ${out.id || '(recibido)'}`);
-          // Cerrar tras unos segundos
-          setTimeout(()=> modal.hide(), 1500);
+          setTimeout(()=> modal.hide(), 1400);
         }catch(err){
           setAlert('danger', err.message);
         }finally{
-          btnConfirm.disabled = false;
-          btnConfirm.textContent = 'Confirmar cita';
+          btnConfirm.disabled = false; btnConfirm.textContent = 'Confirmar cita';
         }
       });
     })();
   </script>
-  <!-- ================== FIN JS de la integración de citas (AGREGADO) ================== -->
 
   <!-- CHAT -->
   <iframe
     src="https://filavirtual.preprod.debmedia.com/Numiabot/#/Ff5h9OOAsmhNELUjk1Dh"
     id="numia-chat-bubble"
-    style="
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 370px;
-      height: 550px;
-      border: none;
-      z-index: 9999;
-      border-radius: 18px;
-      overflow: hidden;
-      transition: width 0.3s, height 0.3s, right 0.3s, bottom 0.3s;
-      display: none;
-    "
+    style="position: fixed; bottom: 24px; right: 24px; width: 370px; height: 550px; border: none; z-index: 9999; border-radius: 18px; overflow: hidden; transition: width .3s, height .3s, right .3s, bottom .3s; display: none;"
     allow="camera; microphone"
   ></iframe>
   <button id="max-chat"
-    style="
-      position: fixed;
-      bottom: 590px;
-      right: 24px;
-      z-index: 10000;
-      background: var(--numia-azul);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      font-size: 1.6rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    "
-    title="Maximizar/minimizar chat"
-  >⛶</button>
+    style="position: fixed; bottom: 590px; right: 24px; z-index: 10000; background: var(--numia-azul); color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.6rem; box-shadow: 0 2px 8px rgba(0,0,0,0.18); cursor: pointer; display: none; align-items: center; justify-content: center; transition: background .2s;"
+    title="Maximizar/minimizar chat">⛶</button>
   <button id="open-chat"
-    style="
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 10001;
-      background: var(--numia-azul);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 64px;
-      height: 64px;
-      font-size: 2.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    "
-    title="Abrir chat"
-  >
+    style="position: fixed; bottom: 24px; right: 24px; z-index: 10001; background: var(--numia-azul); color: #fff; border: none; border-radius: 50%; width: 64px; height: 64px; font-size: 2.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.18); cursor: pointer; display: flex; align-items: center; justify-content: center;"
+    title="Abrir chat">
     <span style="font-weight:bold;font-size:2rem;">N</span>
   </button>
 </body>
