@@ -81,6 +81,22 @@
     #citaSlots .btn.active, #citaSlots .btn:focus { background:var(--numia-azul); color:#fff; border-color:var(--numia-azul); }
     .cita-legend { font-size:.8rem; color:#6c6c7a; }
     @media (max-width:576px){ #citaSlots { max-height:260px; } }
+
+    /* --------- Simulador de Crédito --------- */
+    .step-indicator { display: flex; flex-direction: column; align-items: center; position: relative; }
+    .step-number { width: 40px; height: 40px; border-radius: 50%; background: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 8px; transition: all 0.3s; }
+    .step-indicator.active .step-number { background: var(--numia-azul); color: white; }
+    .step-indicator.completed .step-number { background: #28a745; color: white; }
+    .step-label { font-size: 0.875rem; font-weight: 600; color: #6c757d; }
+    .step-indicator.active .step-label { color: var(--numia-azul); }
+    .step-indicator.completed .step-label { color: #28a745; }
+    .step-line { width: 60px; height: 2px; background: #e9ecef; margin: 0 10px; margin-top: -20px; }
+    .step-indicator.completed + .step-line { background: #28a745; }
+    .step-content { min-height: 400px; }
+    .credit-type-card { cursor: pointer; transition: all 0.3s; border: 2px solid #e9ecef; }
+    .credit-type-card:hover { border-color: var(--numia-azul); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(134, 61, 255, 0.15); }
+    .credit-type-card.selected { border-color: var(--numia-azul); background: var(--numia-azul-muy-claro); }
+    .credit-details { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e9ecef; }
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -247,7 +263,7 @@
           <div class="card-body">
             <h5 class="card-title">Préstamos personales</h5>
             <p class="card-text">Soluciona, planea y disfruta: obtén tu préstamo con tasas preferenciales y pagos flexibles.</p>
-            <button class="btn btn-primary rounded-pill px-4 mt-2 fw-bold" disabled>Simular préstamo</button>
+            <button id="btnSimularPrestamo" class="btn btn-primary rounded-pill px-4 mt-2 fw-bold">Simular préstamo</button>
           </div>
         </div>
       </div>
@@ -432,6 +448,212 @@
     </div>
   </div>
 
+  <!-- ===== MODAL SIMULADOR DE CRÉDITO ===== -->
+  <div class="modal fade" id="modalSimuladorCredito" tabindex="-1" aria-labelledby="modalSimuladorCreditoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalSimuladorCreditoLabel"><i class="bi bi-calculator me-2"></i>Simulador de Crédito</h5>
+          <button class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div id="simuladorAlert" class="alert d-none"></div>
+          
+          <!-- Indicador de pasos -->
+          <div class="d-flex justify-content-center mb-4">
+            <div class="d-flex align-items-center">
+              <div class="step-indicator active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">Información</div>
+              </div>
+              <div class="step-line"></div>
+              <div class="step-indicator" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">Tipo de Crédito</div>
+              </div>
+              <div class="step-line"></div>
+              <div class="step-indicator" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">Resultados</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 1: Información del Cliente -->
+          <div id="step1" class="step-content">
+            <h6 class="mb-3"><i class="bi bi-person-fill me-2"></i>Información Personal</h6>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Nombre</label>
+                <input type="text" id="simNombre" class="form-control" placeholder="Tu nombre" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Apellido</label>
+                <input type="text" id="simApellido" class="form-control" placeholder="Tu apellido" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">DNI</label>
+                <input type="text" id="simDni" class="form-control" placeholder="Número de documento" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Teléfono</label>
+                <input type="tel" id="simTelefono" class="form-control" placeholder="Tu teléfono" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" id="simEmail" class="form-control" placeholder="correo@ejemplo.com" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Ingresos Mensuales</label>
+                <div class="input-group">
+                  <span class="input-group-text">$</span>
+                  <input type="number" id="simIngresos" class="form-control" placeholder="0" min="0" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Gastos Mensuales</label>
+                <div class="input-group">
+                  <span class="input-group-text">$</span>
+                  <input type="number" id="simGastos" class="form-control" placeholder="0" min="0" required>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 2: Tipo de Crédito -->
+          <div id="step2" class="step-content d-none">
+            <h6 class="mb-3"><i class="bi bi-cash-stack me-2"></i>Selecciona tu Crédito</h6>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="card h-100 credit-type-card" data-type="personal">
+                  <div class="card-body text-center">
+                    <i class="bi bi-person-workspace text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h6 class="card-title">Préstamo Personal</h6>
+                    <p class="card-text small">Para necesidades personales, consolidación de deudas o proyectos.</p>
+                    <div class="credit-details">
+                      <small class="text-muted">Tasa desde: 12.5% anual</small><br>
+                      <small class="text-muted">Plazo: 12-60 meses</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card h-100 credit-type-card" data-type="auto">
+                  <div class="card-body text-center">
+                    <i class="bi bi-car-front text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h6 class="card-title">Crédito de Auto</h6>
+                    <p class="card-text small">Financia tu vehículo nuevo o usado con las mejores condiciones.</p>
+                    <div class="credit-details">
+                      <small class="text-muted">Tasa desde: 8.9% anual</small><br>
+                      <small class="text-muted">Plazo: 12-84 meses</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card h-100 credit-type-card" data-type="hipotecario">
+                  <div class="card-body text-center">
+                    <i class="bi bi-house-door text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h6 class="card-title">Crédito Hipotecario</h6>
+                    <p class="card-text small">Tu casa propia con financiamiento a largo plazo.</p>
+                    <div class="credit-details">
+                      <small class="text-muted">Tasa desde: 6.5% anual</small><br>
+                      <small class="text-muted">Plazo: 10-30 años</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card h-100 credit-type-card" data-type="libre">
+                  <div class="card-body text-center">
+                    <i class="bi bi-credit-card text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h6 class="card-title">Crédito Libre Inversión</h6>
+                    <p class="card-text small">Para cualquier propósito con flexibilidad total.</p>
+                    <div class="credit-details">
+                      <small class="text-muted">Tasa desde: 14.2% anual</small><br>
+                      <small class="text-muted">Plazo: 6-48 meses</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <label class="form-label fw-semibold">Monto Solicitado</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" id="simMonto" class="form-control" placeholder="0" min="1000" max="50000000" required>
+              </div>
+              <div class="form-text">Monto mínimo: $1,000 - Máximo: $50,000,000</div>
+            </div>
+            
+            <div class="mt-3">
+              <label class="form-label fw-semibold">Plazo en Meses</label>
+              <select id="simPlazo" class="form-select" required>
+                <option value="">Selecciona el plazo</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Paso 3: Resultados -->
+          <div id="step3" class="step-content d-none">
+            <h6 class="mb-3"><i class="bi bi-graph-up me-2"></i>Resultado de tu Simulación</h6>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="card bg-light">
+                  <div class="card-body text-center">
+                    <h6 class="card-title text-primary">Cuota Mensual</h6>
+                    <h4 class="text-primary" id="resultadoCuota">$0</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card bg-light">
+                  <div class="card-body text-center">
+                    <h6 class="card-title text-primary">Total a Pagar</h6>
+                    <h4 class="text-primary" id="resultadoTotal">$0</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card bg-light">
+                  <div class="card-body text-center">
+                    <h6 class="card-title text-primary">Tasa de Interés</h6>
+                    <h4 class="text-primary" id="resultadoTasa">0%</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card bg-light">
+                  <div class="card-body text-center">
+                    <h6 class="card-title text-primary">Capacidad de Pago</h6>
+                    <h4 class="text-success" id="resultadoCapacidad">Aprobado</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <div class="alert alert-info">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong>Información importante:</strong> Esta es una simulación preliminar. Los términos finales pueden variar según la evaluación crediticia completa.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button id="btnSolicitarAsistencia" class="btn btn-warning me-auto">
+            <i class="bi bi-headset me-1"></i>Solicitar Asistencia
+          </button>
+          <button id="btnAnterior" class="btn btn-outline-primary d-none">Anterior</button>
+          <button id="btnSiguiente" class="btn btn-primary">Siguiente</button>
+          <button id="btnFinalizar" class="btn btn-success d-none">Finalizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -468,6 +690,7 @@
 
     let pollingInterval = null;
     let lastTurnCode = null;
+    window.currentVideoCallUrl = 'about:blank';
 
     const btnNominaComenzar = document.getElementById('btnNominaComenzar');
     const modalForm = new bootstrap.Modal(document.getElementById('modalGuardiaForm'));
@@ -498,20 +721,28 @@
         const avgWait    = out.jsonDetails?.averageWaitingTime ?? out.jsonDetails?.serviceTime ?? 'N/A';
         const queueName  = out.jsonDetails?.queue?.name || '—';
         const wrName     = out.jsonDetails?.waitingRoom?.name || '—';
+        const videoCallUrl = out.jsonDetails?.videoCallUrl || 'about:blank';
+        window.currentVideoCallUrl = videoCallUrl; // Almacenar la URL de videollamada
+        
+        // Actualizar el src del iframe con la URL de videollamada
+        const urlWithParam = videoCallUrl.includes('?') ? `${videoCallUrl}&videocallUser=mobile` : `${videoCallUrl}?videocallUser=mobile`;
+        document.getElementById('videoFrame').src = urlWithParam;
         fillWaitModal({ code:turnCode, number:turnNumber, avgWait:isFinite(avgWait)?`${Math.floor(parseFloat(avgWait))} min`:'N/A', queueName, waitingRoom:wrName });
         modalForm.hide(); modalWait.show(); startPolling(turnCode);
       }catch(err){ setFormAlert('danger', err.message);
       }finally{ btnEnviarTurno.disabled = false; btnEnviarTurno.innerHTML = '<i class="bi bi-check2-circle me-1"></i>Generar turno'; }
     });
 
-    function fillWaitModal({code, number, avgWait, queueName, waitingRoom}){
+    // Función global para llenar el modal de sala de espera
+    window.fillWaitModal = function({code, number, avgWait, queueName, waitingRoom}){
       $('turnCodeDisplay').textContent = code; $('turnNumber').textContent = number; $('avgWaitingTime').textContent = avgWait;
       $('queueName').textContent = queueName; $('waitingRoomName').textContent = waitingRoom;
       $('turnStatus').textContent = 'Consultando...'; $('turnStatus').className = 'info-value status-warn';
       $('currentWaitingTime').textContent = 'N/A'; $('btnAbrirVideo').disabled = true;
     }
 
-    function startPolling(turnCode){
+    // Función global para iniciar el polling del turno
+    window.startPolling = function(turnCode){
       stopPolling();
       const url = `${FV_BASE}/turn/code/${encodeURIComponent(turnCode)}`;
       const mapStatus = (s)=> s==='ANNOUNCED'?{text:'Lo estamos llamando',cls:'status-ok'}: s==='WAITING_TO_BE_CALLED'?{text:'En breve lo llamaremos',cls:'status-warn'}: s==='FINALIZED'?{text:'Atención finalizada',cls:'status-done'}:{text:s||'Desconocido',cls:'status-warn'};
@@ -529,7 +760,7 @@
     }
     function stopPolling(){ if(pollingInterval){ clearInterval(pollingInterval); pollingInterval = null; } }
     document.getElementById('btnCloseWait').addEventListener('click', stopPolling);
-    document.getElementById('btnAbrirVideo').addEventListener('click', ()=>{ openVideoModal({ width:'90vw', height:'80vh', url: VIDEO_CALL_URL }); });
+    document.getElementById('btnAbrirVideo').addEventListener('click', ()=>{ openVideoModal({ width:'90vw', height:'80vh', url: window.currentVideoCallUrl }); });
     document.getElementById('btnResizeVideo').addEventListener('click', ()=>{
       const dlg = document.querySelector('#modalVideo .modal-dialog');
       const curW = dlg.style.getPropertyValue('--video-width') || '90vw';
@@ -538,7 +769,21 @@
       dlg.style.setProperty('--video-width', nextW);
       document.querySelector('#modalVideo .modal-content').style.setProperty('--video-height', nextH);
     });
-    function openVideoModal({width='90vw', height='80vh', url='about:blank'}={}){ const dlg=document.querySelector('#modalVideo .modal-dialog'); const content=document.querySelector('#modalVideo .modal-content'); dlg.style.setProperty('--video-width',width); content.style.setProperty('--video-height',height); document.getElementById('videoFrame').src=url; modalVideo.show(); }
+    function openVideoModal({width='90vw', height='80vh', url=null}={}){ 
+      const dlg=document.querySelector('#modalVideo .modal-dialog'); 
+      const content=document.querySelector('#modalVideo .modal-content'); 
+      dlg.style.setProperty('--video-width',width); 
+      content.style.setProperty('--video-height',height); 
+      
+      // Usar la URL almacenada globalmente o la proporcionada como parámetro
+      const videoUrl = url || window.currentVideoCallUrl || 'about:blank';
+      
+      // Agregar el parámetro ?videocallUser=mobile a la URL
+      const urlWithParam = videoUrl.includes('?') ? `${videoUrl}&videocallUser=mobile` : `${videoUrl}?videocallUser=mobile`;
+      
+      document.getElementById('videoFrame').src=urlWithParam; 
+      modalVideo.show(); 
+    }
   </script>
 
   <!-- ===== MÓDULO DE CITAS ===== -->
@@ -740,6 +985,376 @@
           btnConfirm.disabled = false; btnConfirm.textContent = 'Confirmar cita';
         }
       });
+    })();
+  </script>
+
+  <!-- ===== SIMULADOR DE CRÉDITO ===== -->
+  <script>
+    (function(){
+      const modalEl = document.getElementById('modalSimuladorCredito');
+      const modal = new bootstrap.Modal(modalEl);
+      const btnSimular = document.getElementById('btnSimularPrestamo');
+      const alertBox = document.getElementById('simuladorAlert');
+      
+      // Elementos del formulario
+      const inputs = {
+        nombre: document.getElementById('simNombre'),
+        apellido: document.getElementById('simApellido'),
+        dni: document.getElementById('simDni'),
+        telefono: document.getElementById('simTelefono'),
+        email: document.getElementById('simEmail'),
+        ingresos: document.getElementById('simIngresos'),
+        gastos: document.getElementById('simGastos'),
+        monto: document.getElementById('simMonto'),
+        plazo: document.getElementById('simPlazo')
+      };
+      
+      // Elementos de navegación
+      const btnAnterior = document.getElementById('btnAnterior');
+      const btnSiguiente = document.getElementById('btnSiguiente');
+      const btnFinalizar = document.getElementById('btnFinalizar');
+      const btnSolicitarAsistencia = document.getElementById('btnSolicitarAsistencia');
+      
+      // Elementos de pasos
+      const stepIndicators = document.querySelectorAll('.step-indicator');
+      const stepContents = document.querySelectorAll('.step-content');
+      
+      // Elementos de resultados
+      const resultadoCuota = document.getElementById('resultadoCuota');
+      const resultadoTotal = document.getElementById('resultadoTotal');
+      const resultadoTasa = document.getElementById('resultadoTasa');
+      const resultadoCapacidad = document.getElementById('resultadoCapacidad');
+      
+      let currentStep = 1;
+      let selectedCreditType = null;
+      let simulacionData = {};
+      
+      // Configuración de tipos de crédito
+      const creditTypes = {
+        personal: { tasa: 12.5, minPlazo: 12, maxPlazo: 60, minMonto: 1000, maxMonto: 5000000 },
+        auto: { tasa: 8.9, minPlazo: 12, maxPlazo: 84, minMonto: 50000, maxMonto: 20000000 },
+        hipotecario: { tasa: 6.5, minPlazo: 120, maxPlazo: 360, minMonto: 500000, maxMonto: 50000000 },
+        libre: { tasa: 14.2, minPlazo: 6, maxPlazo: 48, minMonto: 1000, maxMonto: 10000000 }
+      };
+      
+      // Event listeners
+      btnSimular.addEventListener('click', () => {
+        resetSimulador();
+        modal.show();
+      });
+      
+      btnAnterior.addEventListener('click', () => {
+        if (currentStep > 1) {
+          currentStep--;
+          updateStep();
+        }
+      });
+      
+      btnSiguiente.addEventListener('click', () => {
+        if (validateCurrentStep()) {
+          if (currentStep < 3) {
+            currentStep++;
+            updateStep();
+          }
+        }
+      });
+      
+      btnFinalizar.addEventListener('click', () => {
+        modal.hide();
+        resetSimulador();
+      });
+      
+      btnSolicitarAsistencia.addEventListener('click', () => {
+        solicitarAsistencia();
+      });
+      
+      // Event listeners para tarjetas de tipo de crédito
+      document.querySelectorAll('.credit-type-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.credit-type-card').forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          selectedCreditType = card.dataset.type;
+          updatePlazoOptions();
+        });
+      });
+      
+      function resetSimulador() {
+        currentStep = 1;
+        selectedCreditType = null;
+        simulacionData = {};
+        
+        // Limpiar formularios
+        Object.values(inputs).forEach(input => {
+          if (input) input.value = '';
+        });
+        
+        // Limpiar selecciones
+        document.querySelectorAll('.credit-type-card').forEach(card => {
+          card.classList.remove('selected');
+        });
+        
+        // Resetear pasos
+        updateStep();
+        clearAlert();
+      }
+      
+      function updateStep() {
+        // Actualizar indicadores
+        stepIndicators.forEach((indicator, index) => {
+          const stepNum = index + 1;
+          indicator.classList.remove('active', 'completed');
+          
+          if (stepNum < currentStep) {
+            indicator.classList.add('completed');
+          } else if (stepNum === currentStep) {
+            indicator.classList.add('active');
+          }
+        });
+        
+        // Mostrar/ocultar contenido
+        stepContents.forEach((content, index) => {
+          const stepNum = index + 1;
+          if (stepNum === currentStep) {
+            content.classList.remove('d-none');
+          } else {
+            content.classList.add('d-none');
+          }
+        });
+        
+        // Actualizar botones
+        btnAnterior.classList.toggle('d-none', currentStep === 1);
+        btnSiguiente.classList.toggle('d-none', currentStep === 3);
+        btnFinalizar.classList.toggle('d-none', currentStep !== 3);
+        
+        // Actualizar texto del botón siguiente
+        if (currentStep === 2) {
+          btnSiguiente.textContent = 'Calcular';
+        } else if (currentStep === 3) {
+          btnSiguiente.textContent = 'Siguiente';
+        } else {
+          btnSiguiente.textContent = 'Siguiente';
+        }
+      }
+      
+      function validateCurrentStep() {
+        clearAlert();
+        
+        if (currentStep === 1) {
+          const required = ['nombre', 'apellido', 'dni', 'telefono', 'email', 'ingresos', 'gastos'];
+          const missing = required.filter(field => !inputs[field].value.trim());
+          
+          if (missing.length > 0) {
+            setAlert('danger', 'Por favor completa todos los campos requeridos.');
+            return false;
+          }
+          
+          // Validar ingresos vs gastos
+          const ingresos = parseFloat(inputs.ingresos.value);
+          const gastos = parseFloat(inputs.gastos.value);
+          
+          if (gastos >= ingresos) {
+            setAlert('warning', 'Tus gastos no pueden ser iguales o mayores a tus ingresos.');
+            return false;
+          }
+          
+          // Guardar datos del paso 1
+          simulacionData.personal = {
+            nombre: inputs.nombre.value,
+            apellido: inputs.apellido.value,
+            dni: inputs.dni.value,
+            telefono: inputs.telefono.value,
+            email: inputs.email.value,
+            ingresos: ingresos,
+            gastos: gastos
+          };
+          
+        } else if (currentStep === 2) {
+          if (!selectedCreditType) {
+            setAlert('danger', 'Por favor selecciona un tipo de crédito.');
+            return false;
+          }
+          
+          if (!inputs.monto.value || !inputs.plazo.value) {
+            setAlert('danger', 'Por favor completa el monto y plazo.');
+            return false;
+          }
+          
+          const monto = parseFloat(inputs.monto.value);
+          const plazo = parseInt(inputs.plazo.value);
+          const config = creditTypes[selectedCreditType];
+          
+          if (monto < config.minMonto || monto > config.maxMonto) {
+            setAlert('danger', `El monto debe estar entre $${config.minMonto.toLocaleString()} y $${config.maxMonto.toLocaleString()}.`);
+            return false;
+          }
+          
+          if (plazo < config.minPlazo || plazo > config.maxPlazo) {
+            setAlert('danger', `El plazo debe estar entre ${config.minPlazo} y ${config.maxPlazo} meses.`);
+            return false;
+          }
+          
+          // Guardar datos del paso 2
+          simulacionData.credito = {
+            tipo: selectedCreditType,
+            monto: monto,
+            plazo: plazo,
+            tasa: config.tasa
+          };
+          
+          // Calcular simulación
+          calcularSimulacion();
+        }
+        
+        return true;
+      }
+      
+      function updatePlazoOptions() {
+        if (!selectedCreditType) return;
+        
+        const config = creditTypes[selectedCreditType];
+        const plazoSelect = inputs.plazo;
+        
+        plazoSelect.innerHTML = '<option value="">Selecciona el plazo</option>';
+        
+        for (let i = config.minPlazo; i <= config.maxPlazo; i += 6) {
+          const option = document.createElement('option');
+          option.value = i;
+          option.textContent = `${i} meses`;
+          plazoSelect.appendChild(option);
+        }
+        
+        // Actualizar límites del monto
+        inputs.monto.min = config.minMonto;
+        inputs.monto.max = config.maxMonto;
+        inputs.monto.placeholder = `Mínimo: $${config.minMonto.toLocaleString()}`;
+      }
+      
+      function calcularSimulacion() {
+        const { credito, personal } = simulacionData;
+        const tasaMensual = credito.tasa / 100 / 12;
+        const cuota = credito.monto * (tasaMensual * Math.pow(1 + tasaMensual, credito.plazo)) / (Math.pow(1 + tasaMensual, credito.plazo) - 1);
+        const total = cuota * credito.plazo;
+        const interes = total - credito.monto;
+        
+        // Verificar capacidad de pago (la cuota no debe superar el 30% de los ingresos netos)
+        const ingresosNetos = personal.ingresos - personal.gastos;
+        const capacidadMaxima = ingresosNetos * 0.3;
+        const aprobado = cuota <= capacidadMaxima;
+        
+        // Mostrar resultados
+        resultadoCuota.textContent = `$${cuota.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        resultadoTotal.textContent = `$${total.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        resultadoTasa.textContent = `${credito.tasa}%`;
+        resultadoCapacidad.textContent = aprobado ? 'Aprobado' : 'Revisar';
+        resultadoCapacidad.className = aprobado ? 'text-success' : 'text-warning';
+        
+        // Guardar datos de la simulación
+        simulacionData.resultado = {
+          cuota: cuota,
+          total: total,
+          interes: interes,
+          aprobado: aprobado,
+          capacidadMaxima: capacidadMaxima
+        };
+      }
+      
+      function solicitarAsistencia() {
+        // Validar solo nombre, apellido y email
+        const nombre = inputs.nombre.value.trim();
+        const apellido = inputs.apellido.value.trim();
+        const email = inputs.email.value.trim();
+        
+        if (!nombre || !apellido || !email) {
+          setAlert('danger', 'Por favor completa al menos el nombre, apellido y email antes de solicitar asistencia.');
+          return;
+        }
+        
+        // Usar la misma API que el "generar turno"
+        const FV_TOKEN = 'm7NCbNDBShZOV83fu6RGJV1DbkhSkWI6JSTxmT2e';
+        const FV_QUEUE = 5007;
+        const FV_BRANCH = 11;
+        const FV_BASE = 'https://filavirtual2.debmedia.com/api/v1';
+        
+        const data = {
+          firstName: nombre,
+          lastName: apellido,
+          dni: inputs.dni.value.trim() || 'N/A', // Usar valor del campo o 'N/A' si está vacío
+          email: email,
+          phone: inputs.telefono.value.trim() || 'N/A' // Usar valor del campo o 'N/A' si está vacío
+        };
+        
+        btnSolicitarAsistencia.disabled = true;
+        btnSolicitarAsistencia.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Solicitando...';
+        
+        fetch(`${FV_BASE}/queue/${FV_QUEUE}/branch/${FV_BRANCH}/enqueue`, {
+          method: 'POST',
+          headers: {
+            'x-api-token': FV_TOKEN,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(out => {
+          if (out.code) {
+            // Cerrar el modal del simulador
+            modal.hide();
+            resetSimulador();
+            
+            // Usar las funciones existentes para mostrar el modal de sala de espera
+            const turnCode = out.code;
+            const turnNumber = out.jsonDetails?.turn || out.jsonDetails?.actualTurn || '—';
+            const avgWait = out.jsonDetails?.averageWaitingTime ?? out.jsonDetails?.serviceTime ?? 'N/A';
+            const queueName = out.jsonDetails?.queue?.name || '—';
+            const wrName = out.jsonDetails?.waitingRoom?.name || '—';
+            const videoCallUrl = out.jsonDetails?.videoCallUrl || 'about:blank';
+            
+            // Almacenar la URL de videollamada globalmente
+            window.currentVideoCallUrl = videoCallUrl;
+            
+            // Actualizar el src del iframe con la URL de videollamada
+            const urlWithParam = videoCallUrl.includes('?') ? `${videoCallUrl}&videocallUser=mobile` : `${videoCallUrl}?videocallUser=mobile`;
+            document.getElementById('videoFrame').src = urlWithParam;
+            
+            // Llenar el modal de sala de espera con los datos
+            window.fillWaitModal({ 
+              code: turnCode, 
+              number: turnNumber, 
+              avgWait: isFinite(avgWait) ? `${Math.floor(parseFloat(avgWait))} min` : 'N/A', 
+              queueName, 
+              waitingRoom: wrName 
+            });
+            
+            // Mostrar el modal de sala de espera
+            const modalWait = new bootstrap.Modal(document.getElementById('modalSalaEspera'), { backdrop: 'static', keyboard: false });
+            modalWait.show();
+            
+            // Iniciar el polling para verificar el estado del turno
+            window.startPolling(turnCode);
+            
+          } else {
+            throw new Error('No se pudo generar el turno');
+          }
+        })
+        .catch(err => {
+          setAlert('danger', `Error al solicitar asistencia: ${err.message}`);
+        })
+        .finally(() => {
+          btnSolicitarAsistencia.disabled = false;
+          btnSolicitarAsistencia.innerHTML = '<i class="bi bi-headset me-1"></i>Solicitar Asistencia';
+        });
+      }
+      
+      function setAlert(type, msg) {
+        alertBox.className = `alert alert-${type}`;
+        alertBox.textContent = msg;
+        alertBox.classList.remove('d-none');
+      }
+      
+      function clearAlert() {
+        alertBox.className = 'alert d-none';
+        alertBox.textContent = '';
+      }
     })();
   </script>
 
