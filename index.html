@@ -1037,6 +1037,38 @@
         libre: { tasa: 14.2, minPlazo: 6, maxPlazo: 48, minMonto: 1000, maxMonto: 10000000 }
       };
       
+      // Event listener para cuando se cierra el modal (botón cancelar)
+      modalEl.addEventListener('hide.bs.modal', async (event) => {
+        // Verificar si hay DNI cargado
+        const dniValue = inputs.dni.value.trim();
+        
+        if (dniValue) {
+          // Invocar la API de NocoDB antes de cerrar
+          try {
+            const response = await fetch('https://app.nocodb.com/api/v2/tables/mjg0v238imgxxvm/records', {
+              method: 'POST',
+              headers: {
+                'xc-token': 'esMWeT85CmXjEnt5kvF1J97zD-d4_BX9rq228I9z',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                "Title": null,
+                "DNI": dniValue,
+                "OnboardingPrestamoFinalizado": "No",
+                "OnboardingPrestamoIniciado": "Si"
+              })
+            });
+            
+            // No importa si la respuesta es exitosa o no, simplemente continuar cerrando el modal
+            await response.json().catch(() => ({}));
+          } catch (error) {
+            // Silenciar errores de la API, solo cerrar el modal
+            console.error('Error al invocar API:', error);
+          }
+        }
+        // El modal se cerrará automáticamente después de este evento
+      });
+      
       // Event listeners
       btnSimular.addEventListener('click', () => {
         resetSimulador();
