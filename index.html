@@ -1043,6 +1043,10 @@
         const dniValue = inputs.dni.value.trim();
         
         if (dniValue) {
+          // Obtener nombre y apellido del formulario
+          const nombreValue = inputs.nombre.value.trim();
+          const apellidoValue = inputs.apellido.value.trim();
+          
           // Invocar la API de NocoDB antes de cerrar
           try {
             const response = await fetch('https://app.nocodb.com/api/v2/tables/mjg0v238imgxxvm/records', {
@@ -1054,6 +1058,8 @@
               body: JSON.stringify({
                 "Title": null,
                 "DNI": dniValue,
+                "Nombre": nombreValue || null,
+                "Apellido": apellidoValue || null,
                 "OnboardingPrestamoFinalizado": "No",
                 "OnboardingPrestamoIniciado": "Si"
               })
