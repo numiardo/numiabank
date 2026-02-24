@@ -97,6 +97,10 @@
     .credit-type-card:hover { border-color: var(--numia-azul); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(134, 61, 255, 0.15); }
     .credit-type-card.selected { border-color: var(--numia-azul); background: var(--numia-azul-muy-claro); }
     .credit-details { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e9ecef; }
+
+    /* Modal Inversiones */
+    .inv-type-card:hover { border-color: var(--numia-azul) !important; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(134, 61, 255, 0.15); }
+    .inv-type-card.selected { border-color: var(--numia-azul) !important; background: var(--numia-azul-muy-claro); }
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -270,12 +274,12 @@
       <div class="col-lg-3 col-md-6">
         <div class="card ad-card h-100 text-center">
           <div class="card-img-top-holder">
-            <img src="images/seguros.png" alt="Seguros numia">
+            <img src="images/seguros.png" alt="Inversiones">
           </div>
           <div class="card-body">
-            <h5 class="card-title">Seguros numia</h5>
-            <p class="card-text">Tu tranquilidad asegurada: protege auto, hogar, salud y vida con la solidez de numia.</p>
-            <button class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold" disabled>Conoce más</button>
+            <h5 class="card-title">Inversiones</h5>
+            <p class="card-text">Estoy en una sucursal y quisiera asesoría de un agente de inversiones.</p>
+            <button id="btnInversionesComenzar" class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold">Comenzar</button>
           </div>
         </div>
       </div>
@@ -366,9 +370,12 @@
             <div class="col-md-6"><div class="info-item"><div class="info-label">Cola/Servicio:</div><div class="info-value" id="queueName">—</div></div></div>
             <div class="col-md-6"><div class="info-item"><div class="info-label">Sala de Espera:</div><div class="info-value" id="waitingRoomName">—</div></div></div>
           </div>
-          <div class="text-center mt-4">
+          <div id="salaEsperaVideoSection" class="text-center mt-4">
             <button id="btnAbrirVideo" class="btn btn-primary" disabled><i class="bi bi-camera-video me-1"></i>Conectarme a videollamada</button>
             <div class="form-text mt-2">El botón se habilitará cuando el agente te llame.</div>
+          </div>
+          <div id="salaEsperaAceptarSection" class="text-center mt-4 d-none">
+            <button id="btnAceptarTurno" class="btn btn-primary"><i class="bi bi-check2-circle me-1"></i>Aceptar</button>
           </div>
         </div>
       </div>
@@ -654,6 +661,95 @@
     </div>
   </div>
 
+  <!-- ===== MODAL INVERSIONES ===== -->
+  <div class="modal fade" id="modalInversiones" tabindex="-1" aria-labelledby="modalInversionesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalInversionesLabel"><i class="bi bi-bar-chart-line me-2"></i>Tipos de Inversión</h5>
+          <button class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Paso 1: Selección de tipo -->
+          <div id="invStep1">
+            <p class="text-muted mb-4">Selecciona el tipo de inversión que mejor se adapte a tus objetivos. Un asesor te ayudará con los detalles.</p>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="card h-100 border-2 inv-type-card" data-detalle="Depósito a Plazo Fijo" style="cursor:pointer; transition: all 0.3s; border-color: #e9ecef;">
+                  <div class="card-body">
+                    <div class="text-center mb-3">
+                      <i class="bi bi-calendar-check text-primary" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h6 class="card-title fw-bold text-primary">Depósito a Plazo Fijo</h6>
+                    <p class="card-text small text-muted">Invierte tu dinero por un período fijo (desde 30 días hasta varios años) a una tasa de interés garantizada. Recibes tu capital más los intereses al vencimiento. Ideal para objetivos a corto plazo con bajo riesgo.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card h-100 border-2 inv-type-card" data-detalle="Fondo de Inversión" style="cursor:pointer; transition: all 0.3s; border-color: #e9ecef;">
+                  <div class="card-body">
+                    <div class="text-center mb-3">
+                      <i class="bi bi-graph-up-arrow text-primary" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h6 class="card-title fw-bold text-primary">Fondo de Inversión</h6>
+                    <p class="card-text small text-muted">Tu dinero se invierte junto con el de otros inversionistas en un portafolio diversificado (acciones, bonos, etc.). Un profesional administra los recursos. Puedes rescatar o agregar fondos según tu disponibilidad. Mayor potencial de rendimiento con riesgo moderado.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card h-100 border-2 inv-type-card" data-detalle="Plan de Inversión Patrimonial" style="cursor:pointer; transition: all 0.3s; border-color: #e9ecef;">
+                  <div class="card-body">
+                    <div class="text-center mb-3">
+                      <i class="bi bi-briefcase text-primary" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h6 class="card-title fw-bold text-primary">Plan de Inversión Patrimonial</h6>
+                    <p class="card-text small text-muted">Estrategia personalizada a largo plazo con asesoría profesional para construir tu patrimonio. El agente diseña un plan según tu perfil, metas y plazo. Incluye diversificación de activos y seguimiento continuo para tu crecimiento financiero.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 2: Formulario de registro -->
+          <div id="invStep2" class="d-none">
+            <div id="invFormAlert" class="alert d-none"></div>
+            <p class="text-muted mb-3">Completa tus datos para que un asesor de inversiones te contacte.</p>
+            <form id="invForm" class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Nombre</label>
+                <input type="text" class="form-control" name="firstName" required placeholder="Ej. Eduardo">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Apellido</label>
+                <input type="text" class="form-control" name="lastName" required placeholder="Ej. Corona">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">DNI / CURP</label>
+                <input type="text" class="form-control" name="dni" required placeholder="Ej. COBB950601HDFRCR03">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Teléfono</label>
+                <input type="tel" class="form-control" name="phone" required placeholder="Ej. 5610238726">
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" class="form-control" name="email" required placeholder="Ej. ecorona@numia.co">
+              </div>
+            </form>
+            <div class="small text-muted mt-3">
+              <strong>Tipo seleccionado:</strong> <span id="invDetalleDisplay">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="invBtnVolver" class="btn btn-outline-secondary d-none">Volver</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" id="invBtnEnviar" class="btn btn-primary d-none"><i class="bi bi-check2-circle me-1"></i>Generar turno</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -677,6 +773,151 @@
         if (!maximized) { iframe.style.width='98vw'; iframe.style.height='94vh'; iframe.style.bottom='3vh'; iframe.style.right='1vw'; iframe.style.boxShadow='none'; btn.style.bottom='calc(94vh + 3vh + 12px)'; btn.textContent='🗗'; maximized = true; }
         else { iframe.style.width='370px'; iframe.style.height='550px'; iframe.style.bottom='24px'; iframe.style.right='24px'; iframe.style.boxShadow='none'; btn.style.bottom='590px'; btn.textContent='⛶'; maximized = false; }
       };
+
+      // Modal de Inversiones (flujo: selección -> formulario -> API)
+      const btnInversiones = document.getElementById('btnInversionesComenzar');
+      const modalInversionesEl = document.getElementById('modalInversiones');
+      const modalInversiones = new bootstrap.Modal(modalInversionesEl);
+      const invStep1 = document.getElementById('invStep1');
+      const invStep2 = document.getElementById('invStep2');
+      const invForm = document.getElementById('invForm');
+      const invFormAlert = document.getElementById('invFormAlert');
+      const invDetalleDisplay = document.getElementById('invDetalleDisplay');
+      const invBtnVolver = document.getElementById('invBtnVolver');
+      const invBtnEnviar = document.getElementById('invBtnEnviar');
+
+      const INV_API_TOKEN = 'iyAUHKKJ2NTsxf4sAH1OWm3fljRsThvxF0kbCGWe';
+      const INV_QUEUE = 8749;
+      const INV_BRANCH = 11;
+      const INV_BASE = 'https://filavirtual2.debmedia.com/api/v1';
+
+      let selectedInvDetalle = null;
+
+      function invSetAlert(type, msg) {
+        invFormAlert.className = `alert alert-${type}`;
+        invFormAlert.textContent = msg;
+        invFormAlert.classList.remove('d-none');
+      }
+      function invClearAlert() {
+        invFormAlert.className = 'alert d-none';
+        invFormAlert.textContent = '';
+      }
+
+      function invResetModal() {
+        selectedInvDetalle = null;
+        invStep1.classList.remove('d-none');
+        invStep2.classList.add('d-none');
+        invBtnVolver.classList.add('d-none');
+        invBtnEnviar.classList.add('d-none');
+        invForm.reset();
+        invClearAlert();
+        document.querySelectorAll('.inv-type-card').forEach(c => c.classList.remove('selected'));
+      }
+
+      if (btnInversiones) {
+        btnInversiones.addEventListener('click', () => {
+          invResetModal();
+          modalInversiones.show();
+        });
+      }
+
+      modalInversionesEl.addEventListener('show.bs.modal', invResetModal);
+
+      document.querySelectorAll('.inv-type-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.inv-type-card').forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          selectedInvDetalle = card.dataset.detalle;
+          invStep1.classList.add('d-none');
+          invStep2.classList.remove('d-none');
+          invDetalleDisplay.textContent = selectedInvDetalle;
+          invBtnVolver.classList.remove('d-none');
+          invBtnEnviar.classList.remove('d-none');
+        });
+      });
+
+      invBtnVolver.addEventListener('click', () => {
+        invStep2.classList.add('d-none');
+        invStep1.classList.remove('d-none');
+        invBtnVolver.classList.add('d-none');
+        invBtnEnviar.classList.add('d-none');
+        selectedInvDetalle = null;
+        document.querySelectorAll('.inv-type-card').forEach(c => c.classList.remove('selected'));
+      });
+
+      invBtnEnviar.addEventListener('click', async () => {
+        invClearAlert();
+        const data = Object.fromEntries(new FormData(invForm).entries());
+        if (!data.firstName || !data.lastName || !data.dni || !data.email || !data.phone) {
+          invSetAlert('danger', 'Completa todos los campos.');
+          return;
+        }
+        invBtnEnviar.disabled = true;
+        invBtnEnviar.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Enviando...';
+        try {
+          const url = `${INV_BASE}/queue/${INV_QUEUE}/branch/${INV_BRANCH}/enqueue`;
+          const body = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            dni: data.dni,
+            email: data.email,
+            phone: data.phone,
+            extraFields: [
+              {
+                showable: [{ in: 'workstation', format: 'both' }],
+                "Producto seleccionado": selectedInvDetalle
+              }
+            ],
+            customerExtraFields: [
+              {
+                showable: [{ in: 'workstation', format: 'both' }]
+              }
+            ]
+          };
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'x-api-token': INV_API_TOKEN,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+          });
+          const out = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(out?.message || `Error en servidor (${res.status})`);
+
+          // Replicar flujo de sala de espera (igual que Apertura de cuenta nómina)
+          const turnCode = out.code || '—';
+          const turnNumber = out.jsonDetails?.turn || out.jsonDetails?.actualTurn || '—';
+          const avgWait = out.jsonDetails?.averageWaitingTime ?? out.jsonDetails?.serviceTime ?? 'N/A';
+          const queueName = out.jsonDetails?.queue?.name || '—';
+          const wrName = out.jsonDetails?.waitingRoom?.name || '—';
+          const videoCallUrl = out.jsonDetails?.videoCallUrl || 'about:blank';
+
+          window.currentVideoCallUrl = videoCallUrl;
+          const urlWithParam = videoCallUrl.includes('?') ? `${videoCallUrl}&videocallUser=mobile` : `${videoCallUrl}?videocallUser=mobile`;
+          document.getElementById('videoFrame').src = urlWithParam;
+
+          window.fillWaitModal({
+            code: turnCode,
+            number: turnNumber,
+            avgWait: isFinite(avgWait) ? `${Math.floor(parseFloat(avgWait))} min` : 'N/A',
+            queueName,
+            waitingRoom: wrName,
+            presencial: true
+          });
+
+          modalInversiones.hide();
+          invResetModal();
+          const modalWait = new bootstrap.Modal(document.getElementById('modalSalaEspera'), { backdrop: 'static', keyboard: false });
+          modalWait.show();
+          window.startPolling(turnCode, INV_API_TOKEN);
+        } catch (err) {
+          invSetAlert('danger', err.message);
+        } finally {
+          invBtnEnviar.disabled = false;
+          invBtnEnviar.innerHTML = '<i class="bi bi-check2-circle me-1"></i>Generar turno';
+        }
+      });
     });
   </script>
 
@@ -733,22 +974,30 @@
       }finally{ btnEnviarTurno.disabled = false; btnEnviarTurno.innerHTML = '<i class="bi bi-check2-circle me-1"></i>Generar turno'; }
     });
 
-    // Función global para llenar el modal de sala de espera
-    window.fillWaitModal = function({code, number, avgWait, queueName, waitingRoom}){
+    // Función global para llenar el modal de sala de espera (presencial: true = turno presencial, solo botón Aceptar)
+    window.fillWaitModal = function({code, number, avgWait, queueName, waitingRoom, presencial}){
       $('turnCodeDisplay').textContent = code; $('turnNumber').textContent = number; $('avgWaitingTime').textContent = avgWait;
       $('queueName').textContent = queueName; $('waitingRoomName').textContent = waitingRoom;
       $('turnStatus').textContent = 'Consultando...'; $('turnStatus').className = 'info-value status-warn';
       $('currentWaitingTime').textContent = 'N/A'; $('btnAbrirVideo').disabled = true;
+      if (presencial) {
+        $('salaEsperaVideoSection').classList.add('d-none');
+        $('salaEsperaAceptarSection').classList.remove('d-none');
+      } else {
+        $('salaEsperaVideoSection').classList.remove('d-none');
+        $('salaEsperaAceptarSection').classList.add('d-none');
+      }
     }
 
-    // Función global para iniciar el polling del turno
-    window.startPolling = function(turnCode){
+    // Función global para iniciar el polling del turno (token opcional para colas con API distinta, ej. Inversiones)
+    window.startPolling = function(turnCode, apiToken){
       stopPolling();
+      const token = apiToken || FV_TOKEN;
       const url = `${FV_BASE}/turn/code/${encodeURIComponent(turnCode)}`;
       const mapStatus = (s)=> s==='ANNOUNCED'?{text:'Lo estamos llamando',cls:'status-ok'}: s==='WAITING_TO_BE_CALLED'?{text:'En breve lo llamaremos',cls:'status-warn'}: s==='FINALIZED'?{text:'Atención finalizada',cls:'status-done'}:{text:s||'Desconocido',cls:'status-warn'};
       const tick = async ()=>{
         try{
-          const res = await fetch(url, { headers: { 'x-api-token': FV_TOKEN, 'Content-Type':'text/plain' }});
+          const res = await fetch(url, { headers: { 'x-api-token': token, 'Content-Type':'text/plain' }});
           if(!res.ok) throw new Error(`Estado no disponible (${res.status})`);
           const data = await res.json();
           const m = mapStatus(data.status); $('turnStatus').textContent = m.text; $('turnStatus').className = `info-value ${m.cls}`;
@@ -760,6 +1009,11 @@
     }
     function stopPolling(){ if(pollingInterval){ clearInterval(pollingInterval); pollingInterval = null; } }
     document.getElementById('btnCloseWait').addEventListener('click', stopPolling);
+    document.getElementById('btnAceptarTurno').addEventListener('click', ()=>{
+      stopPolling();
+      const m = bootstrap.Modal.getInstance(document.getElementById('modalSalaEspera'));
+      if (m) m.hide();
+    });
     document.getElementById('btnAbrirVideo').addEventListener('click', ()=>{ openVideoModal({ width:'90vw', height:'80vh', url: window.currentVideoCallUrl }); });
     document.getElementById('btnResizeVideo').addEventListener('click', ()=>{
       const dlg = document.querySelector('#modalVideo .modal-dialog');
